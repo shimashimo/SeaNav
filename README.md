@@ -10,6 +10,7 @@ git pull origin
 # Commit
 git status
 git add "filename"
+git add . (Add all files changed)
 git commit -m "Message"
 
 # Push
