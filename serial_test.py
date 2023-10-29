@@ -6,3 +6,5 @@ import csv
 # Constants
 SERIAL_PORT = "COM3"
 BAUD_RATE = 115200
+
+test
