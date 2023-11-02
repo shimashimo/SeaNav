@@ -107,21 +107,21 @@ void displayCalStatus(void)
   bno.getCalibration(&system, &gyro, &accel, &mag);
 
   /* The data should be ignored until the system calibration is > 0 */
-  Serial.print("\t");
+//   Serial.print("\t");
   if (!system)
   {
-    Serial.print("! ");
+    // Serial.print("! ");
   }
 
   /* Display the individual values */
-  Serial.print("Sys:");
-  Serial.print(system, DEC);
-  Serial.print(" G:");
-  Serial.print(gyro, DEC);
-  Serial.print(" A:");
-  Serial.print(accel, DEC);
-  Serial.print(" M:");
-  Serial.print(mag, DEC);
+//   Serial.print("Sys:");
+//   Serial.print(system, DEC);
+//   Serial.print(" G:");
+//   Serial.print(gyro, DEC);
+//   Serial.print(" A:");
+//   Serial.print(accel, DEC);
+//   Serial.print(" M:");
+//   Serial.print(mag, DEC);
 }
 
 /**************************************************************************/
@@ -135,23 +135,23 @@ void imu_setup(void)
 
   // while (!Serial) delay(10);  // wait for serial port to open!
 
-  Serial.println("Orientation Sensor Test"); Serial.println("");
+//   Serial.println("Orientation Sensor Test"); Serial.println("");
 
   /* Initialise the sensor */
   if(!bno.begin())
   {
     /* There was a problem detecting the BNO055 ... check your connections */
-    Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
+    // Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
     while(1);
   }
 
   delay(1000);
 
   /* Display some basic information on this sensor */
-  // displaySensorDetails();
+//   displaySensorDetails();
 
   /* Optional: Display current status */
-  displaySensorStatus();
+//   displaySensorStatus();
 
   bno.setExtCrystalUse(true);
 }
@@ -169,12 +169,17 @@ void imu_run(void)
   bno.getEvent(&event);
 
   /* Display the floating point data */
-  Serial.print("X: ");
-  Serial.print(event.orientation.x, 4);
-  Serial.print("\tY: ");
-  Serial.print(event.orientation.y, 4);
-  Serial.print("\tZ: ");
-  Serial.print(event.orientation.z, 4);
+//   Serial.print("X: ");
+//   Serial.print(event.orientation.x, 4);
+  String xOrient = String(event.orientation.x)
+
+//   Serial.print("\tY: ");
+//   Serial.print(event.orientation.y, 4);
+  String yOrient = String(event.orientation.y)
+
+//   Serial.print("\tZ: ");
+//   Serial.print(event.orientation.z, 4);
+  String zOrient = String(event.orientation.z)
 
   /* Optional: Display calibration status */
   displayCalStatus();
@@ -183,7 +188,7 @@ void imu_run(void)
   //displaySensorStatus();
 
   /* New line for the next sample */
-  Serial.println("");
+//   Serial.println("");
 
   /* Wait the specified delay before requesting nex data */
   delay(BNO055_SAMPLERATE_DELAY_MS);
@@ -195,27 +200,34 @@ void setup_pressure(){
   // Wait until serial port is opened
   // while (!Serial) { delay(1); }
 
-  Serial.println("Adafruit LPS35HW Test");
+//   Serial.println("Adafruit LPS35HW Test");
 
   if (!lps35hw.begin_I2C()) {
   //if (!lps35hw.begin_SPI(LPS_CS)) {
   //if (!lps35hw.begin_SPI(LPS_CS, LPS_SCK, LPS_MISO, LPS_MOSI)) {
-    Serial.println("Couldn't find LPS35HW chip");
+    // Serial.println("Couldn't find LPS35HW chip");
     while (1);
   }
-  Serial.println("Found LPS35HW chip");
+//   Serial.println("Found LPS35HW chip");
 }
 
 void run_pressure(){
-  Serial.print("Temperature: ");
-  Serial.print(lps35hw.readTemperature());
-  Serial.println(" C");
+//   Serial.print("Temperature: ");
+//   Serial.print(lps35hw.readTemperature());
+//   Serial.println(" C");
+
+  String temp = String(lps35hw.readTemperature());
+
+
   
   Serial.print("Pressure: ");
   Serial.print(lps35hw.readPressure());
   Serial.println(" hPa");
+  String pressure = String(lps35hw.readPressure());
+  
+  String pressure_data = 'p' + ',' + temp + ',' + pressure;
 
-  Serial.println();
+  Serial.println(pressure_data);
   delay(1000);
 }
 
