@@ -4,7 +4,7 @@ from matplotlib.animation import FuncAnimation
 import csv
 
 # Constants
-SERIAL_PORT = "COM3"
+SERIAL_PORT = "/dev/cu.usbmodem1401"
 BAUD_RATE = 115200
 
 # Initialize serial connection
@@ -21,7 +21,7 @@ def read_and_process_data():
     sensorValues = line.split(', ')
 
     x_vals.append(float(sensorValues[0]))
-    sensorValue1_data.append(int(sensorValues[1]))
+    sensorValue1_data.append(float(sensorValues[1]))
     # sensorValue2_data.append(int(sensorValues[2]))
 
     #Print received values
@@ -46,7 +46,7 @@ def on_close(event):
 
 #register the callback function for when the plot window is closed
 fig, ax = plt.subplots()
-fig.canvas.mpl_connect('close_even', on_close)
+fig.canvas.mpl_connect('close_event', on_close)
 
-ani = FuncAnimation(fig, update_plot, interval=10)
+ani = FuncAnimation(fig, update_plot, interval=10, cache_frame_data=False)
 plt.show()

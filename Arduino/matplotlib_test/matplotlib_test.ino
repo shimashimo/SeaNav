@@ -14,15 +14,15 @@ void setup() {
   // Wait until serial port is opened
   while (!Serial) { delay(1); }
 
-  Serial.println("Adafruit LPS35HW Test");
+  // Serial.println("Adafruit LPS35HW Test");
 
   if (!lps35hw.begin_I2C()) {
-  //if (!lps35hw.begin_SPI(LPS_CS)) {
-  //if (!lps35hw.begin_SPI(LPS_CS, LPS_SCK, LPS_MISO, LPS_MOSI)) {
-    Serial.println("Couldn't find LPS35HW chip");
+  // if (!lps35hw.begin_SPI(LPS_CS)) {
+  // if (!lps35hw.begin_SPI(LPS_CS, LPS_SCK, LPS_MISO, LPS_MOSI)) {
+    // Serial.println("Couldn't find LPS35HW chip");
     while (1);
   }
-  Serial.println("Found LPS35HW chip");
+  // Serial.println("Found LPS35HW chip");
 }
 
 void loop() {
