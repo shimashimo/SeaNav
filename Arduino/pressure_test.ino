@@ -9,6 +9,7 @@ Adafruit_LPS35HW lps35hw = Adafruit_LPS35HW();
 #define LPS_MISO 12
 #define LPS_MOSI 11
 
+
 void setup() {
   Serial.begin(115200);
   // Wait until serial port is opened

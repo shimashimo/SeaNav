@@ -118,7 +118,7 @@ void displayCalStatus(void)
     Arduino setup function (automatically called at startup)
 */
 /**************************************************************************/
-void setup(void)
+void imu_setup(void)
 {
   Serial.begin(115200);
 
@@ -151,7 +151,7 @@ void setup(void)
     should go here)
 */
 /**************************************************************************/
-void loop(void)
+void imu_run(void)
 {
   /* Get a new sensor event */
   sensors_event_t event;
@@ -176,4 +176,44 @@ void loop(void)
 
   /* Wait the specified delay before requesting nex data */
   delay(BNO055_SAMPLERATE_DELAY_MS);
+}
+
+
+void setup_pressure(){
+  Serial.begin(115200);
+  // Wait until serial port is opened
+  while (!Serial) { delay(1); }
+
+  Serial.println("Adafruit LPS35HW Test");
+
+  if (!lps35hw.begin_I2C()) {
+  //if (!lps35hw.begin_SPI(LPS_CS)) {
+  //if (!lps35hw.begin_SPI(LPS_CS, LPS_SCK, LPS_MISO, LPS_MOSI)) {
+    Serial.println("Couldn't find LPS35HW chip");
+    while (1);
+  }
+  Serial.println("Found LPS35HW chip");
+}
+
+void run_pressure(){
+  Serial.print("Temperature: ");
+  Serial.print(lps35hw.readTemperature());
+  Serial.println(" C");
+  
+  Serial.print("Pressure: ");
+  Serial.print(lps35hw.readPressure());
+  Serial.println(" hPa");
+
+  Serial.println();
+  delay(1000);
+}
+
+void setup(){
+  imu_setup();
+  setup_pressure();
+}
+
+void loop(){
+  imu_run();
+  run_pressure();
 }
