@@ -6,7 +6,7 @@ import platform
     MESSAGE_TYPE_INDEX,
     PRESSURE_READING_INDEX,
     
-) = range(0, 10)
+) = range(0, 2)
 
 #Constants for Pressure Message
 (
@@ -19,7 +19,7 @@ import platform
 
 # Constants depending on platform
 if (platform.system() == "Darwin"):
-    SERIAL_PORT = "/dev/cu.usbmodem1401"
+    SERIAL_PORT = "/dev/cu.usbmodem1301"
 else:
     SERIAL_PORT = "COM4" 
 
@@ -37,12 +37,13 @@ def parse_imu_message():
 def read_serial_data():
     line = ser.readline().decode('utf-8').strip()
     sensorValues = line.split(',')
-    print(sensorsValues)
+    print(sensorValues)
     # Message is of pressure data
     if sensorValues[MESSAGE_TYPE_INDEX] == 'p':
         parse_pressure_message()
-    elif sensorsValues[MESSAGE_TYPE_INDEX] == 'i':
+    elif sensorValues[MESSAGE_TYPE_INDEX] == 'i':
         parse_imu_message()
 
-
+while True:
+    read_serial_data()
 

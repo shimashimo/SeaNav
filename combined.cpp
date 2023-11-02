@@ -171,15 +171,15 @@ void imu_run(void)
   /* Display the floating point data */
 //   Serial.print("X: ");
 //   Serial.print(event.orientation.x, 4);
-  String xOrient = String(event.orientation.x)
+  String xOrient = String(event.orientation.x);
 
 //   Serial.print("\tY: ");
 //   Serial.print(event.orientation.y, 4);
-  String yOrient = String(event.orientation.y)
+  String yOrient = String(event.orientation.y);
 
 //   Serial.print("\tZ: ");
 //   Serial.print(event.orientation.z, 4);
-  String zOrient = String(event.orientation.z)
+  String zOrient = String(event.orientation.z);
 
   /* Optional: Display calibration status */
   displayCalStatus();
@@ -216,16 +216,17 @@ void run_pressure(){
 //   Serial.print(lps35hw.readTemperature());
 //   Serial.println(" C");
 
+  String pressure_data = String("p");
   String temp = String(lps35hw.readTemperature());
 
 
   
-  Serial.print("Pressure: ");
-  Serial.print(lps35hw.readPressure());
-  Serial.println(" hPa");
+  // Serial.print("Pressure: ");
+  // Serial.print(lps35hw.readPressure());
+  // Serial.println(" hPa");
   String pressure = String(lps35hw.readPressure());
   
-  String pressure_data = 'p' + ',' + temp + ',' + pressure;
+  pressure_data += "," + temp + "," + pressure;
 
   Serial.println(pressure_data);
   delay(1000);
