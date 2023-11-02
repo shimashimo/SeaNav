@@ -148,7 +148,7 @@ void imu_setup(void)
   delay(1000);
 
   /* Display some basic information on this sensor */
-  displaySensorDetails();
+  // displaySensorDetails();
 
   /* Optional: Display current status */
   displaySensorStatus();
