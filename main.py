@@ -5,7 +5,7 @@ import serial
 import csv
 import io
 
-app = Flask(__name)
+app = Flask(__name__)
 
 # Constants
 SERIAL_PORT = "/dev/cu.usbmodem1401"
@@ -27,7 +27,7 @@ def read_and_process_data():
     sensorValues = line.split(', ')
 
     x_vals.append(float(sensorValues[0]))
-    sensorValue1_data.append(float(sensorValues[1))
+    sensorValue1_data.append(float(sensorValues[1]))
 
 def generate_plot():
     fig = Figure()
