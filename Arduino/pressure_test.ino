@@ -27,6 +27,7 @@ void setup() {
 }
 
 void loop() {
+  
   Serial.print("Temperature: ");
   Serial.print(lps35hw.readTemperature());
   Serial.println(" C");

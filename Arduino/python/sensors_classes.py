@@ -1,4 +1,3 @@
-
 INVALID_DATA_VALUE = None
 
 class PressureSensor():
