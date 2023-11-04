@@ -80,7 +80,8 @@ void loop(void)
   int8_t boardTemp = bno.getTemp();
   // Serial.println();
   // Serial.print(F("temperature: "));
-  Serial.println(boardTemp);
+
+  // Serial.println(boardTemp); Serial.print(data_to_send);
 
   // name, system, gyro, accel, mag
   uint8_t system, gyro, accel, mag = 0;
@@ -95,10 +96,13 @@ void loop(void)
   // Serial.print(" Mag=");
   // Serial.println(mag);
 
-  // data_to_send = "cal" + "," + String(system) + "," + String(gyro) + "," + String(mag) + "," + String(boardTemp);
+  float time = micros()/ 1e6;
+  data_to_send = String(time) + "," + String("i") + "," + String("cal") + "," + String(system, 2) + "," + String(gyro, 2) + "," + String(accel, 2) + "," + String(mag, 2) + "," + String(boardTemp);
 
-  // Serial.println("--");
-  delay(BNO055_SAMPLERATE_DELAY_MS);
+
+  Serial.println(data_to_send);
+  // delay(BNO055_SAMPLERATE_DELAY_MS);
+  delay(1000);
 }
 
 void printEvent(sensors_event_t* event) {
@@ -162,8 +166,10 @@ void printEvent(sensors_event_t* event) {
   str_y = String(y, 2);
   str_z = String(z, 2);
 
-  data_to_send = str_x + str_y + str_z;
+  float time = micros()/ 1e6;
+  data_to_send = String(time) + "," + String("i") + "," + name + "," + str_x + "," + str_y + "," + str_z;
 
+  Serial.println(data_to_send);
 
   // Serial.print("\tx= ");
   // Serial.print(x);
