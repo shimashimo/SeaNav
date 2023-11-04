@@ -1,51 +1,73 @@
+from dataclasses import dataclass
 
 INVALID_DATA_VALUE = None
 
+@dataclass
 class PressureSensor():
-    temperature = INVALID_DATA_VALUE
-    pressure = INVALID_DATA_VALUE
+        temperature = INVALID_DATA_VALUE
+        pressure = INVALID_DATA_VALUE
 
+@dataclass
 class IMUSensor():
-    acc = Accelerometer()
-    ori = Orientation()
-    mag = Magnetometer()
-    ang = AngularVelocity()
-    rot = RotationVector()
-    lin = LinearAcceleration()
-    gra = Gravity()
-    calibration = IMUCalibration()
-    temp = INVALID_DATA_VALUE
+    def __init__(self) -> None:
+        self.acc = Accelerometer()
+        self.ori = Orientation()
+        self.mag = Magnetometer()
+        self.ang = AngularVelocity()
+        self.rot = RotationVector()
+        self.lin = LinearAcceleration()
+        self.gra = Gravity()
+        self.calibration = IMUCalibration()
+        self.temp = INVALID_DATA_VALUE
 
 
+@dataclass
 class IMUCalibration():
-    system = INVALID_DATA_VALUE
-    gyro = INVALID_DATA_VALUE
-    accel = INVALID_DATA_VALUE
-    mag = INVALID_DATA_VALUE
+    def __init__(self) -> None:
+        self.system = INVALID_DATA_VALUE
+        self.gyro = INVALID_DATA_VALUE
+        self.accel = INVALID_DATA_VALUE
+        self.mag = INVALID_DATA_VALUE
 
+@dataclass
 class ThreeDegreeSensorData():
-    x = INVALID_DATA_VALUE
-    y = INVALID_DATA_VALUE
-    z = INVALID_DATA_VALUE
+    def __init__(self):
+        self.x = INVALID_DATA_VALUE
+        self.y = INVALID_DATA_VALUE
+        self.z = INVALID_DATA_VALUE
 
 
 class Orientation(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class AngularVelocity(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class LinearAcceleration(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class Magnetometer(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class Accelerometer(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class Gravity(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class RotationVector(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass

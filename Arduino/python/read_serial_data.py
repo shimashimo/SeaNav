@@ -1,6 +1,6 @@
 import serial
 import platform
-from sensors_classes import PressureSensor, IMUSensor
+from sensors_classes import PressureSensor, IMUSensor, Accelerometer
 
 
 #Constants for Standard IMU Message
@@ -20,7 +20,7 @@ from sensors_classes import PressureSensor, IMUSensor
     ACCEL_INDEX,
     MAG_INDEX,
     IMU_TEMP_INDEX,
-) = range()
+) = range(0, 6)
 
 #Constants for Pressure Message
 (
