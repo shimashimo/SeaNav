@@ -1,6 +1,6 @@
 import serial
 import platform
-from sensors_classes import PressureSensor, IMUSensor, Accelerometer
+from sensors_classes import PressureSensor, IMUSensor
 
 
 #Constants for Standard IMU Message
@@ -36,7 +36,7 @@ if (platform.system() == "Darwin"):
 else:
     SERIAL_PORT = "COM3" 
 
-BAUD_RATE = 115200  
+BAUD_RATE = 115200
 
 # Initialize serial connection
 ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
@@ -63,9 +63,8 @@ def parse_imu_message(imu_data, message_line):
         imu_data.calibration.temp = message_line[IMU_TEMP_INDEX]
 
     else: # Valid standard message, copy x, y, and z values
-        setattr(imu_data, message_line[SUB_TYPE_INDEX].x, message_line[X_INDEX])
-        setattr(imu_data, message_line[SUB_TYPE_INDEX].y, message_line[Y_INDEX])
-        setattr(imu_data, message_line[SUB_TYPE_INDEX].z, message_line[Z_INDEX])
+        imu_data.set_generic_sensor(message_line[SUB_TYPE_INDEX], message_line[X_INDEX],
+                                    message_line[Y_INDEX], message_line[Z_INDEX])
 
 def read_serial_data(pressure_data, imu_data):
 

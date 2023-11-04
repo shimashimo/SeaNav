@@ -53,3 +53,9 @@ class IMUSensor():
     gra: any = field(default_factory = Gravity)
     calibration: any = field(default_factory = IMUCalibration)
     temp: any = INVALID_DATA_VALUE
+
+    def set_generic_sensor(self, indicator, x, y, z):
+        setattr(getattr(self, indicator), "x", x)
+        setattr(getattr(self, indicator), "y", y)
+        setattr(getattr(self, indicator), "z", z)
+    
