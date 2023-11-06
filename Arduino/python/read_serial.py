@@ -31,7 +31,8 @@ from sensors_classes import PressureSensor, IMUSensor
     MESSAGE_TYPE_INDEX,
     TEMPERATURE_INDEX,
     PRESSURE_INDEX,
-) = range(0, 4)
+    DEPTH_INDEX
+) = range(0, 5)
 
 
 # Constants depending on platform
@@ -52,6 +53,7 @@ def parse_pressure_message(pressure_data, message_line):
     pressure_data.time.append(message_line[TIME_INDEX])
     pressure_data.temperature.append(message_line[TEMPERATURE_INDEX])
     pressure_data.pressure.append(message_line[PRESSURE_INDEX])
+    pressure_data.depth.append(message_line[DEPTH_INDEX])
 
 def parse_imu_message(imu_data, message_line):
     # Sample message "i,ori,1,2,3" for "message_type,subtype,x,y,z"

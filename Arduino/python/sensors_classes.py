@@ -3,6 +3,27 @@ from dataclasses import dataclass, field
 INVALID_DATA_VALUE = None
 
 @dataclass
+class PressureSensor():
+    time: any = field(default_factory = lambda:[])
+    pressure: any = field(default_factory = lambda:[])
+    temperature: any = field(default_factory = lambda:[])
+    depth: any = field(default_factory = lambda:[])
+
+@dataclass
+class IMUSensor():
+    def __init__(self) -> None:
+        self.acc = Accelerometer()
+        self.ori = Orientation()
+        self.mag = Magnetometer()
+        self.ang = AngularVelocity()
+        self.rot = RotationVector()
+        self.lin = LinearAcceleration()
+        self.gra = Gravity()
+        self.calibration = IMUCalibration()
+        self.temp = INVALID_DATA_VALUE
+
+
+@dataclass
 class IMUCalibration():
     system: any = INVALID_DATA_VALUE
     gyro: any = INVALID_DATA_VALUE
