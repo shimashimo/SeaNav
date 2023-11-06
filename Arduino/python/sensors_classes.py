@@ -4,8 +4,15 @@ INVALID_DATA_VALUE = None
 
 @dataclass
 class PressureSensor():
+<<<<<<< Updated upstream
         temperature = INVALID_DATA_VALUE
         pressure = INVALID_DATA_VALUE
+=======
+    time: any = field(default_factory = lambda:[])
+    pressure: any = field(default_factory = lambda:[])
+    temperature: any = field(default_factory = lambda:[])
+    depth: any = field(default_factory = lambda:[])
+>>>>>>> Stashed changes
 
 @dataclass
 class IMUSensor():

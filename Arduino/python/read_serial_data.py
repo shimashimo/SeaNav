@@ -27,7 +27,12 @@ from sensors_classes import PressureSensor, IMUSensor, Accelerometer
     MESSAGE_TYPE_INDEX,
     TEMPERATURE_INDEX,
     PRESSURE_INDEX,
+<<<<<<< Updated upstream:Arduino/python/read_serial_data.py
 ) = range(0, 3)
+=======
+    DEPTH_INDEX
+) = range(0, 5)
+>>>>>>> Stashed changes:Arduino/python/read_serial.py
 
 
 # Constants depending on platform
@@ -45,8 +50,15 @@ def parse_pressure_message(pressure_data, message_line):
     # Sample Message "p,20,100" for "message_type,temperature,pressure"
 
     # Store message information in PressureSensor object.
+<<<<<<< Updated upstream:Arduino/python/read_serial_data.py
     pressure_data.temperature = message_line[TEMPERATURE_INDEX]
     pressure_data.pressure = message_line[PRESSURE_INDEX]
+=======
+    pressure_data.time.append(message_line[TIME_INDEX])
+    pressure_data.temperature.append(message_line[TEMPERATURE_INDEX])
+    pressure_data.pressure.append(message_line[PRESSURE_INDEX])
+    pressure_data.depth.append(message_line[DEPTH_INDEX])
+>>>>>>> Stashed changes:Arduino/python/read_serial.py
 
 def parse_imu_message(imu_data, message_line):
     # Sample message "i,ori,1,2,3" for "message_type,subtype,x,y,z"
@@ -72,6 +84,7 @@ def read_serial_data(pressure_data, imu_data):
     line = ser.readline().decode('utf-8').strip()
     message_line = line.split(',')
     # Message is of pressure data
+    # print(message_line)
     if message_line[MESSAGE_TYPE_INDEX] == 'p':
         parse_pressure_message(pressure_data, message_line)
     elif message_line[MESSAGE_TYPE_INDEX] == 'i':
