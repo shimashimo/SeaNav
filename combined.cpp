@@ -216,7 +216,7 @@ void run_pressure(){
 //   Serial.print(lps35hw.readTemperature());
 //   Serial.println(" C");
 
-  String pressure_data = String("p");
+  // String pressure_data = String("p");
   String temp = String(lps35hw.readTemperature());
 
 
@@ -225,8 +225,13 @@ void run_pressure(){
   // Serial.print(lps35hw.readPressure());
   // Serial.println(" hPa");
   String pressure = String(lps35hw.readPressure());
+
+  // float  depth = lps35hw.readPressure() / 1.0038; //  use cmConvertSaltwater for saltwater
+  float depth = lps35hw.readPressure() / 0.9778;
+
+  float time = micros()/ 1e6;
   
-  pressure_data += "," + temp + "," + pressure;
+  String pressure_data = String(time) + "," + "p" + "," + String(temp) + "," + pressure + "," + String(depth);
 
   Serial.println(pressure_data);
   delay(1000);

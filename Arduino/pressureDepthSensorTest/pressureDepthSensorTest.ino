@@ -63,7 +63,7 @@ void setup() {
   sensor.begin_I2C();
   //uncomment the line below for SPI connections
   //sensor.begin_SPI(LPS_CS, LPS_SCK, LPS_MISO, LPS_MOSI);
-  // sensor.zeroPressure();  //equates the pressure reading with 0 every time program starts
+  sensor.zeroPressure();  //equates the pressure reading with 0 every time program starts
 }
 
 void loop() {
@@ -83,7 +83,7 @@ void loop() {
   // Serial.println(" hPa");
 
   // depth = sensor.readPressure() / cmConvertFreshwater - depthOffset; //  use cmConvertSaltwater for saltwater
-  depth = sensor.readPressure() / (9790.38) * 100;
+  depth = sensor.readPressure() * 100 / (9778.07);  // hectoPascals * 100 kg/ms^2 / kg/(m^2*s^2) = 
 
   float time = micros()/ 1e6;
   pressure_data = String(time) + "," + "p" + "," + String(temp) + "," + String(pressure_hpa) + "," + String(depth);
@@ -94,5 +94,5 @@ void loop() {
 
   //Senses temperature and pressure every 100ms
   //Change the time for more/less frequent sensing
-  delay(1000);
+  delay(500);
 }
