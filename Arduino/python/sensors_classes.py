@@ -25,64 +25,51 @@ class IMUSensor():
 
 @dataclass
 class IMUCalibration():
-    system: any = INVALID_DATA_VALUE
-    gyro: any = INVALID_DATA_VALUE
-    accel: any = INVALID_DATA_VALUE
-    mag: any = INVALID_DATA_VALUE
+    def __init__(self) -> None:
+        self.system = INVALID_DATA_VALUE
+        self.gyro = INVALID_DATA_VALUE
+        self.accel = INVALID_DATA_VALUE
+        self.mag = INVALID_DATA_VALUE
 
 @dataclass
 class ThreeDegreeSensorData():
-    time: any = field(default_factory = lambda:[])
-    x: any = field(default_factory = lambda:[])
-    y: any = field(default_factory = lambda:[])
-    z: any = field(default_factory = lambda:[])
+    def __init__(self):
+        self.x = INVALID_DATA_VALUE
+        self.y = INVALID_DATA_VALUE
+        self.z = INVALID_DATA_VALUE
 
 
 class Orientation(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class AngularVelocity(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class LinearAcceleration(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class Magnetometer(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class Accelerometer(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class Gravity(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
 
 class RotationVector(ThreeDegreeSensorData):
+    def __init__(self):
+        super().__init__()
     pass
-
-@dataclass
-class PressureSensor():
-    time: any = field(default_factory = lambda:[])
-    pressure: any = field(default_factory = lambda:[])
-    temperature: any = field(default_factory = lambda:[])
-
-@dataclass
-class IMUSensor():
-    acc: any = field(default_factory = Accelerometer)
-    ori: any = field(default_factory = Orientation)
-    mag: any = field(default_factory = Magnetometer)
-    ang: any = field(default_factory = AngularVelocity)
-    rot: any = field(default_factory = RotationVector)
-    lin: any = field(default_factory = LinearAcceleration)
-    gra: any = field(default_factory = Gravity)
-    calibration: any = field(default_factory = IMUCalibration)
-    temp: any = INVALID_DATA_VALUE
-
-    def set_generic_sensor(self, time, indicator, x, y, z):
-        # setattr(getattr(self, indicator), "x", x)
-        # setattr(getattr(self, indicator), "y", y)
-        # setattr(getattr(self, indicator), "z", z)
-        getattr(getattr(self, indicator), "time").append(time)
-        getattr(getattr(self, indicator), "x").append(x)
-        getattr(getattr(self, indicator), "y").append(y)
-        getattr(getattr(self, indicator), "z").append(z)
-    
