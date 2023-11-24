@@ -2,16 +2,24 @@
 
 SeaNav is a underwater navigation system
 
-
+# Branching
+## To show which branch you're on currently, can also see with git status
+git branch
+## To create new branch and switch to it
+git checkout -b <new-branch-name>
+## To switch to other branch
+git checkout <branch-name-u-want-to-switch-to>
 
 # Pull
-git pull origin
+git pull origin <branch-name>
 
 # Commit
+'''
 git status \
 git add "filename" \
 git add . (Add all files changed) \
 git commit -m "Message" 
+'''
 
 # Push
 git push
