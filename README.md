@@ -2,6 +2,19 @@
 
 SeaNav is a underwater navigation system
 
+# Order of commands
+1. git status or git branch (check which branch you're on) \
+2. (if not on master) git checkout master \
+3. git pull origin master (get the most recent version of master) \
+4. git checkout nick_branch (switch to nick_branch) \
+5. (u can ignore this step later when u've done work locally) git pull nick_branch (get the latest version of nick_branch) \
+\
+6. (after you've done work) git add . -> git commit -m "Completed something" -> git push origin nick_branch \
+7. git checkout master (switch to master)
+8. git pull origin master (get the most recent version of master)
+9. git merge nick_branch (hopefull it'll just be a fast-forward, u can if its weird u can lmk and ill merge ur branch with master)
+10. git push origin master (push master to github)
+
 # Branching
 ## To show which branch you're on currently, can also see with git status
 git branch
