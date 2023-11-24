@@ -12,13 +12,11 @@ pressure_data.pressure.append(2)
 pressure_data.temperature.append(3)
 pressure_data.depth.append(4)
 
-# Simulate imu data
-
-
 app = Flask(__name__)
 
+@app.route('/imu')
 def start_IMU():
-    processing_executable = subprocess.Popen(["path_to_exe"], stdout=subprocess.PIPE)
+    processing_executable = subprocess.Popen(["/mnt/c/Users/nicpi/ECE356/SeaNav/processing/cuberotate.exe"], stdout=subprocess.PIPE)
 
 
 # Simulated sensor data (replace this with your actual sensor data logic)
