@@ -1,6 +1,6 @@
 import serial
 import platform
-from sensors_classes import PressureSensor, IMUSensor
+from python.sensors_classes import PressureSensor, IMUSensor
 
 
 #Constants for Standard IMU Message
@@ -63,11 +63,11 @@ def parse_imu_message(imu_data, message_line):
         print("Message Unknown")
         
     elif message_line[CAL_SUB_TYPE_INDEX] == "cal": # Valid cal message, copy values
-        imu_data.calibration.system = message_line[SYSTEM_INDEX]
-        imu_data.calibration.gyro = message_line[GYRO_INDEX]
-        imu_data.calibration.accel = message_line[ACCEL_INDEX]
-        imu_data.calibration.mag = message_line[MAG_INDEX]
-        imu_data.temp = message_line[IMU_TEMP_INDEX]
+        imu_data.calibration.system.append(message_line[SYSTEM_INDEX])
+        imu_data.calibration.gyro.append(message_line[GYRO_INDEX])
+        imu_data.calibration.accel.append(message_line[ACCEL_INDEX])
+        imu_data.calibration.mag.append(message_line[MAG_INDEX])
+        imu_data.temp.append([IMU_TEMP_INDEX])
 
         print(message_line)
 

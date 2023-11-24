@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <!-- Include map library for real-time location -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
 </head>
 <body>
     <h2 style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">SeaNav</h2>
@@ -20,6 +19,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Include Toast for alerts -->
     <script src="{{ url_for('static', filename='/toast/Toast.min.js') }}"></script>
+    <!-- Include for htmx live data from Flask-->
+    <script src="https://unpkg.com/htmx.org@1.8.6"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
 
     <div class="grid-container">
         <div class="chart-container">
@@ -42,38 +44,51 @@
                         <th>Value</th>
                     </tr>
                 </thead>
+                <!-- Add Units to all real time measurements-->
                 <tbody>
                     <tr>
+                        <td>Time</td>
+                        <td id="time"></td>
+                    </tr>
+                    <tr>
                         <td>Object Distance</td>
-                        <td id="distance">-</td>
+                        <td id="distance"></td>
                     </tr>
                     <tr>
                         <td>X Angular Velocity</td>
-                        <td id="xAngularVelocity">-</td>
+                        <td id="xAngularVelocity"></td>
                     </tr>
                     <tr>
                         <td>Y Angular Velocity</td>
-                        <td id="yAngularVelocity">-</td>
+                        <td id="yAngularVelocity"></td>
                     </tr>
                     <tr>
                         <td>Z Angular Velocity</td>
-                        <td id="zAngularVelocity">-</td>
+                        <td id="zAngularVelocity"></td>
                     </tr>
                     <tr>
                         <td>X Acceleration</td>
-                        <td id="xAcceleration">-</td>
+                        <td id="xAcceleration"></td>
                     </tr>
                     <tr>
                         <td>Y Acceleration</td>
-                        <td id="yAcceleration">-</td>
+                        <td id="yAcceleration"></td>
                     </tr>
                     <tr>
                         <td>Z Acceleration</td>
-                        <td id="zAcceleration">-</td>
+                        <td id="zAcceleration"></td>
                     </tr>
                     <tr>
                         <td>Depth</td>
-                        <td id="depth">-</td>
+                        <td id="depth"></td>
+                    </tr>
+                    <tr>
+                        <td>Pressure</td>
+                        <td id="pressure"></td>
+                    </tr>
+                    <tr>
+                        <td>Temperature</td>
+                        <td id="p-temperature"></td>
                     </tr>
                 </tbody>
             </table>

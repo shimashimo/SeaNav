@@ -46,9 +46,30 @@ function createChart(ctx, label, color) {
     });
 }
 
-// var evtSource = new EventSource('/updates');
-// evtSource.onmessage = function(event) {
-//     var data = JSON.parse(event.data);
+var evtSource = new EventSource('/stream-sensor-data');
+evtSource.onmessage = function(event) {
+    // Parse JSON formatted data
+    var data = JSON.parse(event.data);
+
+    // Add all real-time values to the table
+
+    // Time
+    document.getElementById("time").innerHTML = parseFloat(data["p_time"]);
+    // Ultrasonic Sensor
+    document.getElementById("distance").innerHTML = parseFloat(data["distance"]);
+    // IMU Sensor
+    document.getElementById("xAngularVelocity").innerHTML = parseFloat(data["name"]);
+    document.getElementById("yAngularVelocity").innerHTML = parseFloat(data["name"]);
+    document.getElementById("zAngularVelocity").innerHTML = parseFloat(data["name"]);
+    document.getElementById("xAcceleration").innerHTML = parseFloat(data["name"]);
+    document.getElementById("yAcceleration").innerHTML = parseFloat(data["name"]);
+    document.getElementById("zAcceleration").innerHTML = parseFloat(data["name"]);
+    // Pressure Sensor
+    document.getElementById("depth").innerHTML = parseFloat(data["p_depth"]);
+    document.getElementById("pressure").innerHTML = parseFloat(data["p_pressure"]);
+    document.getElementById("p-temperature").innerHTML = parseFloat(data["p_temperature"]);
+
+};
 //     var timestamp = new Date().toLocaleTimeString();
 
 //     // Check if 'CO' value reaches a certain number (example: 0.5)
