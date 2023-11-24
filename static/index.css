@@ -24,7 +24,27 @@ body, html {
 
 canvas {
     /* Adjust canvas size if needed */
-    width: 150px;
-    height: 150px;
     border: 1px solid black; /* Add border for visualization */
+}
+
+/* Apply basic styles for the table */
+#realtime_table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+#map { 
+    height: 100%; 
+    width: 100%;
 }
