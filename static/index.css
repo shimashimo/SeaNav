@@ -1,0 +1,30 @@
+body, html {
+    height: 100vh; /* Ensure body and HTML cover the entire viewport */
+    margin: 0; /* Remove default margins */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-auto-rows: minmax(100px, auto); /* Automatic row height */
+    grid-gap: 20px; /* Adjust the gap between grid items */
+    height: 100%; /* Take up entire viewport height */
+    padding: 20px; /* Optional padding */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align content in the center */
+    justify-content: center; /* Align content in the center */
+    border: 1px solid #ccc; /* Add borders for visualization */
+    padding: 10px;
+    text-align: center;
+}
+
+canvas {
+    /* Adjust canvas size if needed */
+    width: 150px;
+    height: 150px;
+    border: 1px solid black; /* Add border for visualization */
+}

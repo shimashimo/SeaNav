@@ -2,9 +2,43 @@
 <html>
 <head>
     <title>Matplotlib Graph</title>
+    <!-- Include jQuery for handling DOM manipulations-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include main Javascript file -->
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <!-- Include main css for displaying -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <!-- Include styling for toast alerts -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/toast/Toast.min.css') }}">
 </head>
 <body>
-    <h1>Real-Time Matplotlib Graph</h1>
-    <img src="{{ url_for('plot') }}" alt="Real-Time Plot">
+    <h2 style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">SeaNav</h2>
+    <!-- Include Chart.js for displaying data -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Toast for alerts -->
+    <script src="{{ url_for('static', filename='/toast/Toast.min.js') }}"></script>
+
+    <div class="grid-container">
+        <div class="chart-container">
+            <canvas id="depthChart"></canvas>
+            <p>Depth</p>
+        </div>
+        <div class="chart-container">
+            <canvas id="imuChart"></canvas>
+            <p>IMU</p>
+        </div>
+        <div class="chart-container">
+            <canvas id="location"></canvas>
+            <p>Location</p>
+        </div>
+        <div class="chart-container">
+            <canvas id="realTime"></canvas>
+            <p>Real-time</p>
+        </div>
+        <div class="chart-container">
+            <canvas id="radar"></canvas>
+            <p>Radar</p>
+        </div>
+    </div>
 </body>
 </html>
