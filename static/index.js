@@ -54,20 +54,20 @@ evtSource.onmessage = function(event) {
     // Add all real-time values to the table
 
     // Time
-    document.getElementById("time").innerHTML = parseFloat(data["p_time"]);
+    document.getElementById("time").textContent = parseFloat(data["p_time"]) || "N/A";
     // Ultrasonic Sensor
-    document.getElementById("distance").innerHTML = parseFloat(data["distance"]);
+    document.getElementById("distance").textContent = parseFloat(data["distance"]) || "N/A";
     // IMU Sensor
-    document.getElementById("xAngularVelocity").innerHTML = parseFloat(data["name"]);
-    document.getElementById("yAngularVelocity").innerHTML = parseFloat(data["name"]);
-    document.getElementById("zAngularVelocity").innerHTML = parseFloat(data["name"]);
-    document.getElementById("xAcceleration").innerHTML = parseFloat(data["name"]);
-    document.getElementById("yAcceleration").innerHTML = parseFloat(data["name"]);
-    document.getElementById("zAcceleration").innerHTML = parseFloat(data["name"]);
+    document.getElementById("xAngularVelocity").textContent = parseFloat(data["name"]) || "N/A";
+    document.getElementById("yAngularVelocity").textContent = parseFloat(data["name"]) || "N/A";
+    document.getElementById("zAngularVelocity").textContent = parseFloat(data["name"]) || "N/A";
+    document.getElementById("xAcceleration").textContent = parseFloat(data["name"]) || "N/A";
+    document.getElementById("yAcceleration").textContent = parseFloat(data["name"]) || "N/A";
+    document.getElementById("zAcceleration").textContent = parseFloat(data["name"]) || "N/A";
     // Pressure Sensor
-    document.getElementById("depth").innerHTML = parseFloat(data["p_depth"]);
-    document.getElementById("pressure").innerHTML = parseFloat(data["p_pressure"]);
-    document.getElementById("p-temperature").innerHTML = parseFloat(data["p_temperature"]);
+    document.getElementById("depth").textContent = parseFloat(data["p_depth"]) || "N/A";
+    document.getElementById("pressure").textContent = parseFloat(data["p_pressure"]) || "N/A";
+    document.getElementById("p-temperature").textContent = parseFloat(data["p_temperature"]) || "N/A";
 
 };
 //     var timestamp = new Date().toLocaleTimeString();

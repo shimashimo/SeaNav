@@ -1,5 +1,6 @@
-import serial
+"""Module to read Arduino serial data and put into Python classes"""
 import platform
+import serial
 from python.sensors_classes import PressureSensor, IMUSensor
 
 
@@ -35,33 +36,50 @@ from python.sensors_classes import PressureSensor, IMUSensor
 ) = range(0, 5)
 
 
-# Constants depending on platform
-if (platform.system() == "Darwin"):
-    SERIAL_PORT = "/dev/cu.usbmodem1401"
-else:
-    SERIAL_PORT = "COM3" 
-
-BAUD_RATE = 115200
-
 # Initialize serial connection
-ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
+def initialize_arduino(serial_port: str, baud_rate: int) -> serial.Serial:
+    """Initialize serial communication with arduino
 
-def parse_pressure_message(pressure_data, message_line):
-    # Sample Message "p,20,100" for "message_type,temperature,pressure"
+    Args:
+        serial_port (str): serial port as a string
+        BAUD_RATE (int): baud rate for communication
 
+    Returns:
+        serial.Serial: Serial object
+    """
+    return serial.Serial(serial_port, baud_rate)
+
+
+def parse_pressure_message(pressure_data: PressureSensor, message_line: str) -> None:
+    """
+    Parse pressure message from Arduino
+    Sample Message "p,20,100" for "message_type,temperature,pressure"
+
+    Args:
+        pressure_data (PressureSensor): PressureSensor object to store 
+                                        message data to
+        message_line (str): Arduino serial port message to be parsed
+    """
     # Store message information in PressureSensor object.
     pressure_data.time.append(message_line[TIME_INDEX])
     pressure_data.temperature.append(message_line[TEMPERATURE_INDEX])
     pressure_data.pressure.append(message_line[PRESSURE_INDEX])
     pressure_data.depth.append(message_line[DEPTH_INDEX])
 
-def parse_imu_message(imu_data, message_line):
-    # Sample message "i,ori,1,2,3" for "message_type,subtype,x,y,z"
+def parse_imu_message(imu_data: IMUSensor, message_line: str) -> None:
+    """
+    Parse imu message from Arduino
+    Sample message "i,ori,1,2,3" for "message_type,subtype,x,y,z"
+
+
+    Args:
+        imu_data (IMUSensor): IMUSensor object to store message data to
+        message_line (str): Arduino serial port message to be parsed
+    """
 
     # Store message information in IMUSensor object.
     if message_line[SUB_TYPE_INDEX] == "unk": # Invalid message
         print("Message Unknown")
-        
     elif message_line[CAL_SUB_TYPE_INDEX] == "cal": # Valid cal message, copy values
         imu_data.calibration.system.append(message_line[SYSTEM_INDEX])
         imu_data.calibration.gyro.append(message_line[GYRO_INDEX])
@@ -69,13 +87,22 @@ def parse_imu_message(imu_data, message_line):
         imu_data.calibration.mag.append(message_line[MAG_INDEX])
         imu_data.temp.append([IMU_TEMP_INDEX])
 
-        print(message_line)
-
     else: # Valid standard message, copy x, y, and z values
-        imu_data.set_generic_sensor(message_line[TIME_INDEX], message_line[SUB_TYPE_INDEX], message_line[X_INDEX],
-                                    message_line[Y_INDEX], message_line[Z_INDEX])
+        imu_data.set_generic_sensor(message_line[TIME_INDEX], message_line[SUB_TYPE_INDEX],
+                                    message_line[X_INDEX], message_line[Y_INDEX],
+                                    message_line[Z_INDEX])
 
-def read_serial_data(pressure_data, imu_data):
+def read_serial_data(ser: serial.Serial, pressure_data: PressureSensor,
+                     imu_data: IMUSensor) -> None:
+    """
+    Determine what type of message is in serial port and store data in
+    correct object
+
+    Args:
+        pressure_data (PressureSensor): PressureSensor object to store 
+                                        serial data
+        imu_data (IMUSensor): IMUSensor object to store serial data
+    """
 
     line = ser.readline().decode('utf-8').strip()
     message_line = line.split(',')

@@ -1,3 +1,7 @@
+"""
+This module includes the classes required to hold all 
+sensor data in Python
+"""
 from __future__ import annotations
 from dataclasses import dataclass, field
 
@@ -12,8 +16,8 @@ class PressureSensor():
         time (list[str]): List containing the time each of the correspondingly
                           index data points from pressure, temperature, and 
                           depth
-        pressure (list[str]): List containing all pressure data points from 
-                              pressure sensor
+        pressure (list[str]): List containing all pressure data points from pressure 
+                              sensor
         temperature (list[str]): List containing all temperature data points 
                                  from pressure sensor
         depth (list[str]): List containing all depth data points from pressure 
@@ -31,10 +35,10 @@ class PressureSensor():
             dict[str, int | str]: Dictionary containing the most recent data 
             for flask server to read.
         """
-        return {"p_time": self.time[-1], 
-                "p_pressure": self.pressure[-1], 
-                "p_temperature": self.temperature[-1], 
-                "p_depth": self.depth[-1] }
+        return {"p_time": self.time[-1],
+                "p_pressure": self.pressure[-1],
+                "p_temperature": self.temperature[-1],
+                "p_depth": self.depth[-1]}
 
 @dataclass
 class IMUCalibration():
@@ -72,26 +76,25 @@ class ThreeDegreeSensorData():
 
 
 class Orientation(ThreeDegreeSensorData):
-    pass
+    """Class for orientation"""
 
 class AngularVelocity(ThreeDegreeSensorData):
-    pass
+    """Class for angular vleocity"""
 
 class LinearAcceleration(ThreeDegreeSensorData):
-    pass
+    """Class for linear acceleration"""
 
 class Magnetometer(ThreeDegreeSensorData):
-    pass
+    """Class for magnetometer"""
 
 class Accelerometer(ThreeDegreeSensorData):
-    pass
+    """Class for accelerometer"""
 
 class Gravity(ThreeDegreeSensorData):
-    pass
+    """Class for gravity"""
 
 class RotationVector(ThreeDegreeSensorData):
-    pass
-
+    """Class for rotation vector"""
 
 @dataclass
 class IMUSensor():
@@ -145,7 +148,7 @@ class IMUSensor():
         getattr(getattr(self, indicator), "x").append(x)
         getattr(getattr(self, indicator), "y").append(y)
         getattr(getattr(self, indicator), "z").append(z)
-    
+
     def most_recent_data(self)-> dict[str, int | str]:
         """Returns the most recently collected data from imu sensor
 
@@ -153,17 +156,29 @@ class IMUSensor():
             dict[str, int | str]: Dictionary containing most recently 
                                   collected data
         """
-        return {"i_acc": self.acc[-1], 
-                "i_ori": self.ori[-1], 
-                "i_mag": self.mag[-1], 
-                "i_ang": self.ang[-1], 
-                "i_rot": self.rot[-1], 
-                "i_lin": self.lin[-1],
-                "i_gra": self.gra[-1],
+        return {"i_acc_x": self.acc.x[-1],
+                "i_acc_y": self.acc.y[-1],
+                "i_acc_z": self.acc.z[-1],
+                "i_ori_x": self.ori.x[-1],
+                "i_ori_y": self.ori.y[-1],
+                "i_ori_z": self.ori.z[-1],
+                "i_mag_x": self.mag.x[-1],
+                "i_mag_y": self.mag.y[-1],
+                "i_mag_z": self.mag.z[-1],
+                "i_ang_x": self.ang.x[-1],
+                "i_ang_y": self.ang.y[-1],
+                "i_ang_z": self.ang.z[-1],
+                "i_rot_x": self.rot.x[-1],
+                "i_rot_y": self.rot.y[-1],
+                "i_rot_z": self.rot.z[-1],
+                "i_lin_x": self.lin.x[-1],
+                "i_lin_y": self.lin.y[-1],
+                "i_lin_z": self.lin.z[-1],
+                "i_gra_x": self.gra.x[-1],
+                "i_gra_y": self.gra.y[-1],
+                "i_gra_z": self.gra.z[-1],
                 "i_cal_sys": self.calibration.system[-1],
                 "i_cal_gyro": self.calibration.gyro[-1],
                 "i_cal_accel": self.calibration.accel[-1],
                 "i_cal_mag": self.calibration.mag[-1],
                 }
-
-    
