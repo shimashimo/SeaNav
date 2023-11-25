@@ -1,83 +1,146 @@
+"""
+This module includes the classes required to hold all 
+sensor data in Python
+"""
+from __future__ import annotations
 from dataclasses import dataclass, field
 
 INVALID_DATA_VALUE = None
 
 @dataclass
 class PressureSensor():
-    time: any = field(default_factory = lambda:[])
-    pressure: any = field(default_factory = lambda:[])
-    temperature: any = field(default_factory = lambda:[])
-    depth: any = field(default_factory = lambda:[])
+    """Pressure sensor data points with helper functions to output real-time 
+       data to flask server.
 
-@dataclass
-class IMUSensor():
-    def __init__(self) -> None:
-        self.acc = Accelerometer()
-        self.ori = Orientation()
-        self.mag = Magnetometer()
-        self.ang = AngularVelocity()
-        self.rot = RotationVector()
-        self.lin = LinearAcceleration()
-        self.gra = Gravity()
-        self.calibration = IMUCalibration()
-        self.temp = INVALID_DATA_VALUE
+    Attributes:
+        time (list[str]): List containing the time each of the correspondingly
+                          index data points from pressure, temperature, and 
+                          depth
+        pressure (list[str]): List containing all pressure data points from pressure 
+                              sensor
+        temperature (list[str]): List containing all temperature data points 
+                                 from pressure sensor
+        depth (list[str]): List containing all depth data points from pressure 
+                           sensor
+    """
+    time: list[str] = field(default_factory = lambda:[])
+    pressure: list[str] = field(default_factory = lambda:[])
+    temperature: list[str] = field(default_factory = lambda:[])
+    depth: list[str] = field(default_factory = lambda:[])
 
+    def most_recent_data(self) -> dict[str, int | str]:
+        """Pull most recently polled data from Arduino on serial port
+
+        Returns:
+            dict[str, int | str]: Dictionary containing the most recent data 
+            for flask server to read.
+        """
+        return {"p_time": self.time[-1],
+                "p_pressure": self.pressure[-1],
+                "p_temperature": self.temperature[-1],
+                "p_depth": self.depth[-1]}
 
 @dataclass
 class IMUCalibration():
-    system: any = INVALID_DATA_VALUE
-    gyro: any = INVALID_DATA_VALUE
-    accel: any = INVALID_DATA_VALUE
-    mag: any = INVALID_DATA_VALUE
+    """
+    IMU Calibration dataclass to hold system, gyro, acceleration, 
+    and magnitude calibration data as lists.
+
+    Attributes:
+        system (list[str]): List containing all calibration data for system
+        gyro (list[str]): List containing all calibration data for gyro
+        accel (list[str]): List containing all calibration data for 
+                           accelerometer
+        mag (list[str]): List containing all calibration data for 
+                         magnetometer
+    """
+    system: list[str] = field(default_factory = lambda:[])
+    gyro: list[str] = field(default_factory = lambda:[])
+    accel: list[str] = field(default_factory = lambda:[])
+    mag: list[str] = field(default_factory = lambda:[])
 
 @dataclass
 class ThreeDegreeSensorData():
-    time: any = field(default_factory = lambda:[])
-    x: any = field(default_factory = lambda:[])
-    y: any = field(default_factory = lambda:[])
-    z: any = field(default_factory = lambda:[])
+    """Standard three degree sensor data class for all sensor data off of IMU
+
+    Attributes:
+        time (list[str]): List of timestamps for data in three degrees
+        x (list[str]): List of x value sensor data
+        y (list[str]): List of y value sensor data
+        z (list[str]): List of z value sensor data
+    """
+    time: list[str] = field(default_factory = lambda:[])
+    x: list[str] = field(default_factory = lambda:[])
+    y: list[str] = field(default_factory = lambda:[])
+    z: list[str] = field(default_factory = lambda:[])
 
 
 class Orientation(ThreeDegreeSensorData):
-    pass
+    """Class for orientation"""
 
 class AngularVelocity(ThreeDegreeSensorData):
-    pass
+    """Class for angular vleocity"""
 
 class LinearAcceleration(ThreeDegreeSensorData):
-    pass
+    """Class for linear acceleration"""
 
 class Magnetometer(ThreeDegreeSensorData):
-    pass
+    """Class for magnetometer"""
 
 class Accelerometer(ThreeDegreeSensorData):
-    pass
+    """Class for accelerometer"""
 
 class Gravity(ThreeDegreeSensorData):
-    pass
+    """Class for gravity"""
 
 class RotationVector(ThreeDegreeSensorData):
-    pass
-
-@dataclass
-class PressureSensor():
-    time: any = field(default_factory = lambda:[])
-    pressure: any = field(default_factory = lambda:[])
-    temperature: any = field(default_factory = lambda:[])
+    """Class for rotation vector"""
 
 @dataclass
 class IMUSensor():
-    acc: any = field(default_factory = Accelerometer)
-    ori: any = field(default_factory = Orientation)
-    mag: any = field(default_factory = Magnetometer)
-    ang: any = field(default_factory = AngularVelocity)
-    rot: any = field(default_factory = RotationVector)
-    lin: any = field(default_factory = LinearAcceleration)
-    gra: any = field(default_factory = Gravity)
-    calibration: any = field(default_factory = IMUCalibration)
-    temp: any = INVALID_DATA_VALUE
+    """IMU sensor class to store all forms of data from the sensor
 
-    def set_generic_sensor(self, time, indicator, x, y, z):
+    Attributes:
+        acc (Accelerometer): Object containing lists for standard three
+                             degree sensor data
+        ori (Orientation): Object containing lists for standard three
+                             degree sensor data
+        mag (Magnetometer): Object containing lists for standard three
+                             degree sensor data
+        ang (AngularVelocity): Object containing lists for standard three
+                             degree sensor data
+        rot (RotationVector): Object containing lists for standard three
+                             degree sensor data
+        lin (LinearAcceleration): Object containing lists for standard three
+                             degree sensor data
+        gra (Gravity): Object containing lists for standard three
+                             degree sensor data
+        calibration (IMUCalibration): Object containing lists for historical
+                                      calibration data
+        temperature (list[str]): List containing temperature data from IMU
+    """
+    acc: Accelerometer = field(default_factory = Accelerometer)
+    ori: Orientation = field(default_factory = Orientation)
+    mag: Magnetometer = field(default_factory = Magnetometer)
+    ang: AngularVelocity = field(default_factory = AngularVelocity)
+    rot: RotationVector = field(default_factory = RotationVector)
+    lin: LinearAcceleration = field(default_factory = LinearAcceleration)
+    gra: Gravity = field(default_factory = Gravity)
+    calibration: IMUCalibration = field(default_factory = IMUCalibration)
+    temperature: list[str] = field(default_factory = lambda:[])
+
+    def set_generic_sensor(self, time: str, indicator: str, x: str, y: str, z: str) -> None:
+        """Appends values to desired class of ThreeDegreeSensor
+
+        Args:
+            time (str): Timestamp for incoming data
+            indicator (str): Indicator to tell which class of ThreeDegreeSensor
+                             the data is being added to
+            x (str): Data for x axis
+            y (str): Data for y axis
+            z (str): Data for z axis
+        """
+        # Maybe Remove if serial works
         # setattr(getattr(self, indicator), "x", x)
         # setattr(getattr(self, indicator), "y", y)
         # setattr(getattr(self, indicator), "z", z)
@@ -85,4 +148,37 @@ class IMUSensor():
         getattr(getattr(self, indicator), "x").append(x)
         getattr(getattr(self, indicator), "y").append(y)
         getattr(getattr(self, indicator), "z").append(z)
-    
+
+    def most_recent_data(self)-> dict[str, int | str]:
+        """Returns the most recently collected data from imu sensor
+
+        Returns:
+            dict[str, int | str]: Dictionary containing most recently 
+                                  collected data
+        """
+        return {"i_acc_x": self.acc.x[-1],
+                "i_acc_y": self.acc.y[-1],
+                "i_acc_z": self.acc.z[-1],
+                "i_ori_x": self.ori.x[-1],
+                "i_ori_y": self.ori.y[-1],
+                "i_ori_z": self.ori.z[-1],
+                "i_mag_x": self.mag.x[-1],
+                "i_mag_y": self.mag.y[-1],
+                "i_mag_z": self.mag.z[-1],
+                "i_ang_x": self.ang.x[-1],
+                "i_ang_y": self.ang.y[-1],
+                "i_ang_z": self.ang.z[-1],
+                "i_rot_x": self.rot.x[-1],
+                "i_rot_y": self.rot.y[-1],
+                "i_rot_z": self.rot.z[-1],
+                "i_lin_x": self.lin.x[-1],
+                "i_lin_y": self.lin.y[-1],
+                "i_lin_z": self.lin.z[-1],
+                "i_gra_x": self.gra.x[-1],
+                "i_gra_y": self.gra.y[-1],
+                "i_gra_z": self.gra.z[-1],
+                "i_cal_sys": self.calibration.system[-1],
+                "i_cal_gyro": self.calibration.gyro[-1],
+                "i_cal_accel": self.calibration.accel[-1],
+                "i_cal_mag": self.calibration.mag[-1],
+                }
