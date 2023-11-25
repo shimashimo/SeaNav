@@ -1,3 +1,13 @@
+
+// Display an error toast notification
+iziToast.error({
+    title: 'Error',
+    message: 'Error occurred!',
+    timeout: 5000, // Auto-closes after 3 seconds
+    position: 'topLeft',
+});
+
+
 var coCtx = document.getElementById('depthChart').getContext('2d');
 
 var coChart = createChart(coCtx, 'Depth', 'blue');
@@ -123,8 +133,10 @@ function updateMarker(lat, lng) {
 
 /* * * * */
 // Simulated real-time updates (replace this with your actual data stream)
-setInterval(function() {
-    var newLat = 28.80 + Math.random() * 0.01; // Example: Random latitude update
-    var newLng = -97.0 + Math.random() * 0.01; // Example: Random longitude update
-    updateMarker(newLat, newLng);
-}, 2000); // Update every 2 seconds (for demonstration)
+// setInterval(function() {
+//     var newLat = 28.80 + Math.random() * 0.01; // Example: Random latitude update
+//     var newLng = -97.0 + Math.random() * 0.01; // Example: Random longitude update
+//     updateMarker(newLat, newLng);
+// }, 2000); // Update every 2 seconds (for demonstration)
+
+/* Send AJAX request for the server to execute program*/
