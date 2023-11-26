@@ -4,7 +4,7 @@ from matplotlib.animation import FuncAnimation
 import csv
 
 # Constants
-SERIAL_PORT = "/dev/cu.usbmodem1401"
+SERIAL_PORT = "COM3"
 BAUD_RATE = 115200
 
 # Initialize serial connection

@@ -56,6 +56,10 @@ function createChart(ctx, label, color) {
     });
 }
 
+function realTimeFormat(num){
+    return (Math.round(num * 100) / 100).toFixed(2);
+}
+
 var evtSource = new EventSource('/stream-sensor-data');
 evtSource.onmessage = function(event) {
     // Parse JSON formatted data
@@ -64,20 +68,20 @@ evtSource.onmessage = function(event) {
     // Add all real-time values to the table
 
     // Time
-    document.getElementById("time").textContent = parseFloat(data["p_time"]) || "N/A";
+    document.getElementById("time").textContent = realTimeFormat(parseFloat(data["p_time"]));
     // Ultrasonic Sensor
-    document.getElementById("distance").textContent = parseFloat(data["distance"]) || "N/A";
+    document.getElementById("distance").textContent = realTimeFormat(parseFloat(data["distance"]));
     // IMU Sensor
-    document.getElementById("xAngularVelocity").textContent = parseFloat(data["name"]) || "N/A";
-    document.getElementById("yAngularVelocity").textContent = parseFloat(data["name"]) || "N/A";
-    document.getElementById("zAngularVelocity").textContent = parseFloat(data["name"]) || "N/A";
-    document.getElementById("xAcceleration").textContent = parseFloat(data["name"]) || "N/A";
-    document.getElementById("yAcceleration").textContent = parseFloat(data["name"]) || "N/A";
-    document.getElementById("zAcceleration").textContent = parseFloat(data["name"]) || "N/A";
+    document.getElementById("xAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_x"]));
+    document.getElementById("yAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_y"]));
+    document.getElementById("zAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_z"]));
+    document.getElementById("xAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_x"]));
+    document.getElementById("yAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_y"]));
+    document.getElementById("zAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_z"]));
     // Pressure Sensor
-    document.getElementById("depth").textContent = parseFloat(data["p_depth"]) || "N/A";
-    document.getElementById("pressure").textContent = parseFloat(data["p_pressure"]) || "N/A";
-    document.getElementById("p-temperature").textContent = parseFloat(data["p_temperature"]) || "N/A";
+    document.getElementById("depth").textContent = realTimeFormat(parseFloat(data["p_depth"]));
+    document.getElementById("pressure").textContent = realTimeFormat(parseFloat(data["p_pressure"]));
+    document.getElementById("p-temperature").textContent = realTimeFormat(parseFloat(data["p_temperature"]));
 
 };
 //     var timestamp = new Date().toLocaleTimeString();
@@ -134,8 +138,12 @@ evtSource.onmessage = function(event) {
 //     nh3Chart.update();
 // };
 
-var map = L.map('map').setView([28.80, -97.0], 13); // Initialize map with a default view
-var marker = L.marker([28.80, -97.0]).addTo(map);     // Initialize map with marker
+
+var latitude = 0;
+var longitude = 0;
+getLocation();
+var map = L.map('map').setView([latitude, longitude], 13); // Initialize map with a default view
+var marker = L.marker([latitude, longitude]).addTo(map);     // Initialize map with marker
 
 // Add a tile layer (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -154,10 +162,22 @@ function updateMarker(lat, lng) {
 
 /* * * * */
 // Simulated real-time updates (replace this with your actual data stream)
-// setInterval(function() {
-//     var newLat = 28.80 + Math.random() * 0.01; // Example: Random latitude update
-//     var newLng = -97.0 + Math.random() * 0.01; // Example: Random longitude update
-//     updateMarker(newLat, newLng);
-// }, 2000); // Update every 2 seconds (for demonstration)
+setInterval(function() {
+    getLocation();
+    updateMarker(latitude, longitude);
+}, 2000); // Update every 2 seconds (for demonstration)
 
-/* Send AJAX request for the server to execute program*/
+
+// Get current device location data
+function getLocation() {
+    if (navigator.geolocation) {
+      position = navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        
+    }
+  }
+  
+function showPosition(position) {
+    latitude = position.coords.latitude;
+    longitude =position.coords.longitude;
+}
