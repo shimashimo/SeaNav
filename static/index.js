@@ -1,3 +1,13 @@
+
+// Display an error toast notification
+iziToast.error({
+    title: 'Error',
+    message: 'Error occurred!',
+    timeout: 5000, // Auto-closes after 3 seconds
+    position: 'topLeft',
+});
+
+
 var coCtx = document.getElementById('depthChart').getContext('2d');
 
 var coChart = createChart(coCtx, 'Depth', 'blue');
