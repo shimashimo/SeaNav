@@ -1,1 +1,3 @@
 .DS_Store
+processing/
+python/__pycache__/

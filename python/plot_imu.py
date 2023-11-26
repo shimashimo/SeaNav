@@ -6,7 +6,7 @@ import csv
 import numpy as np
 
 # Constants
-SERIAL_PORT = "/dev/cu.usbmodem1401"
+SERIAL_PORT = "COM3"
 BAUD_RATE = 115200
 
 imu_sensor_obj = read_serial.IMUSensor()
@@ -21,10 +21,10 @@ pressure_data = []
 
 # Create function to update the plot
 def update_plot(frame):
-    read_serial.read_serial_data(pressure_sensor_obj, imu_sensor_obj)
+    read_serial.read_serial_data(ser, pressure_sensor_obj, imu_sensor_obj)
     
-    # print(pressure_sensor_obj.time)
-    # print(pressure_sensor_obj.pressure)
+    print(pressure_sensor_obj.time)
+    print(pressure_sensor_obj.pressure)
     # Append the time and pressure data
     # x_vals.append(np.asarray(pressure_sensor_obj.time,)
     # pressure_data.append(pressure_sensor_obj.pressure))

@@ -35,21 +35,6 @@ from python.sensors_classes import PressureSensor, IMUSensor
     DEPTH_INDEX
 ) = range(0, 5)
 
-
-# Initialize serial connection
-def initialize_arduino(serial_port: str, baud_rate: int) -> serial.Serial:
-    """Initialize serial communication with arduino
-
-    Args:
-        serial_port (str): serial port as a string
-        BAUD_RATE (int): baud rate for communication
-
-    Returns:
-        serial.Serial: Serial object
-    """
-    return serial.Serial(serial_port, baud_rate)
-
-
 def parse_pressure_message(pressure_data: PressureSensor, message_line: str) -> None:
     """
     Parse pressure message from Arduino
@@ -85,7 +70,7 @@ def parse_imu_message(imu_data: IMUSensor, message_line: str) -> None:
         imu_data.calibration.gyro.append(message_line[GYRO_INDEX])
         imu_data.calibration.accel.append(message_line[ACCEL_INDEX])
         imu_data.calibration.mag.append(message_line[MAG_INDEX])
-        imu_data.temp.append([IMU_TEMP_INDEX])
+        imu_data.temperature.append([IMU_TEMP_INDEX])
 
     else: # Valid standard message, copy x, y, and z values
         imu_data.set_generic_sensor(message_line[TIME_INDEX], message_line[SUB_TYPE_INDEX],
@@ -105,6 +90,7 @@ def read_serial_data(ser: serial.Serial, pressure_data: PressureSensor,
     """
 
     line = ser.readline().decode('utf-8').strip()
+    #print(line)
     message_line = line.split(',')
     # Message is of pressure data
     if message_line[MESSAGE_TYPE_INDEX] == 'p':
@@ -116,6 +102,6 @@ def read_serial_data(ser: serial.Serial, pressure_data: PressureSensor,
 # imu_data = IMUSensor()
 
 # while True:
-#     read_serial_data(pressure_data, imu_data)
+#     read_serial_data(serial_port, pressure_data, imu_data)
 #     print(str(pressure_data) + "\n")
 #     print(str(imu_data) + "\n")
