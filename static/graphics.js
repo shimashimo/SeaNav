@@ -1,6 +1,7 @@
 var Euler = {heading: 180.0, pitch: -40.0, roll: 45.0};  // Global Var of IMU orientaion data
 // Listen for SSE messages and process the data
 window.addEventListener('message', function(event) {
+  console.log(event.data);
   if (event.data) {
     const data = JSON.parse(event.data);
     if (data.Orientation) {
