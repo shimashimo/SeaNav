@@ -59,8 +59,8 @@ function createChart(ctx, label, color) {
 var evtSource = new EventSource('/stream-sensor-data');
 evtSource.onmessage = function(event) {
     // Parse JSON formatted data
-    var data = JSON.parse(event.data);
-
+    // var data = JSON.parse(event.data);
+    var data = [];
     // Add all real-time values to the table
 
     // Time
@@ -161,3 +161,28 @@ function updateMarker(lat, lng) {
 // }, 2000); // Update every 2 seconds (for demonstration)
 
 /* Send AJAX request for the server to execute program*/
+
+
+/* JQuery*/
+$(document).ready(function() {
+    // When the button is clicked
+    $("#execIMU").click(function() {
+        // Make an AJAX request to execute_program.php
+        $.ajax({
+                url: "/imu", // Replace with your server-side script URL
+                type: "POST", // HTTP method (can be GET or POST)
+                success: function(response) {
+                    if(response.data == true)
+                    // On successful execution, handle the response here
+                        console.log("Program executed successfully.");
+                    // You can do further actions with the response if needed
+                    else 
+                        console.log("Failed");
+                },
+                    error: function(xhr, status, error) {
+                    // Handle errors if the request fails
+                    console.error("Error executing program:", error);
+                }
+        });
+    });
+});

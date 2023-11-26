@@ -36,9 +36,11 @@ imu_data = IMUSensor()
 #Initialize flask
 app = Flask(__name__)
 
-@app.route('/imu')
+@app.route('/imu', methods=['POST'])
 def start_IMU():
-    processing_executable = subprocess.Popen(["/mnt/c/Users/nicpi/ECE356/SeaNav/processing/cuberotate.exe"], stdout=subprocess.PIPE)
+    print("Called exec")
+    return
+    # processing_executable = subprocess.Popen(["/mnt/c/Users/nicpi/ECE356/SeaNav/processing/cuberotate.exe"], stdout=subprocess.PIPE)
 
 # Simulated sensor data (replace this with your actual sensor data logic)
 def generate_sensor_data():
@@ -70,5 +72,5 @@ def polling_serial(ser: serial.Serial, pressure_data: PressureSensor,
 if __name__ == '__main__':
     p = Process(target = polling_serial, args=(ser, pressure_data, imu_data))
     p.start()
-    app.run(debug=True)  # Start the Flask app using the built-in development server
+    app.run(debug=False)  # Start the Flask app using the built-in development server
     p.join()
