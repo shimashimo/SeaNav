@@ -198,29 +198,3 @@ function showPosition(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
 }
-
-
-/* JQuery*/
-/* Send AJAX request for the server to execute program*/
-$(document).ready(function() {
-    // When the button is clicked
-    $("#execIMU").click(function() {
-        // Make an AJAX request to execute_program.php
-        $.ajax({
-                url: "/imu", // Replace with your server-side script URL
-                type: "POST", // HTTP method (can be GET or POST)
-                success: function(response) {
-                    if(response.data == true)
-                    // On successful execution, handle the response here
-                        console.log("Program executed successfully.");
-                    // You can do further actions with the response if needed
-                    else 
-                        console.log("Failed");
-                },
-                    error: function(xhr, status, error) {
-                    // Handle errors if the request fails
-                    console.error("Error executing program:", error);
-                }
-        });
-    });
-});
