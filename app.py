@@ -32,9 +32,11 @@ BAUD_RATE = 115200
 #Initialize flask
 app = Flask(__name__)
 
-@app.route('/imu')
+@app.route('/imu', methods=['POST'])
 def start_IMU():
-    processing_executable = subprocess.Popen(["/mnt/c/Users/nicpi/ECE356/SeaNav/processing/cuberotate.exe"], stdout=subprocess.PIPE)
+    print("Called exec")
+    return
+    # processing_executable = subprocess.Popen(["/mnt/c/Users/nicpi/ECE356/SeaNav/processing/cuberotate.exe"], stdout=subprocess.PIPE)
 
 # Simulated sensor data (replace this with your actual sensor data logic)
 def generate_sensor_data():
