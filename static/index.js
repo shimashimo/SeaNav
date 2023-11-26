@@ -7,54 +7,109 @@ iziToast.error({
     position: 'topLeft',
 });
 
-
-var coCtx = document.getElementById('depthChart').getContext('2d');
-
-var coChart = createChart(coCtx, 'Depth', 'blue');
-
-function createChart(ctx, label, color) {
-    return new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [{
-                label: label,
-                data: [],
-                borderColor: color,
-                borderWidth: 1,
-                fill: false,
-                showLine: true,
-                pointRadius: 4,
-                pointHoverRadius: 6,
-                lineTension: 0.1,
-            }]
+const config = {
+    type: 'line',
+    data: {
+      datasets: [
+        {
+          label: 'X Angular Velocity',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          borderColor: 'rgb(255, 99, 132)',
+          borderDash: [8, 4],
+          fill: false,
+          data: []
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            title: {
-                display: true,
-                text: 'Real-Time ' + label + ' Data'
-            },
-            scales: {
-                x: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: 'Time'
-                    }
-                },
-                y: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: 'Depth [m]'
-                    },
-                }
+        {
+          label: 'Y Angular Velocity',
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgb(54, 162, 235)',
+          cubicInterpolationMode: 'monotone',
+          fill: false,
+          data: []
+        },
+        {
+            label: 'Z Angular Velocity',
+            backgroundColor: 'rgba(155, 80, 110, 0.5)',
+            borderColor: 'rgb(155, 80, 110)',
+            cubicInterpolationMode: 'monotone',
+            fill: false,
+            data: []
+          }
+      ]
+    },
+    options: {
+      scales: {
+        x: {
+          type: 'realtime',
+          realtime: {
+            delay: 2000,
+            onRefresh: chart => {       // Change function to push new data to all datasets
+              chart.data.datasets.forEach(dataset => {
+                dataset.data.push({
+                  x: Date.now(),
+                  y: Math.random()  // Change this to data from SSE
+                });
+              });
             }
+          }
         }
-    });
+      }
+    }
+};
+
+const imuChart = new Chart(
+    document.getElementById('imuChart'),
+    config
+);
+
+function createChart(ctx, label, color, data = {
+                                            labels: [],
+                                            datasets: [{
+                                                label: label,
+                                                data: [],
+                                                borderColor: color,
+                                                borderWidth: 1,
+                                                fill: false,
+                                                showLine: true,
+                                                pointRadius: 4,
+                                                pointHoverRadius: 6,
+                                                lineTension: 0.2,
+                                            }]}, 
+                                        config = {
+                                            options: {
+                                                responsive: true,
+                                                maintainAspectRatio: true,
+                                                title: {
+                                                    display: true,
+                                                    text: 'Real-Time ' + label + ' Data'
+                                                },
+                                                scales: {
+                                                    x: {
+                                                        display: true,
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Time'
+                                                        }
+                                                    },
+                                                    y: {
+                                                        display: true,
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Depth [m]'
+                                                        },
+                                                    }
+                                                },
+                                                scrollX: true
+                                            }
+                                        } ) {
+                                            return new Chart(ctx, {
+                                            type: 'line',
+                                            data: data,
+                                            options : config,
+                                        });
 }
+var depthCtx = document.getElementById('depthChart').getContext('2d');
+var depthChart = createChart(depthCtx, 'Depth', 'blue');
 
 function realTimeFormat(num){
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -86,62 +141,10 @@ evtSource.onmessage = function(event) {
 };
 //     var timestamp = new Date().toLocaleTimeString();
 
-//     // Check if 'CO' value reaches a certain number (example: 0.5)
-//     if (parseFloat(data["CO:"]) >= 3.55) {
-//         new Toast({
-//             message: 'CO: Carbon Monoxide is too high!' + "\nAt:&nbsp" + timestamp,
-//             type: 'danger'
-//         });
-//     }
+var latitude = 50.4;
+var longitude = -123.4;
 
-//     // Check if 'NO2' value reaches a certain number (example: 0.15)
-//     if (parseFloat(data["N02:"]) >= 0.15) {
-//         new Toast({
-//             message: 'N02: Nitrogen Oxide is getting too high!' + "\nAt:&nbsp" + timestamp,
-//             type: 'danger'
-//         });
-//     }
-
-//     // Check if 'NH3' value reaches a certain number (example: 10)
-//     if (parseFloat(data["NH3:"]) >= 13) {
-//         new Toast({
-//             message: 'NH3: Ammonia levels are too high!' + "\nAt:&nbsp" + timestamp,
-//             type: 'danger'
-//         });
-//     }
-
-//     if(coChart.data.datasets[0].data.length > 15) {
-//         coChart.data.labels.shift(timestamp);
-//         coChart.data.datasets[0].data.shift();
-//         coChart.update();
-
-//         no2Chart.data.labels.shift(timestamp);
-//         no2Chart.data.datasets[0].data.shift();
-//         no2Chart.update();
-
-//         nh3Chart.data.labels.shift(timestamp);
-//         nh3Chart.data.datasets[0].data.shift();
-//         nh3Chart.update();
-//     }
-
-
-//     coChart.data.labels.push(timestamp);
-//     coChart.data.datasets[0].data.push(data["CO:"]);
-//     coChart.update();
-
-//     no2Chart.data.labels.push(timestamp);
-//     no2Chart.data.datasets[0].data.push(data["N02:"]);
-//     no2Chart.update();
-
-//     nh3Chart.data.labels.push(timestamp);
-//     nh3Chart.data.datasets[0].data.push(data["NH3:"]);
-//     nh3Chart.update();
-// };
-
-var latitude = 48.4;
-var longitude = 123.4;
-
-var map_output = L.map('map').setView([latitude, longitude], 13); // Initialize map with a default view
+var map_output = L.map('map').setView([latitude, longitude], 16); // Initialize map with a default view
 var marker = L.marker([latitude, longitude]).addTo(map_output);     // Initialize map with marker
 
 // Add a tile layer (OpenStreetMap)

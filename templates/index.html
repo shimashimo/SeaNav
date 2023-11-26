@@ -15,11 +15,14 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <!-- Processing IDE's js library to do display graphics -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <!-- Include Chart.js for displaying data -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
 </head>
 <body>
     <h2 style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">SeaNav</h2>
-    <!-- Include Chart.js for displaying data -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Include Toast for alerts -->
     <script src="{{ url_for('static', filename='/toast/Toast.min.js') }}"></script>
 
@@ -27,7 +30,7 @@
         <div class="chart-container">
             <canvas id="depthChart"></canvas>
         </div>
-        <div class="chart-container">
+        <div class="chart-container scroll-container">
             <canvas id="imuChart"></canvas>
             <p>IMU</p>
             <!-- Button to trigger the AJAX request -->

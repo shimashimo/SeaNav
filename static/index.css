@@ -13,6 +13,7 @@ body, html {
 }
 
 .chart-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center; /* Align content in the center */
@@ -47,4 +48,8 @@ th {
 #map { 
     height: 100%; 
     width: 100%;
+}
+.scroll-container {
+    width: 100%; /* Set the width of the container */
+    overflow-x: auto; /* Enable horizontal scrolling */
 }
