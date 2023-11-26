@@ -136,7 +136,7 @@ let radius = 200;
 let lines = [1, 5, 10]; // Distances in meters
 let angle = 90; // Initial angle for the sweeping line
 let iDistance = Math.random()*100;
-let iAngle = 87;
+let iAngle = 177;
 
 var s1 = function( sketch ) {
     sketch.setup = function() {
@@ -151,8 +151,8 @@ var s1 = function( sketch ) {
 
         sketch.translate(sketch.width / 2, sketch.height);
         
-        if(iAngle==93) {
-            iAngle=86;
+        if(iAngle==183) {
+            iAngle=177;
         }
         iAngle++
         for (let i = 0; i < lines.length; i++) {
@@ -218,7 +218,7 @@ var s1 = function( sketch ) {
     }
 
     sketch.drawObject = function() {
-        console.log(iDistance);
+        console.log(iAngle);
         sketch.push();
         sketch.translate(sketch.width / 2, sketch.height); // moves the starting coordinats to new location
         sketch.strokeWeight(9);
