@@ -160,8 +160,8 @@ evtSource.onmessage = function(event) {
 };
 //     var timestamp = new Date().toLocaleTimeString();
 
-var latitude = 50.4;
-var longitude = -123.4;
+var latitude = 0;
+var longitude = 0;
 
 var map_output = L.map('map').setView([latitude, longitude], 16); // Initialize map with a default view
 var marker = L.marker([latitude, longitude]).addTo(map_output);     // Initialize map with marker
