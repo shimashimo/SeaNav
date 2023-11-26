@@ -138,25 +138,24 @@ evtSource.onmessage = function(event) {
 //     nh3Chart.update();
 // };
 
+var latitude = 48.4;
+var longitude = 123.4;
 
-var latitude = 0;
-var longitude = 0;
-getLocation();
-var map = L.map('map').setView([latitude, longitude], 13); // Initialize map with a default view
-var marker = L.marker([latitude, longitude]).addTo(map);     // Initialize map with marker
+var map_output = L.map('map').setView([latitude, longitude], 13); // Initialize map with a default view
+var marker = L.marker([latitude, longitude]).addTo(map_output);     // Initialize map with marker
 
 // Add a tile layer (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+}).addTo(map_output);
 
 // Function to update marker position in real time
 function updateMarker(lat, lng) {
     if (!marker) {
-        marker = L.marker([lat, lng]).addTo(map);
+        marker = L.marker([lat, lng]).addTo(map_output);
     } else {
         marker.setLatLng([lat, lng]);
-        map.setView([lat, lng]);
+        map_output.setView([lat, lng]);
     }
 }
 
@@ -172,12 +171,10 @@ setInterval(function() {
 function getLocation() {
     if (navigator.geolocation) {
       position = navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        
     }
   }
   
 function showPosition(position) {
     latitude = position.coords.latitude;
-    longitude =position.coords.longitude;
+    longitude = position.coords.longitude;
 }
