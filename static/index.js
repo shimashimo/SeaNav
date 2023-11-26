@@ -147,11 +147,6 @@ var longitude = -123.4;
 var map_output = L.map('map').setView([latitude, longitude], 16); // Initialize map with a default view
 var marker = L.marker([latitude, longitude]).addTo(map_output);     // Initialize map with marker
 
-// Add a tile layer (OpenStreetMap)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map_output);
-
 // Function to update marker position in real time
 function updateMarker(lat, lng) {
     if (!marker) {
