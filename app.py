@@ -13,13 +13,6 @@ from python.sensors_classes import PressureSensor, IMUSensor, DistanceSensor
 TEST = False
 
 # Simulate pressure data
-pressure_data = PressureSensor()
-distance_data = DistanceSensor()
-pressure_data.time.append(1)
-pressure_data.pressure.append(2)
-pressure_data.temperature.append(3)
-pressure_data.depth.append(4)
-
 
 #Initialize serial port
 # Constants depending on platform
@@ -76,20 +69,13 @@ def polling_serial(serial_port: serial.Serial, p_data: PressureSensor,
 
 
 if __name__ == '__main__':
+    # Open serial port
+    ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
 
-    if not TEST:
-        ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
+    # Build database objects to store data to
+    pressure_data = PressureSensor()
+    distance_data = DistanceSensor()
+    imu_data = IMUSensor()
 
-        #Initialize database
-        #pressure_data = PressureSensor()
-        imu_data = IMUSensor()
-
-        #p = Process(target = polling_serial, args=(ser, pressure_data, imu_data))
-        #p.start()
-
-    app.run(debug=False)  # Start the Flask app using the built-in development server
-    
-    if not TEST:
-        #p.join()
-        pass
-        
+    # Start Flask server
+    app.run(debug=False)

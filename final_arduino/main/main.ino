@@ -22,7 +22,7 @@ void loop(){
   loop_imu();
   loop_pressure();
   loop_distance();
-  
+
   // Add a 100 ms delay
   delay(100);
 }

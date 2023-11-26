@@ -35,10 +35,10 @@ class PressureSensor():
             dict[str, int | str]: Dictionary containing the most recent data 
             for flask server to read.
         """
-        return {"p_time": self.time[-1],
-                "p_pressure": self.pressure[-1],
-                "p_temperature": self.temperature[-1],
-                "p_depth": self.depth[-1]}
+        return {"p_time": self.time[-1] if self.time else 0,
+                "p_pressure": self.pressure[-1] if self.pressure else 0,
+                "p_temperature": self.temperature[-1] if self.temperature else 0,
+                "p_depth": self.depth[-1] if self.depth else 0}
 
 @dataclass
 class IMUCalibration():
@@ -215,7 +215,7 @@ class IMUSensor():
                 "i_cal_accel": self.calibration.accel[-1] if self.calibration.accel else 0,
                 "i_cal_mag": self.calibration.mag[-1] if self.calibration.mag else 0,
                 }
-    
+
 
 @dataclass
 class DistanceSensor():
