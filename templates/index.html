@@ -29,8 +29,6 @@
         </div>
         <div class="chart-container scroll-container">
             <canvas id="imuChart"></canvas>
-            <!-- Button to trigger the AJAX request -->
-            <button id="execIMU">Drone Model</button>
         </div>
         <div class="chart-container">
             <div id="map"></div>
@@ -96,12 +94,12 @@
         <div class="chart-container">
             <div id="radar"></div>
         </div>
-        <div class="chart-container">
-            <canvas id="position_history"></canvas>
-            <p>Position History</p>
-        </div>
         <div id="model" class="chart-container">
         </div>
+        <!-- <div class="chart-container">
+            <canvas id="position_history"></canvas>
+            <p>Position History</p>
+        </div> -->
     </div>
     <!-- Include main Javascript file -->
     <script src="{{ url_for('static', filename='index.js') }}"></script>

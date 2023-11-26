@@ -11,6 +11,7 @@ DISTANCE_MESSAGE_LENGTH = 3
 
 VALID_IMU_MESSAGE_LENGTHS = [IMU_MESSAGE_LENGTH, CALIBRATION_MESSAGE_LENGTH, QUAT_MESSAGE_LENGTH]
 VALID_IMU_SUBTYPES = ["ori", "ang", "lin", "mag", "acc", "gra", "qua", "cal"]
+VALID_IMU_XYZ_SUBTYPES = ["ori", "ang", "lin", "mag", "acc", "gra", "qua"]
 
 #Constants for Standard IMU Message
 (
@@ -102,7 +103,7 @@ def parse_imu_message(imu_data: IMUSensor, message_line: str) -> None:
         elif len(message_line) == QUAT_MESSAGE_LENGTH and message_line[SUB_TYPE_INDEX] == "qua":
             imu_data.set_quat_data(message_line[TIME_INDEX], message_line[HEADING_INDEX],
                                 message_line[PITCH_INDEX], message_line[ROLL_INDEX])
-        elif len(message_line) == IMU_MESSAGE_LENGTH: # Valid standard message, copy x, y, and z values
+        elif len(message_line) == IMU_MESSAGE_LENGTH and message_line[SUB_TYPE_INDEX] in VALID_IMU_XYZ_SUBTYPES: # Valid standard message, copy x, y, and z values
             imu_data.set_generic_sensor(message_line[TIME_INDEX], message_line[SUB_TYPE_INDEX],
                                         message_line[X_INDEX], message_line[Y_INDEX],
                                         message_line[Z_INDEX])
@@ -133,7 +134,7 @@ def read_serial_data(ser: serial.Serial, pressure_data: PressureSensor,
                                         serial data
         imu_data (IMUSensor): IMUSensor object to store serial data
     """
-    line = ser.readline().decode('utf-8').strip()
+    line = ser.readline().decode('utf-8', errors = "ignore").strip()
     
 
     #print(line)
