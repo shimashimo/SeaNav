@@ -140,7 +140,7 @@ evtSource.onmessage = function(event) {
     // Add all real-time values to the table
 
     //Depth
-    depthChart.data.labels.push(timestamp);
+    // depthChart.data.labels.push(timestamp);
     depthChart.data.datasets[0].data.push(data["p_depth"]);
     depthChart.update();
 
