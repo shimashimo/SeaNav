@@ -136,7 +136,7 @@ let radius = 200;
 let lines = [1, 5, 10]; // Distances in meters
 let angle = 90; // Initial angle for the sweeping line
 let iDistance = Math.random()*100;
-let iAngle = Math.random()*180;
+let iAngle = 87;
 
 var s1 = function( sketch ) {
     sketch.setup = function() {
@@ -151,7 +151,10 @@ var s1 = function( sketch ) {
 
         sketch.translate(sketch.width / 2, sketch.height);
         
-
+        if(iAngle==93) {
+            iAngle=86;
+        }
+        iAngle++
         for (let i = 0; i < lines.length; i++) {
             let r = lines[i] * 20; // Convert meters to pixels (20 pixels per meter)
             sketch.drawSemiCircle(r); // Draw semi-circle at specified distances
