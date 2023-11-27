@@ -13,7 +13,7 @@ body, html {
 }
 
 .chart-container {
-    position: relative;
+    /* position: relative; */
     display: flex;
     flex-direction: column;
     align-items: center; /* Align content in the center */
