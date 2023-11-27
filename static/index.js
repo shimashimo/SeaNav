@@ -136,10 +136,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 var evtSource = new EventSource('/stream-sensor-data');
 evtSource.onmessage = function(event) {
     // Parse JSON formatted data
-    // var data = JSON.parse(event.data);
-    var data = [];
+    var data = JSON.parse(event.data);
     // Add all real-time values to the table
-    
+
+    //Depth
+    depthChart.data.labels.push(timestamp);
+    depthChart.data.datasets[0].data.push(data["p_depth"]);
+    depthChart.update();
 
     // Time
     document.getElementById("time").textContent = realTimeFormat(parseFloat(data["p_time"]));
