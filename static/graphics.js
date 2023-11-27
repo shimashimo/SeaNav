@@ -2,7 +2,6 @@ var Euler = {heading: 180.0, pitch: -40.0, roll: 45.0};  // Global Var of IMU or
 // Listen for SSE messages and process the data
 window.addEventListener('message', function(event) {
   if (event.data) {
-    console.log(event.data);
     const data = JSON.parse(event.data);
     if (data.Orientation) {
       // Process Orientation data
@@ -19,7 +18,7 @@ window.addEventListener('message', function(event) {
     }
 
     // Pass the data to a processing function
-    console.log(Euler);
+    // console.log(Euler);
   } else{
     console.log("Not getting SSE data");
   }
@@ -28,7 +27,7 @@ window.addEventListener('message', function(event) {
 var s2 = function( sketch ) {
 
     sketch.setup = function() {
-        let model = sketch.createCanvas(400, 400, sketch.WEBGL);
+        let model = sketch.createCanvas(450, 260, sketch.WEBGL);
         model.parent('model');
     }
     sketch.draw = function() {
@@ -132,106 +131,12 @@ var s2 = function( sketch ) {
  new p5(s2);
 
 
-function draw_imu() {
-    background(64);
-
-    push();
-    // draw main body in red
-    fill(255, 0, 0);
-
-    rotateY(sketch.radians(-Euler.heading));
-    rotateX(sketch.radians(Euler.pitch));
-    rotateZ(sketch.radians(-Euler.roll));
-
-    box(10, 10, 200);
-
-    // draw wings in green
-    fill(0, 255, 0);
-    beginShape(sketch.TRIANGLES);
-    vertex(-100, 2, 30);
-    vertex(0, 2, -80);
-    vertex(100, 2, 30);  // wing top layer
-
-    vertex(-100, -2, 30);
-    vertex(0, -2, -80);
-    vertex(100, -2, 30);  // wing bottom layer
-    endShape();
-
-    // draw wing edges in slightly darker green
-    fill(0, 192, 0);
-    beginShape(sketch.TRIANGLES);
-    vertex(-100, 2, 30);  // No quads so use 2 triangles to cover wing edges
-    vertex(-100, -2, 30);
-    vertex(  0, 2, -80);
-    
-    vertex(  0, 2, -80);
-    vertex(  0, -2, -80);
-    vertex(-100, -2, 30); // Left wing edge
-
-    vertex( 100, 2, 30);
-    vertex( 100, -2, 30);
-    vertex(  0, -2, -80);
-
-    vertex(  0, -2, -80);
-    vertex(  0, 2, -80);
-    vertex( 100, 2, 30);  // Right wing edge
-
-    vertex(-100, 2, 30);
-    vertex(-100, -2, 30);
-    vertex(100, -2, 30);
-
-    vertex(100, -2, 30);
-    vertex(100, 2, 30);
-    vertex(-100, 2, 30);  // Back wing edge
-    endShape();
-
-    // draw tail in green
-    fill(0, 255, 0);
-    beginShape(sketch.TRIANGLES);
-    vertex(-2, 0, 98);
-    vertex(-2, -30, 98);
-    vertex(-2, 0, 70);  // tail left layer
-
-    vertex( 2, 0, 98);
-    vertex( 2, -30, 98);
-    vertex( 2, 0, 70);  // tail right layer
-    endShape();
-
-    // draw tail edges in slightly darker green
-    fill(0, 192, 0);
-    beginShape(sketch.TRIANGLES);
-    vertex(-2, 0, 98);
-    vertex(2, 0, 98);
-    vertex(2, -30, 98);
-
-    vertex(2, -30, 98);
-    vertex(-2, -30, 98);
-    vertex(-2, 0, 98);  // tail back edge
-
-    vertex(-2, 0, 98);
-    vertex(2, 0, 98);
-    vertex(2, 0, 70);
-
-    vertex(2, 0, 70);
-    vertex(-2, 0, 70);
-    vertex(-2, 0, 98);  // tail front edge
-    
-    vertex(-2, -30, 98);
-    vertex(2, -30, 98);
-    vertex(2, 0, 70);
-
-    vertex(2, 0, 70);
-    vertex(-2, 0, 70);
-    vertex(-2, -30, 98);
-    endShape();
-
-    pop();
-}
-
 
 let radius = 200;
 let lines = [1, 5, 10]; // Distances in meters
-let angle = 0; // Initial angle for the sweeping line
+let angle = 90; // Initial angle for the sweeping line
+let iDistance = Math.random()*100;
+let iAngle = Math.random()*180;
 
 var s1 = function( sketch ) {
     sketch.setup = function() {
@@ -256,6 +161,7 @@ var s1 = function( sketch ) {
 
         sketch.drawCircumference(); // Draw the circumference
         sketch.drawFadingLines(); // Draw fading radial lines
+        sketch.drawObject();
         angle += 1; // Increment angle for the sweeping lines
     }
     sketch.drawSemiCircle = function(r) {
@@ -307,6 +213,21 @@ var s1 = function( sketch ) {
           sketch.text(lines[i] + 'm', 0, -r-10); // Display distance labels above the semi-circle
         }
     }
+
+    sketch.drawObject = function() {
+        console.log(iDistance);
+        sketch.push();
+        sketch.translate(sketch.width / 2, sketch.height); // moves the starting coordinats to new location
+        sketch.strokeWeight(9);
+        sketch.stroke(255,10,10); // red color
+        pixsDistance = iDistance*22.5; // covers the distance from the sensor from cm to pixels
+        // limiting the range to 40 cms
+        if(iDistance<100){
+          // draws the object according to the angle and the distance
+        sketch.line(pixsDistance*sketch.cos(sketch.radians(iAngle)),-pixsDistance*sketch.sin(sketch.radians(iAngle)),950*sketch.cos(sketch.radians(iAngle)),-950*sketch.sin(sketch.radians(iAngle)));
+        }
+        sketch.pop();
+      }
   };
   
 // create a new instance of p5 and pass in the function for sketch 1

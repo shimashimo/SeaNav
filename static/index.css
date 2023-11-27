@@ -53,3 +53,8 @@ th {
     width: 100%; /* Set the width of the container */
     overflow-x: auto; /* Enable horizontal scrolling */
 }
+
+#model {
+    height: 100%;
+    width: 100%;
+}

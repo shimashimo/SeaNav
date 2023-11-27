@@ -100,15 +100,12 @@
             <canvas id="position_history"></canvas>
             <p>Position History</p>
         </div>
-        <div class="chart-container">
-            <div id="model"></div>
+        <div id="model" class="chart-container">
         </div>
     </div>
     <!-- Include main Javascript file -->
     <script src="{{ url_for('static', filename='index.js') }}"></script>
     <!-- Include JS file used for drawing radar map -->
     <script src="{{ url_for('static', filename='graphics.js') }}"></script>
-    <!-- Include JS file for modelling drone -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
