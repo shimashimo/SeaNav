@@ -21,6 +21,7 @@ void setup_pressure(){
   if (!lps35hw.begin_I2C()) {
     while (1);
   }
+  lps35hw.zeroPressure();  //equates the pressure reading with 0 every time program starts
 }
 
 void loop_pressure(){
@@ -31,6 +32,8 @@ void loop_pressure(){
   // Depending on use case to get depth. d = pgh is used for calculations, see report for further details.
   // float  depth = lps35hw.readPressure() / 1.0038; //  use for saltwater
   float depth = lps35hw.readPressure() / 0.9778; // use for freshwater
+  // float depth = lps35hw.readPressure() * 100 / (9778.07);  // hectoPascals * 100 kg/ms^2 / kg/(m^2*s^2) 
+
   float time = micros()/ 1e6;
   
   // Format message, see format in Python read_serial.py file
