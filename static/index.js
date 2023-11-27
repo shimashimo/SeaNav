@@ -136,14 +136,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 var evtSource = new EventSource('/stream-sensor-data');
 evtSource.onmessage = function(event) {
     // Parse JSON formatted data
-    // var data = JSON.parse(event.data);
-    var data = [];
+    var data = JSON.parse(event.data);
     // Add all real-time values to the table
+    
 
     // Time
     document.getElementById("time").textContent = realTimeFormat(parseFloat(data["p_time"]));
     // Ultrasonic Sensor
-    document.getElementById("distance").textContent = realTimeFormat(parseFloat(data["distance"]));
+    var distance = parseFloat(data["d_distance"])
+    document.getElementById("distance").textContent = distance > 25 && distance < 650 ? distance : "Out of Range";
     // IMU Sensor
     document.getElementById("xAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_x"]));
     document.getElementById("yAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_y"]));

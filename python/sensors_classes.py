@@ -35,10 +35,10 @@ class PressureSensor():
             dict[str, int | str]: Dictionary containing the most recent data 
             for flask server to read.
         """
-        return {"p_time": self.time[-1],
-                "p_pressure": self.pressure[-1],
-                "p_temperature": self.temperature[-1],
-                "p_depth": self.depth[-1]}
+        return {"p_time": self.time[-1] if self.time else 0,
+                "p_pressure": self.pressure[-1] if self.pressure else 0,
+                "p_temperature": self.temperature[-1] if self.temperature else 0,
+                "p_depth": self.depth[-1] if self.depth else 0}
 
 @dataclass
 class IMUCalibration():
@@ -97,6 +97,21 @@ class RotationVector(ThreeDegreeSensorData):
     """Class for rotation vector"""
 
 @dataclass
+class Quaternion():
+    """Quaternion data class for data off of IMU
+
+    Attributes:
+        time (list[str]): List of timestamps for data in three degrees
+        heading (list[str]): List of heading value sensor data
+        pitch (list[str]): List of pitch value sensor data
+        roll (list[str]): List of roll value sensor data
+    """
+    time: list[str] = field(default_factory = lambda:[])
+    heading: list[str] = field(default_factory = lambda:[])
+    pitch: list[str] = field(default_factory = lambda:[])
+    roll: list[str] = field(default_factory = lambda:[])
+
+@dataclass
 class IMUSensor():
     """IMU sensor class to store all forms of data from the sensor
 
@@ -126,6 +141,7 @@ class IMUSensor():
     rot: RotationVector = field(default_factory = RotationVector)
     lin: LinearAcceleration = field(default_factory = LinearAcceleration)
     gra: Gravity = field(default_factory = Gravity)
+    qua: Quaternion = field(default_factory = Quaternion)
     calibration: IMUCalibration = field(default_factory = IMUCalibration)
     temperature: list[str] = field(default_factory = lambda:[])
 
@@ -148,6 +164,20 @@ class IMUSensor():
         getattr(getattr(self, indicator), "x").append(x)
         getattr(getattr(self, indicator), "y").append(y)
         getattr(getattr(self, indicator), "z").append(z)
+
+    def set_quat_data(self, time: str, heading: str, pitch: str, roll:str) -> None:
+        """Appends values to quat data
+
+        Args:
+            time (str): Timestamp for incoming data
+            heading (str): Data for heading axis
+            pitch (str): Data for pitch axis
+            roll (str): Data for roll axis
+        """
+        self.qua.time.append(time)
+        self.qua.heading.append(heading)
+        self.qua.pitch.append(pitch)
+        self.qua.roll.append(roll)
 
     def most_recent_data(self)-> dict[str, int | str]:
         """Returns the most recently collected data from imu sensor
@@ -177,8 +207,34 @@ class IMUSensor():
                 "i_gra_x": self.gra.x[-1] if self.gra.x else 0,
                 "i_gra_y": self.gra.y[-1] if self.gra.y else 0,
                 "i_gra_z": self.gra.z[-1] if self.gra.z else 0,
+                "i_qua_head": self.qua.heading[-1] if self.qua.heading else 0,
+                "i_qua_pitch": self.qua.pitch[-1] if self.qua.pitch else 0,
+                "i_qua_roll": self.qua.roll[-1] if self.qua.roll else 0,
                 "i_cal_sys": self.calibration.system[-1] if self.calibration.system else 0,
                 "i_cal_gyro": self.calibration.gyro[-1] if self.calibration.gyro else 0,
                 "i_cal_accel": self.calibration.accel[-1] if self.calibration.accel else 0,
                 "i_cal_mag": self.calibration.mag[-1] if self.calibration.mag else 0,
+                }
+
+
+@dataclass
+class DistanceSensor():
+    """Distance sensor class to store all distance sensor data
+
+    Attributes:
+        time (list[str]): list of timestamps for data
+        distance (list[str]): list of distance values
+    """
+    time: list[str] = field(default_factory = lambda:[])
+    distance: list[str] = field(default_factory = lambda:[])
+
+    def most_recent_data(self) -> dict[str, int | str]:
+        """Pull most recently polled data from Arduino on serial port
+
+        Returns:
+            dict[str, int | str]: Dictionary containing the most recent data 
+            for flask server to read.
+        """
+        return {"d_time": self.time[-1] if self.time else 0,
+                "d_distance": self.distance[-1] if self.distance else 0
                 }

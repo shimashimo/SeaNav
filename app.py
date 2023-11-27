@@ -7,49 +7,49 @@ import platform
 import random
 from multiprocessing import Process
 from python import read_serial # Import when there is a connection to the port
-from python.sensors_classes import PressureSensor, IMUSensor
+from python.sensors_classes import PressureSensor, IMUSensor, DistanceSensor
 
 
 TEST = False
 
 # Simulate pressure data
-pressure_data = PressureSensor()
-pressure_data.time.append(1)
-pressure_data.pressure.append(2)
-pressure_data.temperature.append(3)
-pressure_data.depth.append(4)
-
 
 #Initialize serial port
 # Constants depending on platform
 if platform.system() == "Darwin":
     SERIAL_PORT = "/dev/cu.usbmodem1401"
+    PROCESSING_PATH = ""
 else:
     SERIAL_PORT = "COM3"
+    PROCESSING_PATH = "C:\\Users\\nicpi\ECE356\SeaNav\processing\cuberotate.exe"
 
 BAUD_RATE = 115200
 
 #Initialize flask
 app = Flask(__name__)
 
-@app.route('/imu', methods=['POST'])
-def start_IMU():
-    print("Called exec")
-    return
-    # processing_executable = subprocess.Popen(["/mnt/c/Users/nicpi/ECE356/SeaNav/processing/cuberotate.exe"], stdout=subprocess.PIPE)
+# @app.route('/imu', methods=['POST'])
+# def start_IMU():
+#     processing_executable = subprocess.Popen([PROCESSING_PATH], stdout=subprocess.PIPE)
+#     data = {
+#         "data" : True,
+#     }
+#     return data
 
 # Simulated sensor data (replace this with your actual sensor data logic)
 def generate_sensor_data():
     while True:
         
-        read_serial.read_serial_data(ser, pressure_data, imu_data)
+        read_serial.read_serial_data(ser, pressure_data, imu_data, distance_data)
         #print(pressure_data)
         real_time_pressure_data = pressure_data.most_recent_data()
         real_time_imu_data = imu_data.most_recent_data()
+        real_time_distance_data = distance_data.most_recent_data()
         # Generate or fetch sensor data here (replace this with your sensor logic)
         sensor_data = {}
         sensor_data.update(real_time_pressure_data)
         sensor_data.update(real_time_imu_data)
+        sensor_data.update(real_time_distance_data)
         #print(sensor_data)
         yield f"data: {json.dumps(sensor_data)}\n\n"
         #time.sleep(1)  # Simulate data being sent every second
@@ -69,20 +69,13 @@ def polling_serial(serial_port: serial.Serial, p_data: PressureSensor,
 
 
 if __name__ == '__main__':
+    # Open serial port
+    ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
 
-    if not TEST:
-        ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
+    # Build database objects to store data to
+    pressure_data = PressureSensor()
+    distance_data = DistanceSensor()
+    imu_data = IMUSensor()
 
-        #Initialize database
-        #pressure_data = PressureSensor()
-        imu_data = IMUSensor()
-
-        #p = Process(target = polling_serial, args=(ser, pressure_data, imu_data))
-        #p.start()
-
-    app.run(debug=False)  # Start the Flask app using the built-in development server
-    
-    if not TEST:
-        #p.join()
-        pass
-        
+    # Start Flask server
+    app.run(debug=False)
