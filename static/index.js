@@ -115,6 +115,24 @@ function realTimeFormat(num){
     return (Math.round(num * 100) / 100).toFixed(2);
 }
 
+// SSE simulation to mimic data reception
+function simulateSSE() {
+    const event = new Event('message');
+    const data = JSON.stringify({
+      Orientation: [10 + Math.random()*11, 20 + Math.random()*13, 30 + Math.random()*10],
+      Quaternion: ['0.5', '0.5', '0.5'],
+      Calibration: ['1', '2','3']
+    });
+    event.data = data;
+    window.dispatchEvent(event);
+}
+  
+document.addEventListener('DOMContentLoaded', async () => {
+    // Simulating SSE data reception
+    setInterval(simulateSSE, 1000); // Simulate SSE data every second
+});
+  
+
 var evtSource = new EventSource('/stream-sensor-data');
 evtSource.onmessage = function(event) {
     // Parse JSON formatted data
