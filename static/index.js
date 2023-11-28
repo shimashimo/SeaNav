@@ -1,12 +1,4 @@
 
-// Display an error toast notification
-iziToast.error({
-    title: 'Error',
-    message: 'Error occurred!',
-    timeout: 5000, // Auto-closes after 3 seconds
-    position: 'topLeft',
-});
-
 const imuConfig = {
     type: 'line',
     data: {
@@ -115,6 +107,7 @@ function realTimeFormat(num){
 
 var Euler = {heading: 0, pitch: 0, roll: 0};  // Global Var of IMU orientaion data
 var depth_data;
+const DEPTH_THRESH = 0.90;
 // var pressure_data;
 
 var evtSource = new EventSource('/stream-sensor-data');
@@ -125,6 +118,15 @@ evtSource.onmessage = function(event) {
 
     //Depth
     depth_data = parseFloat(data["p_depth"]);
+    if(depth_data > DEPTH_THRESH) {
+        // Display an error toast notification
+        iziToast.error({
+            title: 'Warning!',
+            message: 'Reaching Maximum Depth!',
+            timeout: 5000, // Auto-closes after 3 seconds
+            position: 'topLeft',
+        });
+    }
     // pressure_data = parseFloat(data["p_pressure"])
 
     // Time
@@ -256,14 +258,9 @@ var s2 = function( sketch ) {
  // create the second instance of p5 and pass in the function for sketch 2
  new p5(s2);
 
- depthChart.update();
-chartInterval = setInterval(updateChart(), 1000); // Refresh the depth every 500ms
 // setInterval(depthChart.update(), 500); // Refresh the depth every 500ms
 
-function updateChart() {
-    depthChart.update();
-    console.log("Updating Chart");
-}
+
 
 
  /* MAP LOCATION */
