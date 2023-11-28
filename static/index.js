@@ -38,7 +38,7 @@ const imuConfig = {
             onRefresh: chart => {       // Change function to push new data to all datasets
               chart.data.datasets[0].data.push({
                 x: Date.now(),
-                y: 
+                y: Math.random(),
               })
             }
           }
@@ -108,9 +108,11 @@ function realTimeFormat(num){
 var Euler = {heading: 0, pitch: 0, roll: 0};  // Global Var of IMU orientaion data
 var depth_data;
 const DEPTH_THRESH = 0.90;
+const DISTANCE_THRESH = 25;
 // var pressure_data;
 
 var evtSource = new EventSource('/stream-sensor-data');
+var timeout_flag = 0;
 evtSource.onmessage = function(event) {
     // Parse JSON formatted data
     var data = JSON.parse(event.data);
@@ -118,7 +120,8 @@ evtSource.onmessage = function(event) {
 
     //Depth
     depth_data = parseFloat(data["p_depth"]);
-    if(depth_data > DEPTH_THRESH) {
+    if(depth_data > DEPTH_THRESH && timeout_flag == 0) {
+        timeout_flag = 1;
         // Display an error toast notification
         iziToast.error({
             title: 'Warning!',
@@ -126,6 +129,9 @@ evtSource.onmessage = function(event) {
             timeout: 5000, // Auto-closes after 3 seconds
             position: 'topLeft',
         });
+        setTimeout(function() {
+            timeout_flag = 0;
+        },5000);
     }
     // pressure_data = parseFloat(data["p_pressure"])
 
@@ -133,22 +139,48 @@ evtSource.onmessage = function(event) {
     document.getElementById("time").textContent = realTimeFormat(parseFloat(data["p_time"]));
     // Ultrasonic Sensor
     var distance = parseFloat(data["d_distance"])
-    document.getElementById("distance").textContent = distance > 25 && distance < 650 ? distance : "Out of Range";
+    // document.getElementById("distance").textContent = distance > 20 && distance < 650 ? distance : "Out of Range";
+    document.getElementById("distance").textContent = distance;
+    if(distance < DISTANCE_THRESH && timeout_flag == 0) {
+        timeout_flag = 1;
+        // Display an error toast notification
+        iziToast.error({
+            title: 'Warning!',
+            message: 'Collision Bound!',
+            timeout: 5000, // Auto-closes after 3 seconds
+            position: 'topLeft',
+        });
+        setTimeout(function() {
+            timeout_flag = 0;
+        },5000);
+    }
+    
     // IMU Sensor
     document.getElementById("xAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_x"]));
     document.getElementById("yAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_y"]));
     document.getElementById("zAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_z"]));
-    document.getElementById("xAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_x"]));
-    document.getElementById("yAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_y"]));
-    document.getElementById("zAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_z"]));
+    document.getElementById("xAcceleration").textContent = realTimeFormat(parseFloat(data["i_ori_x"]));
+    document.getElementById("yAcceleration").textContent = realTimeFormat(parseFloat(data["i_ori_y"]));
+    document.getElementById("zAcceleration").textContent = realTimeFormat(parseFloat(data["i_ori_z"]));
+
+    document.getElementById("p-cal-sys").textContent = realTimeFormat(parseFloat(data["i_cal_sys"]));
+    document.getElementById("p-cal-gyro").textContent = realTimeFormat(parseFloat(data["i_cal_gyro"]));
+    document.getElementById("p-cal-accel").textContent = realTimeFormat(parseFloat(data["i_cal_accel"]));
+    document.getElementById("p-cal-mag").textContent = realTimeFormat(parseFloat(data["i_cal_mag"]));
+
+    
     // Pressure Sensor
     document.getElementById("depth").textContent = realTimeFormat(parseFloat(data["p_depth"]));
     document.getElementById("pressure").textContent = realTimeFormat(parseFloat(data["p_pressure"]));
     document.getElementById("p-temperature").textContent = realTimeFormat(parseFloat(data["p_temperature"]));
 
-    Euler.heading = parseFloat(data["i_qua_head"]);
-    Euler.pitch = parseFloat(data["i_qua_pitch"]);
-    Euler.roll = parseFloat(data["i_qua_pitch"]);
+    // Euler.heading = parseFloat(data["i_qua_head"]);
+    // Euler.pitch =   parseFloat(data["i_qua_roll"]);
+    // Euler.roll =   -parseFloat(data["i_qua_pitch"]);
+
+    Euler.heading = parseFloat(data["i_ori_x"]);
+    Euler.pitch =   parseFloat(data["i_ori_y"]);
+    Euler.roll =   parseFloat(data["i_ori_z"]);
 
 };
 //     var timestamp = new Date().toLocaleTimeString();
@@ -165,10 +197,14 @@ var s2 = function( sketch ) {
         // draw main body in red
         sketch.fill(255, 0, 0);
     
+        // sketch.rotateY(sketch.radians(-Euler.heading));
+        // sketch.rotateX(sketch.radians(Euler.pitch));
+        // sketch.rotateZ(sketch.radians(-Euler.roll));
+    
         sketch.rotateY(sketch.radians(-Euler.heading));
         sketch.rotateX(sketch.radians(Euler.pitch));
         sketch.rotateZ(sketch.radians(-Euler.roll));
-    
+
         sketch.box(10, 10, 200);
     
         // draw wings in green
