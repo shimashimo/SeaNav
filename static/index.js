@@ -1,3 +1,4 @@
+var x_int = 0;
 
 // Display an error toast notification
 iziToast.error({
@@ -38,6 +39,12 @@ const config = {
       ]
     },
     options: {
+      animations: false,
+      plugins: {
+        stremaing: {
+            framRate: 5
+        }
+      },
       scales: {
         x: {
           type: 'realtime',
@@ -47,7 +54,7 @@ const config = {
               chart.data.datasets.forEach(dataset => {
                 dataset.data.push({
                   x: Date.now(),
-                  y: Math.random()  // Change this to data from SSE
+                  y: x_int // Change this to data from SSE
                 });
               });
             }
@@ -115,22 +122,17 @@ function realTimeFormat(num){
     return (Math.round(num * 100) / 100).toFixed(2);
 }
 
+
 // SSE simulation to mimic data reception
-function simulateSSE() {
-    const event = new Event('message');
-    const data = JSON.stringify({
-      Orientation: [10 + Math.random()*11, 20 + Math.random()*13, 30 + Math.random()*10],
-      Quaternion: ['0.5', '0.5', '0.5'],
-      Calibration: ['1', '2','3']
-    });
-    event.data = data;
-    window.dispatchEvent(event);
-}
+// function simulateSSE() {
+
+// }
   
-document.addEventListener('DOMContentLoaded', async () => {
-    // Simulating SSE data reception
-    setInterval(simulateSSE, 1000); // Simulate SSE data every second
-});
+// document.addEventListener('DOMContentLoaded', async () => {
+//     // Simulating SSE data reception
+//     setInterval(simulateSSE, 1000); // Simulate SSE data every second
+// });
+
   
 
 var evtSource = new EventSource('/stream-sensor-data');
@@ -140,9 +142,9 @@ evtSource.onmessage = function(event) {
     // Add all real-time values to the table
 
     //Depth
-    // depthChart.data.labels.push(timestamp);
-    depthChart.data.datasets[0].data.push(data["p_depth"]);
-    depthChart.update();
+    //depthChart.data.labels.push(timestamp);
+    //depthChart.data.datasets[0].data.push(parseFloat(data["p_depth"]));
+    //depthChart.update();
 
     // Time
     document.getElementById("time").textContent = realTimeFormat(parseFloat(data["p_time"]));
@@ -161,6 +163,17 @@ evtSource.onmessage = function(event) {
     document.getElementById("pressure").textContent = realTimeFormat(parseFloat(data["p_pressure"]));
     document.getElementById("p-temperature").textContent = realTimeFormat(parseFloat(data["p_temperature"]));
 
+    x_int = realTimeFormat(parseFloat(data["i_ang_x"]));
+
+    const event_3d = new Event('message');
+    const data_3d = JSON.stringify({
+      Orientation: [realTimeFormat(parseFloat(data["i_qua_head"])), realTimeFormat(parseFloat(data["i_qua_pitch"])), realTimeFormat(parseFloat(data["i_qua_roll"]))],
+      Quaternion: ['0.5', '0.5', '0.5'],
+      Calibration: ['1', '2','3']
+    });
+    event_3d.data = data_3d;
+    window.dispatchEvent(event_3d);
+    
 };
 //     var timestamp = new Date().toLocaleTimeString();
 
