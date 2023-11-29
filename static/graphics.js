@@ -1,134 +1,135 @@
-var Euler = {heading: 180.0, pitch: -40.0, roll: 45.0};  // Global Var of IMU orientaion data
+// var Euler = {heading: 180.0, pitch: -40.0, roll: 45.0};  // Global Var of IMU orientaion data
 // Listen for SSE messages and process the data
-window.addEventListener('message', function(event) {
-  if (event.data) {
-    const data = JSON.parse(event.data);
-    if (data.Orientation) {
-      // Process Orientation data
-      Euler.heading = data.Orientation[0];
-      Euler.pitch = data.Orientation[1];
-      Euler.roll = data.Orientation[2];
-    }
-    if (data.Quaternion) {
-      // Process Quaternion data
+// window.addEventListener('message', function(event) {
+//   console.log(event.data);
+//   if (event.data) {
+//     const data = JSON.parse(event.data);
+//     if (data.Orientation) {
+//       // Process Orientation data
+//       Euler.heading = data.Orientation[0];
+//       Euler.pitch = data.Orientation[1];
+//       Euler.roll = data.Orientation[2];
+//     }
+//     if (data.Quaternion) {
+//       // Process Quaternion data
      
-    }
-    if (data.Calibration) {
-      // Process Calibration data
-    }
+//     }
+//     if (data.Calibration) {
+//       // Process Calibration data
+//     }
 
-    // Pass the data to a processing function
-    // console.log(Euler);
-  } else{
-    console.log("Not getting SSE data");
-  }
-});
+//     // Pass the data to a processing function
+//     // console.log(Euler);
+//   } else{
+//     console.log("Not getting SSE data");
+//   }
+// });
 
-var s2 = function( sketch ) {
+// var s2 = function( sketch ) {
 
-    sketch.setup = function() {
-        let model = sketch.createCanvas(450, 260, sketch.WEBGL);
-        model.parent('model');
-    }
-    sketch.draw = function() {
-        sketch.background(64);
+//     sketch.setup = function() {
+//         let model = sketch.createCanvas(450, 260, sketch.WEBGL);
+//         model.parent('model');
+//     }
+//     sketch.draw = function() {
+//         sketch.background(64);
 
-        sketch.push();
-        // draw main body in red
-        sketch.fill(255, 0, 0);
+//         sketch.push();
+//         // draw main body in red
+//         sketch.fill(255, 0, 0);
     
-        sketch.rotateY(sketch.radians(-Euler.heading));
-        sketch.rotateX(sketch.radians(Euler.pitch));
-        sketch.rotateZ(sketch.radians(-Euler.roll));
+//         sketch.rotateY(sketch.radians(-Euler.heading));
+//         sketch.rotateX(sketch.radians(Euler.pitch));
+//         sketch.rotateZ(sketch.radians(-Euler.roll));
     
-        sketch.box(10, 10, 200);
+//         sketch.box(10, 10, 200);
     
-        // draw wings in green
-        sketch.fill(0, 255, 0);
-        sketch.beginShape(sketch.TRIANGLES);
-        sketch.vertex(-100, 2, 30);
-        sketch.vertex(0, 2, -80);
-        sketch.vertex(100, 2, 30);  // wing top layer
+//         // draw wings in green
+//         sketch.fill(0, 255, 0);
+//         sketch.beginShape(sketch.TRIANGLES);
+//         sketch.vertex(-100, 2, 30);
+//         sketch.vertex(0, 2, -80);
+//         sketch.vertex(100, 2, 30);  // wing top layer
     
-        sketch.vertex(-100, -2, 30);
-        sketch.vertex(0, -2, -80);
-        sketch.vertex(100, -2, 30);  // wing bottom layer
-        sketch.endShape();
+//         sketch.vertex(-100, -2, 30);
+//         sketch.vertex(0, -2, -80);
+//         sketch.vertex(100, -2, 30);  // wing bottom layer
+//         sketch.endShape();
     
-        // draw wing edges in slightly darker green
-        sketch.fill(0, 192, 0);
-        sketch.beginShape(sketch.TRIANGLES);
-        sketch.vertex(-100, 2, 30);  // No quads so use 2 triangles to cover wing edges
-        sketch.vertex(-100, -2, 30);
-        sketch.vertex(  0, 2, -80);
+//         // draw wing edges in slightly darker green
+//         sketch.fill(0, 192, 0);
+//         sketch.beginShape(sketch.TRIANGLES);
+//         sketch.vertex(-100, 2, 30);  // No quads so use 2 triangles to cover wing edges
+//         sketch.vertex(-100, -2, 30);
+//         sketch.vertex(  0, 2, -80);
         
-        sketch.vertex(  0, 2, -80);
-        sketch.vertex(  0, -2, -80);
-        sketch.vertex(-100, -2, 30); // Left wing edge
+//         sketch.vertex(  0, 2, -80);
+//         sketch.vertex(  0, -2, -80);
+//         sketch.vertex(-100, -2, 30); // Left wing edge
     
-        sketch.vertex( 100, 2, 30);
-        sketch.vertex( 100, -2, 30);
-        sketch.vertex(  0, -2, -80);
+//         sketch.vertex( 100, 2, 30);
+//         sketch.vertex( 100, -2, 30);
+//         sketch.vertex(  0, -2, -80);
     
-        sketch.vertex(  0, -2, -80);
-        sketch.vertex(  0, 2, -80);
-        sketch.vertex( 100, 2, 30);  // Right wing edge
+//         sketch.vertex(  0, -2, -80);
+//         sketch.vertex(  0, 2, -80);
+//         sketch.vertex( 100, 2, 30);  // Right wing edge
     
-        sketch.vertex(-100, 2, 30);
-        sketch.vertex(-100, -2, 30);
-        sketch.vertex(100, -2, 30);
+//         sketch.vertex(-100, 2, 30);
+//         sketch.vertex(-100, -2, 30);
+//         sketch.vertex(100, -2, 30);
     
-        sketch.vertex(100, -2, 30);
-        sketch.vertex(100, 2, 30);
-        sketch.vertex(-100, 2, 30);  // Back wing edge
-        sketch.endShape();
+//         sketch.vertex(100, -2, 30);
+//         sketch.vertex(100, 2, 30);
+//         sketch.vertex(-100, 2, 30);  // Back wing edge
+//         sketch.endShape();
     
-        // draw tail in green
-        sketch.fill(0, 255, 0);
-        sketch.beginShape(sketch.TRIANGLES);
-        sketch.vertex(-2, 0, 98);
-        sketch.vertex(-2, -30, 98);
-        sketch.vertex(-2, 0, 70);  // tail left layer
+//         // draw tail in green
+//         sketch.fill(0, 255, 0);
+//         sketch.beginShape(sketch.TRIANGLES);
+//         sketch.vertex(-2, 0, 98);
+//         sketch.vertex(-2, -30, 98);
+//         sketch.vertex(-2, 0, 70);  // tail left layer
     
-        sketch.vertex( 2, 0, 98);
-        sketch.vertex( 2, -30, 98);
-        sketch.vertex( 2, 0, 70);  // tail right layer
-        sketch.endShape();
+//         sketch.vertex( 2, 0, 98);
+//         sketch.vertex( 2, -30, 98);
+//         sketch.vertex( 2, 0, 70);  // tail right layer
+//         sketch.endShape();
     
-        // draw tail edges in slightly darker green
-        sketch.fill(0, 192, 0);
-        sketch.beginShape(sketch.TRIANGLES);
-        sketch.vertex(-2, 0, 98);
-        sketch.vertex(2, 0, 98);
-        sketch.vertex(2, -30, 98);
+//         // draw tail edges in slightly darker green
+//         sketch.fill(0, 192, 0);
+//         sketch.beginShape(sketch.TRIANGLES);
+//         sketch.vertex(-2, 0, 98);
+//         sketch.vertex(2, 0, 98);
+//         sketch.vertex(2, -30, 98);
     
-        sketch.vertex(2, -30, 98);
-        sketch.vertex(-2, -30, 98);
-        sketch.vertex(-2, 0, 98);  // tail back edge
+//         sketch.vertex(2, -30, 98);
+//         sketch.vertex(-2, -30, 98);
+//         sketch.vertex(-2, 0, 98);  // tail back edge
     
-        sketch.vertex(-2, 0, 98);
-        sketch.vertex(2, 0, 98);
-        sketch.vertex(2, 0, 70);
+//         sketch.vertex(-2, 0, 98);
+//         sketch.vertex(2, 0, 98);
+//         sketch.vertex(2, 0, 70);
     
-        sketch.vertex(2, 0, 70);
-        sketch.vertex(-2, 0, 70);
-        sketch.vertex(-2, 0, 98);  // tail front edge
+//         sketch.vertex(2, 0, 70);
+//         sketch.vertex(-2, 0, 70);
+//         sketch.vertex(-2, 0, 98);  // tail front edge
         
-        sketch.vertex(-2, -30, 98);
-        sketch.vertex(2, -30, 98);
-        sketch.vertex(2, 0, 70);
+//         sketch.vertex(-2, -30, 98);
+//         sketch.vertex(2, -30, 98);
+//         sketch.vertex(2, 0, 70);
     
-        sketch.vertex(2, 0, 70);
-        sketch.vertex(-2, 0, 70);
-        sketch.vertex(-2, -30, 98);
-        sketch.endShape();
+//         sketch.vertex(2, 0, 70);
+//         sketch.vertex(-2, 0, 70);
+//         sketch.vertex(-2, -30, 98);
+//         sketch.endShape();
     
         
-    }
- };
+//     }
+//  };
  
- // create the second instance of p5 and pass in the function for sketch 2
- new p5(s2);
+//  // create the second instance of p5 and pass in the function for sketch 2
+//  new p5(s2);
 
 
 
@@ -218,7 +219,7 @@ var s1 = function( sketch ) {
     }
 
     sketch.drawObject = function() {
-        console.log(iAngle);
+        // console.log(iAngle);
         sketch.push();
         sketch.translate(sketch.width / 2, sketch.height); // moves the starting coordinats to new location
         sketch.strokeWeight(9);

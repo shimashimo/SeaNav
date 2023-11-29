@@ -1,14 +1,6 @@
 var x_int = 0;
 
-// Display an error toast notification
-iziToast.error({
-    title: 'Error',
-    message: 'Error occurred!',
-    timeout: 5000, // Auto-closes after 3 seconds
-    position: 'topLeft',
-});
-
-const config = {
+const imuConfig = {
     type: 'line',
     data: {
       datasets: [
@@ -51,12 +43,10 @@ const config = {
           realtime: {
             delay: 2000,
             onRefresh: chart => {       // Change function to push new data to all datasets
-              chart.data.datasets.forEach(dataset => {
-                dataset.data.push({
-                  x: Date.now(),
-                  y: x_int // Change this to data from SSE
-                });
-              });
+              chart.data.datasets[0].data.push({
+                x: Date.now(),
+                y: Math.random(),
+              })
             }
           }
         }
@@ -66,116 +56,257 @@ const config = {
 
 const imuChart = new Chart(
     document.getElementById('imuChart'),
-    config
+    imuConfig
 );
 
-function createChart(ctx, label, color, data = {
-                                            labels: [],
-                                            datasets: [{
-                                                label: label,
-                                                data: [],
-                                                borderColor: color,
-                                                borderWidth: 1,
-                                                fill: false,
-                                                showLine: true,
-                                                pointRadius: 4,
-                                                pointHoverRadius: 6,
-                                                lineTension: 0.2,
-                                            }]}, 
-                                        config = {
-                                            options: {
-                                                responsive: true,
-                                                maintainAspectRatio: true,
-                                                title: {
-                                                    display: true,
-                                                    text: 'Real-Time ' + label + ' Data'
-                                                },
-                                                scales: {
-                                                    x: {
-                                                        display: true,
-                                                        title: {
-                                                            display: true,
-                                                            text: 'Time'
-                                                        }
-                                                    },
-                                                    y: {
-                                                        display: true,
-                                                        title: {
-                                                            display: true,
-                                                            text: 'Depth [m]'
-                                                        },
-                                                    }
-                                                },
-                                                scrollX: true
-                                            }
-                                        } ) {
-                                            return new Chart(ctx, {
-                                            type: 'line',
-                                            data: data,
-                                            options : config,
-                                        });
+const depthConfig = {
+    type: 'line',
+    data: {
+      datasets: [
+        {
+          label: 'Depth',
+          backgroundColor: 'rgba(10, 100, 255, 0.5)',
+          borderColor: 'rgb(0, 100, 255)',
+          fill: false,
+          data: []
+        },
+        // {
+        //   label: 'Pressure',
+        //   backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        //   borderColor: 'rgb(154, 122, 135)',
+        //   cubicInterpolationMode: 'monotone',
+        //   fill: false,
+        //   data: []
+        // },
+      ]
+    },
+    options: {
+      scales: {
+        x: {
+          type: 'realtime',
+          realtime: {
+            delay: 2000,
+            onRefresh: chart => {       // Change function to push new data to all datasets
+              chart.data.datasets[0].data.push({x: Date.now(), y: depth_data});
+            //   chart.data.datasets[1].data.push({x: Date.now(), y: pressure_data});
+            }
+          }
+        },
+        y: {
+            reverse: true,
+        }
+      }
+    }
 }
-var depthCtx = document.getElementById('depthChart').getContext('2d');
-var depthChart = createChart(depthCtx, 'Depth', 'blue');
+
+const depthChart = new Chart(
+    document.getElementById('depthChart').getContext('2d'),
+    depthConfig
+);
+
+// var depthChart = createChart(depthCtx, 'Depth', 'blue');
 
 function realTimeFormat(num){
     return (Math.round(num * 100) / 100).toFixed(2);
 }
 
-
-// SSE simulation to mimic data reception
-// function simulateSSE() {
-
-// }
   
-// document.addEventListener('DOMContentLoaded', async () => {
-//     // Simulating SSE data reception
-//     setInterval(simulateSSE, 1000); // Simulate SSE data every second
-// });
 
-  
+var Euler = {heading: 0, pitch: 0, roll: 0};  // Global Var of IMU orientaion data
+var depth_data;
+const DEPTH_THRESH = 0.90;
+const DISTANCE_THRESH = 25;
+// var pressure_data;
 
 var evtSource = new EventSource('/stream-sensor-data');
+var timeout_flag = 0;
 evtSource.onmessage = function(event) {
     // Parse JSON formatted data
     var data = JSON.parse(event.data);
     // Add all real-time values to the table
 
     //Depth
-    //depthChart.data.labels.push(timestamp);
-    //depthChart.data.datasets[0].data.push(parseFloat(data["p_depth"]));
-    //depthChart.update();
+    depth_data = parseFloat(data["p_depth"]);
+    if(depth_data > DEPTH_THRESH && timeout_flag == 0) {
+        timeout_flag = 1;
+        // Display an error toast notification
+        iziToast.error({
+            title: 'Warning!',
+            message: 'Reaching Maximum Depth!',
+            timeout: 5000, // Auto-closes after 3 seconds
+            position: 'topLeft',
+        });
+        setTimeout(function() {
+            timeout_flag = 0;
+        },5000);
+    }
+    // pressure_data = parseFloat(data["p_pressure"])
 
     // Time
     document.getElementById("time").textContent = realTimeFormat(parseFloat(data["p_time"]));
     // Ultrasonic Sensor
     var distance = parseFloat(data["d_distance"])
-    document.getElementById("distance").textContent = distance > 25 && distance < 650 ? distance : "Out of Range";
+    // document.getElementById("distance").textContent = distance > 20 && distance < 650 ? distance : "Out of Range";
+    document.getElementById("distance").textContent = distance;
+    if(distance < DISTANCE_THRESH && timeout_flag == 0) {
+        timeout_flag = 1;
+        // Display an error toast notification
+        iziToast.error({
+            title: 'Warning!',
+            message: 'Collision Bound!',
+            timeout: 5000, // Auto-closes after 3 seconds
+            position: 'topLeft',
+        });
+        setTimeout(function() {
+            timeout_flag = 0;
+        },5000);
+    }
+    
     // IMU Sensor
     document.getElementById("xAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_x"]));
     document.getElementById("yAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_y"]));
     document.getElementById("zAngularVelocity").textContent = realTimeFormat(parseFloat(data["i_ang_z"]));
-    document.getElementById("xAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_x"]));
-    document.getElementById("yAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_y"]));
-    document.getElementById("zAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_z"]));
+    document.getElementById("xAcceleration").textContent = realTimeFormat(parseFloat(data["i_ori_x"]));
+    document.getElementById("yAcceleration").textContent = realTimeFormat(parseFloat(data["i_ori_y"]));
+    document.getElementById("zAcceleration").textContent = realTimeFormat(parseFloat(data["i_ori_z"]));
+
+    document.getElementById("p-cal-sys").textContent = realTimeFormat(parseFloat(data["i_cal_sys"]));
+    document.getElementById("p-cal-gyro").textContent = realTimeFormat(parseFloat(data["i_cal_gyro"]));
+    document.getElementById("p-cal-accel").textContent = realTimeFormat(parseFloat(data["i_cal_accel"]));
+    document.getElementById("p-cal-mag").textContent = realTimeFormat(parseFloat(data["i_cal_mag"]));
+
+    
     // Pressure Sensor
     document.getElementById("depth").textContent = realTimeFormat(parseFloat(data["p_depth"]));
     document.getElementById("pressure").textContent = realTimeFormat(parseFloat(data["p_pressure"]));
     document.getElementById("p-temperature").textContent = realTimeFormat(parseFloat(data["p_temperature"]));
 
-    x_int = realTimeFormat(parseFloat(data["i_ang_x"]));
+    // Euler.heading = parseFloat(data["i_qua_head"]);
+    // Euler.pitch =   parseFloat(data["i_qua_roll"]);
+    // Euler.roll =   -parseFloat(data["i_qua_pitch"]);
 
-    const event_3d = new Event('message');
-    const data_3d = JSON.stringify({
-      Orientation: [realTimeFormat(parseFloat(data["i_qua_head"])), realTimeFormat(parseFloat(data["i_qua_pitch"])), realTimeFormat(parseFloat(data["i_qua_roll"]))],
-      Quaternion: ['0.5', '0.5', '0.5'],
-      Calibration: ['1', '2','3']
-    });
-    event_3d.data = data_3d;
-    window.dispatchEvent(event_3d);
-    
+    Euler.heading = parseFloat(data["i_ori_x"]);
+    Euler.pitch =   parseFloat(data["i_ori_y"]);
+    Euler.roll =   parseFloat(data["i_ori_z"]);
+
 };
 //     var timestamp = new Date().toLocaleTimeString();
+var s2 = function( sketch ) {
+
+    sketch.setup = function() {
+        let model = sketch.createCanvas(450, 260, sketch.WEBGL);
+        model.parent('model');
+    }
+    sketch.draw = function() {
+        sketch.background(64);
+
+        sketch.push();
+        // draw main body in red
+        sketch.fill(255, 0, 0);
+    
+        // sketch.rotateY(sketch.radians(-Euler.heading));
+        // sketch.rotateX(sketch.radians(Euler.pitch));
+        // sketch.rotateZ(sketch.radians(-Euler.roll));
+    
+        sketch.rotateY(sketch.radians(-Euler.heading));
+        sketch.rotateX(sketch.radians(Euler.pitch));
+        sketch.rotateZ(sketch.radians(-Euler.roll));
+
+        sketch.box(10, 10, 200);
+    
+        // draw wings in green
+        sketch.fill(0, 255, 0);
+        sketch.beginShape(sketch.TRIANGLES);
+        sketch.vertex(-100, 2, 30);
+        sketch.vertex(0, 2, -80);
+        sketch.vertex(100, 2, 30);  // wing top layer
+    
+        sketch.vertex(-100, -2, 30);
+        sketch.vertex(0, -2, -80);
+        sketch.vertex(100, -2, 30);  // wing bottom layer
+        sketch.endShape();
+    
+        // draw wing edges in slightly darker green
+        sketch.fill(0, 192, 0);
+        sketch.beginShape(sketch.TRIANGLES);
+        sketch.vertex(-100, 2, 30);  // No quads so use 2 triangles to cover wing edges
+        sketch.vertex(-100, -2, 30);
+        sketch.vertex(  0, 2, -80);
+        
+        sketch.vertex(  0, 2, -80);
+        sketch.vertex(  0, -2, -80);
+        sketch.vertex(-100, -2, 30); // Left wing edge
+    
+        sketch.vertex( 100, 2, 30);
+        sketch.vertex( 100, -2, 30);
+        sketch.vertex(  0, -2, -80);
+    
+        sketch.vertex(  0, -2, -80);
+        sketch.vertex(  0, 2, -80);
+        sketch.vertex( 100, 2, 30);  // Right wing edge
+    
+        sketch.vertex(-100, 2, 30);
+        sketch.vertex(-100, -2, 30);
+        sketch.vertex(100, -2, 30);
+    
+        sketch.vertex(100, -2, 30);
+        sketch.vertex(100, 2, 30);
+        sketch.vertex(-100, 2, 30);  // Back wing edge
+        sketch.endShape();
+    
+        // draw tail in green
+        sketch.fill(0, 255, 0);
+        sketch.beginShape(sketch.TRIANGLES);
+        sketch.vertex(-2, 0, 98);
+        sketch.vertex(-2, -30, 98);
+        sketch.vertex(-2, 0, 70);  // tail left layer
+    
+        sketch.vertex( 2, 0, 98);
+        sketch.vertex( 2, -30, 98);
+        sketch.vertex( 2, 0, 70);  // tail right layer
+        sketch.endShape();
+    
+        // draw tail edges in slightly darker green
+        sketch.fill(0, 192, 0);
+        sketch.beginShape(sketch.TRIANGLES);
+        sketch.vertex(-2, 0, 98);
+        sketch.vertex(2, 0, 98);
+        sketch.vertex(2, -30, 98);
+    
+        sketch.vertex(2, -30, 98);
+        sketch.vertex(-2, -30, 98);
+        sketch.vertex(-2, 0, 98);  // tail back edge
+    
+        sketch.vertex(-2, 0, 98);
+        sketch.vertex(2, 0, 98);
+        sketch.vertex(2, 0, 70);
+    
+        sketch.vertex(2, 0, 70);
+        sketch.vertex(-2, 0, 70);
+        sketch.vertex(-2, 0, 98);  // tail front edge
+        
+        sketch.vertex(-2, -30, 98);
+        sketch.vertex(2, -30, 98);
+        sketch.vertex(2, 0, 70);
+    
+        sketch.vertex(2, 0, 70);
+        sketch.vertex(-2, 0, 70);
+        sketch.vertex(-2, -30, 98);
+        sketch.endShape();
+    
+        
+    }
+ };
+ 
+ // create the second instance of p5 and pass in the function for sketch 2
+ new p5(s2);
+
+// setInterval(depthChart.update(), 500); // Refresh the depth every 500ms
+
+
+
+
+ /* MAP LOCATION */
 
 var latitude = 0;
 var longitude = 0;
