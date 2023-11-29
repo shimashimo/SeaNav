@@ -84,7 +84,7 @@ void loop_imu(void)
   float time = micros()/ 1e6;
 
   // Format message, see format in Python read_serial.py file
-  data_to_send = String(time) + "," + String("i") + "," + String("cal") + "," + String(system, 2) + "," + String(gyro, 2) + "," + String(accel, 2) + "," + String(mag, 2) + "," + String(boardTemp);
+  data_to_send = String(time) + "," + String("i") + "," + String("cal") + "," + String(system) + "," + String(gyro) + "," + String(accel) + "," + String(mag) + "," + String(boardTemp);
 
   // Send data over serial
   Serial.println(data_to_send);
@@ -143,9 +143,9 @@ void printEvent(sensors_event_t* event) {
   }
 
   // Convert doubles to strings with two decimal places  
-  str_x = String(x, 2);
-  str_y = String(y, 2);
-  str_z = String(z, 2);
+  str_x = String(x);
+  str_y = String(y);
+  str_z = String(z);
 
   // Timestamp data
   float time = micros()/ 1e6;
@@ -162,7 +162,7 @@ void quat_imu(){
   imu::Quaternion q = bno.getQuat();
 
   // flip BNO/Adafruit quaternion axes to aerospace: x forward, y right, z down
-  float temp = q.x();  q.x() = q.y();  q.y() = temp;  q.z() = -q.z();
+  // float temp = q.x();  q.x() = q.y();  q.y() = temp;  q.z() = -q.z();
   q.normalize();
 
   // convert aerospace quaternion to aerospace Euler, because BNO055 Euler data is broken
