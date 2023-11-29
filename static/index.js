@@ -194,7 +194,7 @@ evtSource.onmessage = function(event) {
 var s2 = function( sketch ) {
 
     sketch.setup = function() {
-        let model = sketch.createCanvas(450, 260, sketch.WEBGL);
+        let model = sketch.createCanvas(400, 230, sketch.WEBGL);
         model.parent('model');
     }
     sketch.draw = function() {
