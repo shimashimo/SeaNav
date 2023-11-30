@@ -14,7 +14,7 @@ var s1 = function( sketch ) {
     }
     sketch.draw = function() {
         sketch.background(0);
-        console.log("loop start");
+        // console.log("loop start");
         sketch.translate(sketch.width / 2, sketch.height);
         
         for (let i = 0; i < lines.length; i++) {
@@ -88,7 +88,7 @@ var s1 = function( sketch ) {
         sketch.stroke(255, 10, 10); // red color
         pixsDistance = iDistance * 22.5; // converts the distance from the sensor from cm to pixels
         // limiting the range to 40 cms
-        console.log("here")
+        // console.log("here")
         if (iDistance < 200) {
             let x = 0; // x-coordinate for square (center)
             let y = -100; // y-coordinate for square (top center)

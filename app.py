@@ -17,7 +17,7 @@ TEST = False
 #Initialize serial port
 # Constants depending on platform
 if platform.system() == "Darwin":
-    SERIAL_PORT = "/dev/cu.usbmodem1401"
+    SERIAL_PORT = "/dev/cu.usbmodem11401"
     PROCESSING_PATH = ""
 else:
     SERIAL_PORT = "COM3"

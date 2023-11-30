@@ -200,120 +200,68 @@ evtSource.onmessage = function(event) {
     document.getElementById("pressure").textContent = realTimeFormat(parseFloat(data["p_pressure"]));
     document.getElementById("p-temperature").textContent = realTimeFormat(parseFloat(data["p_temperature"]));
 
-    // Euler.heading = parseFloat(data["i_qua_head"]);
-    // Euler.pitch =   parseFloat(data["i_qua_roll"]);
-    // Euler.roll =   -parseFloat(data["i_qua_pitch"]);
+    Euler.heading = parseFloat(data["i_qua_head"]);
+    Euler.pitch =   parseFloat(data["i_qua_roll"]);
+    Euler.roll =   parseFloat(data["i_qua_pitch"]);
 
-    Euler.heading = parseFloat(data["i_ori_x"]);
-    Euler.pitch =   parseFloat(data["i_ori_y"]);
-    Euler.roll =   parseFloat(data["i_ori_z"]);
+    // Euler.heading = parseFloat(data["i_ori_x"]);
+    // Euler.pitch =   parseFloat(data["i_ori_y"]);
+    // Euler.roll =   parseFloat(data["i_ori_z"]);
     // console.log(Euler.heading);
 
 };
 //     var timestamp = new Date().toLocaleTimeString();
 var s2 = function( sketch ) {
 
+    sketch.preload = function() {
+        bunny = sketch.loadModel('static/bunny.obj', true);
+    }
+
     sketch.setup = function() {
-        let model = sketch.createCanvas(450, 260, sketch.WEBGL);
-        model.parent('model');
+        let d_model = sketch.createCanvas(400, 225, sketch.WEBGL);
+        d_model.parent('model');
+        sketch.angleMode(sketch.RADIANS);
     }
     sketch.draw = function() {
         sketch.background(64);
+        sketch.scale(0.5);
+
+        // Set a new co-ordinate space
+        sketch.push();
+
+        // Simple 3 point lighting for dramatic effect.
+        // Slightly red light in upper right, slightly blue light in upper left, and white light from behind.
+        sketch.pointLight(255, 200, 200,  400, 400,  500);
+        sketch.pointLight(200, 200, 255, -400, 400,  500);
+        sketch.pointLight(255, 255, 255,    0,   0, -500);
+        
+        // Move bunny from 0,0 in upper left corner to roughly center of screen.
+        // sketch.translate(0, 10);
+        // sketch.translate((sketch.width / 2) + 10, sketch.height / 2);
+
+        // sketch.rotateZ(-sketch.PI);
+        // Rotate shapes around the X/Y/Z axis (values in radians, 0..Pi*2)
+        // sketch.rotateZ(sketch.radians(Euler.roll));
+        // sketch.rotateX(sketch.radians(Euler.pitch)); // extrinsic rotation
+        // sketch.rotateY(sketch.radians(Euler.heading));
+
+        c1 = sketch.cos(sketch.radians(Euler.roll));
+        s1 = sketch.sin(sketch.radians(Euler.roll));
+        c2 = sketch.cos(sketch.radians(Euler.pitch)); // intrinsic rotation
+        s2 = sketch.sin(sketch.radians(Euler.pitch));
+        c3 = sketch.cos(sketch.radians(Euler.heading));
+        s3 = sketch.sin(sketch.radians(Euler.heading));
+        sketch.applyMatrix( c2*c3, s1*s3+c1*c3*s2, c3*s1*s2-c1*s3, 0,
+                              -s2, c1*c2,          c2*s1,          0,
+                            c2*s3, c1*s2*s3-c3*s1, c1*c3+s1*s2*s3, 0,
+                            0,     0,              0,              1
+                          );
 
         sketch.push();
-        // draw main body in red
-        sketch.fill(255, 0, 0);
-    
-        // sketch.rotateY(sketch.radians(-Euler.heading));
-        // sketch.rotateX(sketch.radians(Euler.pitch));
-        // sketch.rotateZ(sketch.radians(-Euler.roll));
-    
-        sketch.rotateY(sketch.radians(-Euler.heading));
-        sketch.rotateX(sketch.radians(Euler.pitch));
-        sketch.rotateZ(sketch.radians(-Euler.roll));
-
-        sketch.box(10, 10, 200);
-    
-        // draw wings in green
-        sketch.fill(0, 255, 0);
-        sketch.beginShape(sketch.TRIANGLES);
-        sketch.vertex(-100, 2, 30);
-        sketch.vertex(0, 2, -80);
-        sketch.vertex(100, 2, 30);  // wing top layer
-    
-        sketch.vertex(-100, -2, 30);
-        sketch.vertex(0, -2, -80);
-        sketch.vertex(100, -2, 30);  // wing bottom layer
-        sketch.endShape();
-    
-        // draw wing edges in slightly darker green
-        sketch.fill(0, 192, 0);
-        sketch.beginShape(sketch.TRIANGLES);
-        sketch.vertex(-100, 2, 30);  // No quads so use 2 triangles to cover wing edges
-        sketch.vertex(-100, -2, 30);
-        sketch.vertex(  0, 2, -80);
-        
-        sketch.vertex(  0, 2, -80);
-        sketch.vertex(  0, -2, -80);
-        sketch.vertex(-100, -2, 30); // Left wing edge
-    
-        sketch.vertex( 100, 2, 30);
-        sketch.vertex( 100, -2, 30);
-        sketch.vertex(  0, -2, -80);
-    
-        sketch.vertex(  0, -2, -80);
-        sketch.vertex(  0, 2, -80);
-        sketch.vertex( 100, 2, 30);  // Right wing edge
-    
-        sketch.vertex(-100, 2, 30);
-        sketch.vertex(-100, -2, 30);
-        sketch.vertex(100, -2, 30);
-    
-        sketch.vertex(100, -2, 30);
-        sketch.vertex(100, 2, 30);
-        sketch.vertex(-100, 2, 30);  // Back wing edge
-        sketch.endShape();
-    
-        // draw tail in green
-        sketch.fill(0, 255, 0);
-        sketch.beginShape(sketch.TRIANGLES);
-        sketch.vertex(-2, 0, 98);
-        sketch.vertex(-2, -30, 98);
-        sketch.vertex(-2, 0, 70);  // tail left layer
-    
-        sketch.vertex( 2, 0, 98);
-        sketch.vertex( 2, -30, 98);
-        sketch.vertex( 2, 0, 70);  // tail right layer
-        sketch.endShape();
-    
-        // draw tail edges in slightly darker green
-        sketch.fill(0, 192, 0);
-        sketch.beginShape(sketch.TRIANGLES);
-        sketch.vertex(-2, 0, 98);
-        sketch.vertex(2, 0, 98);
-        sketch.vertex(2, -30, 98);
-    
-        sketch.vertex(2, -30, 98);
-        sketch.vertex(-2, -30, 98);
-        sketch.vertex(-2, 0, 98);  // tail back edge
-    
-        sketch.vertex(-2, 0, 98);
-        sketch.vertex(2, 0, 98);
-        sketch.vertex(2, 0, 70);
-    
-        sketch.vertex(2, 0, 70);
-        sketch.vertex(-2, 0, 70);
-        sketch.vertex(-2, 0, 98);  // tail front edge
-        
-        sketch.vertex(-2, -30, 98);
-        sketch.vertex(2, -30, 98);
-        sketch.vertex(2, 0, 70);
-    
-        sketch.vertex(2, 0, 70);
-        sketch.vertex(-2, 0, 70);
-        sketch.vertex(-2, -30, 98);
-        sketch.endShape();
-    
+        sketch.noStroke();
+        sketch.model(bunny);
+        sketch.pop();
+        sketch.pop();
         
     }
  };
