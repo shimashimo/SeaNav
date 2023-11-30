@@ -25,17 +25,17 @@
     <h2 style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">SeaNav</h2>
     <div class="grid-container">
         <div class="chart-container">
-            <canvas id="depthChart"></canvas>
+            <div id="map"></div>
+        </div>
+        <div id="model" class="chart-container">
         </div>
         <div class="chart-container scroll-container">
             <canvas id="imuChart"></canvas>
         </div>
         <div class="chart-container">
-            <div id="map"></div>
-        </div>
-        <div class="chart-container">
             <!-- Table to display real-time data -->
             <table id="realtime_table">
+                <caption><b>Real Time Data</b></caption>
                 <thead>
                     <tr>
                         <th>Data Type</th>
@@ -103,22 +103,22 @@
                     <tr>
                         <td>Cal Sys</td>
                         <td id="p-cal-sys"></td>
-                        <td>[&deg;C]</td>
+                        <td>[-]</td>
                     </tr>
                     <tr>
                         <td>Cal Gyro</td>
                         <td id="p-cal-gyro"></td>
-                        <td>[&deg;C]</td>
+                        <td>[-]</td>
                     </tr>
                     <tr>
                         <td>Cal Acceleration</td>
                         <td id="p-cal-accel"></td>
-                        <td>[&deg;C]</td>
+                        <td>[-]</td>
                     </tr>
                     <tr>
                         <td>Cal Mag</td>
                         <td id="p-cal-mag"></td>
-                        <td>[&deg;C]</td>
+                        <td>[-]</td>
                     </tr>
                 </tbody>
             </table>
@@ -126,7 +126,8 @@
         <div class="chart-container">
             <div id="radar"></div>
         </div>
-        <div id="model" class="chart-container">
+        <div class="chart-container">
+            <canvas id="depthChart"></canvas>
         </div>
         <!-- <div class="chart-container">
             <canvas id="position_history"></canvas>
