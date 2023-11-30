@@ -1,6 +1,7 @@
 """Module to read Arduino serial data and put into Python classes"""
 import serial
 from python.sensors_classes import PressureSensor, IMUSensor, DistanceSensor
+from datetime import datetime
 
 # For error checking during serial transmission
 IMU_MESSAGE_LENGTH = 6
@@ -72,7 +73,8 @@ def parse_pressure_message(pressure_data: PressureSensor, message_line: str) -> 
         message_line (str): Arduino serial port message to be parsed
     """
     # Store message information in PressureSensor object.
-    pressure_data.time.append(message_line[TIME_INDEX])
+    cur_time = datetime.utcnow().strftime('%T.%f')[:-3]
+    pressure_data.time.append(cur_time)
     pressure_data.temperature.append(message_line[TEMPERATURE_INDEX])
     pressure_data.pressure.append(message_line[PRESSURE_INDEX])
     pressure_data.depth.append(message_line[DEPTH_INDEX])
@@ -119,8 +121,9 @@ def parse_distance_message(distance_data: DistanceSensor, message_line: str) -> 
                                         message data to
         message_line (str): Arduino serial port message to be parsed
     """
+    cur_time = datetime.utcnow().strftime('%T.%f')[:-3]
     # Store message information in PressureSensor object.
-    distance_data.time.append(message_line[TIME_INDEX])
+    distance_data.time.append(cur_time)
     distance_data.distance.append(message_line[DISTANCE_INDEX])
 
 def read_serial_data(ser: serial.Serial, pressure_data: PressureSensor,

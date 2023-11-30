@@ -179,6 +179,25 @@ class IMUSensor():
         self.qua.pitch.append(pitch)
         self.qua.roll.append(roll)
 
+    def write_to_matlab_file(self, path: str) -> None:
+        # Open file
+        with open(path, "w") as file:
+            # go through each point in data storage
+            for element_index, element in enumerate(self.acc.x):
+                # Store as string, while converting rad to degrees
+                line = (self.acc.x[element_index] + "\t"
+                       + self.acc.y[element_index] + "\t"
+                       + self.acc.z[element_index] + "\t"
+                       + str(float(self.ang.x[element_index])*57.2958) + "\t"
+                       + str(float(self.ang.y[element_index])*57.2958) + "\t"
+                       + str(float(self.ang.z[element_index])*57.2958) + "\t"
+                       )
+                file.write("0x50\t" + self.acc.time[element_index] + "\t" + line  + "\n")
+
+
+
+
+
     def most_recent_data(self)-> dict[str, int | str]:
         """Returns the most recently collected data from imu sensor
 

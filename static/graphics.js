@@ -23,15 +23,21 @@ var s1 = function( sketch ) {
             sketch.drawRadius(r); // Draw single radius line
             sketch.drawDistanceLabels(r, lines[i]); // Display distance labels
         }
-
-        sketch.drawCircumference(); // Draw the circumference
         sketch.drawFadingLines(); // Draw fading radial lines
-        sketch.drawObject();
+        sketch.drawCircumference(); // Draw the circumference
+
+        //sketch.drawObject();
+        sketch.stroke(255, 10, 10);
+        sketch.circle(0,0, 1000);
         angle += 1; // Increment angle for the sweeping lines
     }
     sketch.drawSemiCircle = function(r) {
         sketch.arc(0, 0, r * 2, r * 2, 180, 360); // Draw semi-circle
     }
+  
+    sketch.drawCircle = function(r) {
+      sketch.arc(0, 0, r * 2, r * 2, 360, 360); // Draw semi-circle
+  }
       
     sketch.drawRadius = function(r) {
         sketch.line(0, 0, 0, -r); // Draw single radius line
@@ -72,10 +78,10 @@ var s1 = function( sketch ) {
           if(lines[i] == 1) {
             sketch.text(25 + 'cm', 0, -r-10);
           } else if(lines[i] == 5) {
-            sketch.text(35 + 'cm', 0, -r-10);
+            sketch.text(200 + 'cm', 0, -r-10);
           }
           else if (lines[i] == 10) {
-            sketch.text(60 + 'cm', 0, -r-10);
+            sketch.text(600 + 'cm', 0, -r-10);
           }
         //   sketch.text(lines[i]*2+23 + 'cm', 0, -r-10); // Display distance labels above the semi-circle
         }
@@ -94,6 +100,8 @@ var s1 = function( sketch ) {
             let y = -100; // y-coordinate for square (top center)
             sketch.square(x, y, 20); // draw a square at the calculated coordinates
         }
+        sketch.translate(sketch.width / 2, sketch.height);
+        sketch.square(500, 500, 5000);
         sketch.pop();
     }
   };
