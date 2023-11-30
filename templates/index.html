@@ -29,8 +29,8 @@
         </div>
         <div id="model" class="chart-container">
         </div>
-        <div class="chart-container scroll-container">
-            <canvas id="imuChart"></canvas>
+        <div class="chart-container">
+            <canvas id="depthChart"></canvas>
         </div>
         <div class="chart-container">
             <!-- Table to display real-time data -->
@@ -100,34 +100,36 @@
                         <td id="p-temperature"></td>
                         <td>[&deg;C]</td>
                     </tr>
-                    <tr>
-                        <td>Cal Sys</td>
-                        <td id="p-cal-sys"></td>
-                        <td>[-]</td>
-                    </tr>
-                    <tr>
-                        <td>Cal Gyro</td>
-                        <td id="p-cal-gyro"></td>
-                        <td>[-]</td>
-                    </tr>
-                    <tr>
-                        <td>Cal Acceleration</td>
-                        <td id="p-cal-accel"></td>
-                        <td>[-]</td>
-                    </tr>
-                    <tr>
-                        <td>Cal Mag</td>
-                        <td id="p-cal-mag"></td>
-                        <td>[-]</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
-        <div class="chart-container">
+        <div class="chart-container" style="vertical-align: top;">
+            <h3>Calibration Status</h3>
+            <p>(0 = Not Calibrated, 3 = Calibrated)</p>
+            <table id="realtime_table">
+                <thead>
+                    <tr>
+                        <th>System</th>
+                        <th>Gyro</th>
+                        <th>Accel</th>
+                        <th>Mag</th>
+                    </tr>
+                </thead>
+                <!-- Add Units to all real time measurements-->
+                <tbody>
+                    <tr>
+                        <td id="p-cal-sys"></td>
+                        <td id="p-cal-gyro"></td>
+                        <td id="p-cal-accel"></td>
+                        <td id="p-cal-mag"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
             <div id="radar"></div>
         </div>
-        <div class="chart-container">
-            <canvas id="depthChart"></canvas>
+        <div class="chart-container scroll-container">
+            <canvas id="imuChart"></canvas>
         </div>
         <!-- <div class="chart-container">
             <canvas id="position_history"></canvas>

@@ -1,3 +1,4 @@
+var x_int = 0;
 
 const imuConfig = {
     type: 'line',
@@ -30,6 +31,7 @@ const imuConfig = {
       ]
     },
     options: {
+      animations: false,
       scales: {
         x: {
           type: 'realtime',
