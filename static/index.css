@@ -14,7 +14,9 @@ h2 {
     grid-auto-rows: minmax(100px, auto); /* Automatic row height */
     grid-gap: 20px; /* Adjust the gap between grid items */
     height: 100%; /* Take up entire viewport height */
-    padding: 20px; /* Optional padding */
+    padding: 10px; /* Optional padding */
+    /* align-items: start; Align items at the start of the container */
+    /* justify-items: start; Justify items at the start of the container */
 }
 
 .chart-container {
@@ -24,8 +26,8 @@ h2 {
     align-items: center; /* Align content in the center */
     justify-content: center; /* Align content in the center */
     border: 1px solid #ccc; /* Add borders for visualization */
-    padding: 10px;
     text-align: center;
+    font-size: small;
 }
 
 canvas {

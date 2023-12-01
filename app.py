@@ -70,7 +70,7 @@ def polling_serial(serial_port: serial.Serial, p_data: PressureSensor,
 
 if __name__ == '__main__':
     # Open serial port
-    #ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
+    ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
 
     # Build database objects to store data to
     pressure_data = PressureSensor()

@@ -56,21 +56,21 @@
                         <td>[cm]</td>
                     </tr>
                     <tr>
-                        <td>X Angular Velocity</td>
-                        <td id="xAngularVelocity"></td>
+                        <td>Heading</td>
+                        <td id="heading"></td>
                         <td>[rad/s]</td>
                     </tr>
                     <tr>
-                        <td>Y Angular Velocity</td>
-                        <td id="yAngularVelocity"></td>
+                        <td>Pitch </td>
+                        <td id="pitch"></td>
                         <td>[rad/s]</td>
                     </tr>
                     <tr>
-                        <td>Z Angular Velocity</td>
-                        <td id="zAngularVelocity"></td>
+                        <td>Roll </td>
+                        <td id="roll"></td>
                         <td>[rad/s]</td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>X Acceleration</td>
                         <td id="xAcceleration"></td>
                         <td>[m/s<sup>2</sup>]</td>
@@ -84,7 +84,7 @@
                         <td>Z Acceleration</td>
                         <td id="zAcceleration"></td>
                         <td>[m/s<sup>2</sup>]</td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>Depth</td>
                         <td id="depth"></td>
@@ -139,6 +139,6 @@
     <!-- Include main Javascript file -->
     <script src="{{ url_for('static', filename='index.js') }}"></script>
     <!-- Include JS file used for drawing radar map -->
-    <script src="{{ url_for('static', filename='graphics.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='graphics.js') }}"></script> -->
 </body>
 </html>
