@@ -336,7 +336,6 @@ var s2 = function( sketch ) {
          radar.parent('radar');
      }
      sketch.draw = function() {
- 
          if(iAngle == 360) {
              iAngle = 0;
          } else {
