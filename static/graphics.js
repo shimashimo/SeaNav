@@ -1,101 +1,131 @@
-let radius = 200;
-let lines = [1, 5, 10]; // Distances in meters
-let angle = 90; // Initial angle for the sweeping line
-let iDistance = Math.random()*100;
-let iAngle = 90;
+let iDistance = 0;
+let iAngle = 0;
 
 var s1 = function( sketch ) {
     sketch.setup = function() {
-        let radar = sketch.createCanvas(400, 225);
-        sketch.angleMode(sketch.DEGREES);
-        sketch.noFill();
-        sketch.stroke(255);
+        let radar = sketch.createCanvas(1920, 1080);
+        sketch.smooth();
         radar.parent('radar');
     }
     sketch.draw = function() {
-        sketch.background(0);
-        // console.log("loop start");
-        sketch.translate(sketch.width / 2, sketch.height);
-        
-        for (let i = 0; i < lines.length; i++) {
-            let r = lines[i] * 20; // Convert meters to pixels (20 pixels per meter)
-            sketch.drawSemiCircle(r); // Draw semi-circle at specified distances
-            sketch.drawRadius(r); // Draw single radius line
-            sketch.drawDistanceLabels(r, lines[i]); // Display distance labels
-        }
+        iDistance = Math.random()*100;
+        console.log(iDistance);
+        sketch.fill(98,245,31);
+        sketch.noStroke();
+        sketch.fill(0,4); 
+        sketch.rect(0, 0, sketch.width, 1010); 
 
-        sketch.drawCircumference(); // Draw the circumference
-        sketch.drawFadingLines(); // Draw fading radial lines
+        sketch.fill(98,245,31); // green color
+
+        sketch.drawRadar();
+        sketch.drawLine();
         sketch.drawObject();
-        angle += 1; // Increment angle for the sweeping lines
+        sketch.drawText();
+
+        if(iAngle == 360) {
+            iAngle = 0;
+        } else {
+            iAngle++;
+        }
+        // console.log("loop start");
     }
-    sketch.drawSemiCircle = function(r) {
-        sketch.arc(0, 0, r * 2, r * 2, 180, 360); // Draw semi-circle
-    }
-      
-    sketch.drawRadius = function(r) {
-        sketch.line(0, 0, 0, -r); // Draw single radius line
-    }
-      
-    sketch.drawCircumference = function() {
+
+    sketch.drawRadar = function() {
+        sketch.push();
+        sketch.translate(sketch.width / 2, 1000);
         sketch.noFill();
-        sketch.ellipse(0, 0, radius * 2); // Draw the circumference
-      
-        for(let i = -60; i <= 60; i+=30){
-          sketch.drawLineAtAngle(i);
-        }
+        sketch.strokeWeight(2);
+        sketch.stroke(98,245,31);
+        // draws  the arc lines
+        sketch.arc(0,0,1800,1800,sketch.PI,sketch.TWO_PI);
+        sketch.arc(0,0,1400,1400,sketch.PI,sketch.TWO_PI);
+        sketch.arc(0,0,1000,1000,sketch.PI,sketch.TWO_PI);
+        sketch.arc(0,0,600,600,sketch.PI,sketch.TWO_PI);
+        // draws the angle lines
+        sketch.line(-960,0,960,0);
+        sketch.line(0,0,-960*sketch.cos(sketch.radians(30)),-960*sketch.sin(sketch.radians(30)));
+        sketch.line(0,0,-960*sketch.cos(sketch.radians(60)),-960*sketch.sin(sketch.radians(60)));
+        sketch.line(0,0,-960*sketch.cos(sketch.radians(90)),-960*sketch.sin(sketch.radians(90)));
+        sketch.line(0,0,-960*sketch.cos(sketch.radians(120)),-960*sketch.sin(sketch.radians(120)));
+        sketch.line(0,0,-960*sketch.cos(sketch.radians(150)),-960*sketch.sin(sketch.radians(150)));
+        sketch.line(-960*sketch.cos(sketch.radians(30)),0,960,0);
+        sketch.pop();
     }
-      
-    sketch.drawLineAtAngle = function(degrees) {
-          let x1 = (radius+10) * sketch.cos(degrees);
-          let y1 = (radius+10) * sketch.sin(degrees);
-          let x2 = (radius+10) * sketch.cos(degrees + 180);
-          let y2 = (radius+10) * sketch.sin(degrees + 180);
-          sketch.line(x1, y1, x2, y2);
-    }
-      
-    sketch.drawFadingLines = function() {
-        for (let i = 0; i <= 90; i++) {
-          let alpha = sketch.map(i, 0, 180, 0, 255); // Reverse fading effect
-          sketch.stroke(0, 255, 0, alpha); // Green color with alpha
-          let x = radius * sketch.cos(i + angle);
-          let y = radius * sketch.sin(i + angle);
-          sketch.line(0, 0, x, y); // Draw the fading radial lines
-        }
-    }
-      
-    sketch.drawDistanceLabels = function() {
-        sketch.textSize(12);
-        sketch.textAlign(sketch.CENTER, sketch.CENTER);
-        for (let i = 0; i < lines.length; i++) {
-          let r = lines[i] * 20; // Convert meters to pixels (20 pixels per meter)
-          if(lines[i] == 1) {
-            sketch.text(25 + 'cm', 0, -r-10);
-          } else if(lines[i] == 5) {
-            sketch.text(35 + 'cm', 0, -r-10);
-          }
-          else if (lines[i] == 10) {
-            sketch.text(60 + 'cm', 0, -r-10);
-          }
-        //   sketch.text(lines[i]*2+23 + 'cm', 0, -r-10); // Display distance labels above the semi-circle
-        }
-    }
+
+    sketch.drawLine = function() {
+        sketch.push();
+        sketch.strokeWeight(9);
+        sketch.stroke(30,250,60);
+        sketch.translate(960,1000); // moves the starting coordinats to new location
+        sketch.line(0,0,950*sketch.cos(sketch.radians(iAngle)),-950*sketch.sin(sketch.radians(iAngle))); // draws the line according to the angle
+        sketch.pop();
+      }
 
     sketch.drawObject = function() {
         sketch.push();
-        sketch.translate(sketch.width / 2, sketch.height); // moves the starting coordinates to a new location
-        sketch.strokeWeight(2);
-        sketch.stroke(255, 10, 10); // red color
-        pixsDistance = iDistance * 22.5; // converts the distance from the sensor from cm to pixels
+        sketch.translate(960,1000); // moves the starting coordinats to new location
+        sketch.strokeWeight(9);
+        sketch.stroke(255,10,10); // red color
+        pixsDistance = iDistance*22.5; // covers the distance from the sensor from cm to pixels
         // limiting the range to 40 cms
-        // console.log("here")
-        if (iDistance < 200) {
-            let x = 0; // x-coordinate for square (center)
-            let y = -100; // y-coordinate for square (top center)
-            sketch.square(x, y, 20); // draw a square at the calculated coordinates
+        if(iDistance<40 && iAngle > 87 && iAngle < 93){
+          // draws the object according to the angle and the distance
+            // sketch.line(pixsDistance*sketch.cos(sketch.radians(iAngle)),-pixsDistance*sketch.sin(sketch.radians(iAngle)),950*sketch.cos(sketch.radians(iAngle)),-950*sketch.sin(sketch.radians(iAngle)));
+            for(let i = 87; i < 93; i++) {
+                sketch.line(pixsDistance*sketch.cos(sketch.radians(i)),-pixsDistance*sketch.sin(sketch.radians(i)),950*sketch.cos(sketch.radians(i)),-950*sketch.sin(sketch.radians(i)));
+            }
         }
         sketch.pop();
-    }
+      }
+      
+    sketch.drawText = function() { // draws the texts on the screen
+  
+        sketch.push();
+        if(iDistance>40) {
+            noObject = "Out of Range";
+        }
+        else {
+            noObject = "In Range";
+        }
+        sketch.fill(0,0,0);
+        sketch.noStroke();
+        sketch.rect(0, 1010, sketch.width, 1080);
+        sketch.fill(98,245,31);
+        sketch.textSize(25);
+        sketch.text("10cm",1180,990);
+        sketch.text("20cm",1380,990);
+        sketch.text("30cm",1580,990);
+        sketch.text("40cm",1780,990);
+        sketch.textSize(40);
+        sketch.text("Object: " + noObject, 240, 1050);
+        sketch.text("Angle: " + iAngle +" °", 1050, 1050);
+        sketch.text("Distance: ", 1380, 1050);
+        if(iDistance<40) {
+            sketch.text("        " + iDistance +" cm", 1400, 1050);
+        }
+        sketch.textSize(25);
+        sketch.fill(98,245,60);
+        sketch.translate(961+960*sketch.cos(sketch.radians(30)),982-960*sketch.sin(sketch.radians(30)));
+        sketch.rotate(-sketch.radians(-60));
+        sketch.text("30°",0,0);
+        sketch.resetMatrix();
+        sketch.translate(954+960*sketch.cos(sketch.radians(60)),984-960*sketch.sin(sketch.radians(60)));
+        sketch.rotate(-sketch.radians(-30));
+        sketch.text("60°",0,0);
+        sketch.resetMatrix();
+        sketch.translate(945+960*sketch.cos(sketch.radians(90)),990-960*sketch.sin(sketch.radians(90)));
+        sketch.rotate(sketch.radians(0));
+        sketch.text("90°",0,0);
+        sketch.resetMatrix();
+        sketch.translate(935+960*sketch.cos(sketch.radians(120)),1003-960*sketch.sin(sketch.radians(120)));
+        sketch.rotate(sketch.radians(-30));
+        sketch.text("120°",0,0);
+        sketch.resetMatrix();
+        sketch.translate(940+960*sketch.cos(sketch.radians(150)),1018-960*sketch.sin(sketch.radians(150)));
+        sketch.rotate(sketch.radians(-60));
+        sketch.text("150°",0,0);
+        sketch.pop(); 
+      }
   };
   
 // create a new instance of p5 and pass in the function for sketch 1
