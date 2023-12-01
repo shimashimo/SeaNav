@@ -21,7 +21,6 @@ if platform.system() == "Darwin":
     PROCESSING_PATH = ""
 else:
     SERIAL_PORT = "COM3"
-    PROCESSING_PATH = "C:\\Users\\nicpi\ECE356\SeaNav\processing\cuberotate.exe"
 
 BAUD_RATE = 115200
 
@@ -41,7 +40,6 @@ def generate_sensor_data():
     while True:
         
         read_serial.read_serial_data(ser, pressure_data, imu_data, distance_data)
-        #print(pressure_data)
         real_time_pressure_data = pressure_data.most_recent_data()
         real_time_imu_data = imu_data.most_recent_data()
         real_time_distance_data = distance_data.most_recent_data()
@@ -62,10 +60,21 @@ def index():
 def stream_sensor_data():
     return Response(generate_sensor_data(), content_type='text/event-stream')
 
-def polling_serial(serial_port: serial.Serial, p_data: PressureSensor,
-                   i_data: IMUSensor) -> None:
-    while True:
-        read_serial.read_serial_data(serial_port, p_data, i_data)
+
+@app.route('/generate-matlab' , methods=['POST'])
+def generate_matlab():
+    data = {"data": True}
+    imu_data.write_to_matlab_file("C:\\Users\\nicpi\ECE356\SeaNav\matlab\data.txt")
+    matlab_script = "C:\\Users\\nicpi\ECE356\SeaNav\matlab\WitMotion.m"
+
+    # Run MATLAB script using subprocess
+    subprocess.run(['matlab', '-nodesktop', '-noFigureWindows', '-batch', f"run('{matlab_script}')"])
+
+    # Path to the generated MATLAB JPEG file
+    # matlab_output_image = 'C:\\Users\echat\Documents\MATLAB\\try_now.jpg'
+    return data
+
+
 
 
 if __name__ == '__main__':

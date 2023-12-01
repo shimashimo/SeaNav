@@ -71,6 +71,8 @@ var s1 = function( sketch ) {
           // draws the object according to the angle and the distance
             sketch.line(pixsDistance*sketch.cos(sketch.radians(iAngle)),-pixsDistance*sketch.sin(sketch.radians(iAngle)),950*sketch.cos(sketch.radians(iAngle)),-950*sketch.sin(sketch.radians(iAngle)));
         }
+        sketch.translate(sketch.width / 2, sketch.height);
+        sketch.square(500, 500, 5000);
         sketch.pop();
       }
       
