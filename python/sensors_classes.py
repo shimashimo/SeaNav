@@ -185,6 +185,8 @@ class IMUSensor():
             # go through each point in data storage
             for element_index, element in enumerate(self.acc.x):
                 # Store as string, while converting rad to degrees
+                # Index may be out of range if is a different number of data points parsed due to errors, maybe
+                # add a try except or better printing algorithm
                 line = (self.acc.x[element_index] + "\t"
                        + self.acc.y[element_index] + "\t"
                        + self.acc.z[element_index] + "\t"
