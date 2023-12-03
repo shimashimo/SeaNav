@@ -1,7 +1,8 @@
 """Module to read Arduino serial data and put into Python classes"""
+from datetime import datetime
 import serial
 from python.sensors_classes import PressureSensor, IMUSensor, DistanceSensor
-from datetime import datetime
+
 
 # For error checking during serial transmission
 IMU_MESSAGE_LENGTH = 6
@@ -96,7 +97,8 @@ def parse_imu_message(imu_data: IMUSensor, message_line: str) -> None:
     if message_line[SUB_TYPE_INDEX] in VALID_IMU_SUBTYPES:
         if message_line[SUB_TYPE_INDEX] == "unk": # Invalid message
             print("Message Unknown")
-        elif len(message_line) == CALIBRATION_MESSAGE_LENGTH and message_line[CAL_SUB_TYPE_INDEX] == "cal": # Valid cal message, copy values
+        elif (len(message_line) == CALIBRATION_MESSAGE_LENGTH
+              and message_line[CAL_SUB_TYPE_INDEX] == "cal"): # Valid cal message, copy values
             imu_data.calibration.system.append(message_line[SYSTEM_INDEX])
             imu_data.calibration.gyro.append(message_line[GYRO_INDEX])
             imu_data.calibration.accel.append(message_line[ACCEL_INDEX])
@@ -105,7 +107,9 @@ def parse_imu_message(imu_data: IMUSensor, message_line: str) -> None:
         elif len(message_line) == QUAT_MESSAGE_LENGTH and message_line[SUB_TYPE_INDEX] == "qua":
             imu_data.set_quat_data(cur_time, message_line[HEADING_INDEX],
                                 message_line[PITCH_INDEX], message_line[ROLL_INDEX])
-        elif len(message_line) == IMU_MESSAGE_LENGTH and message_line[SUB_TYPE_INDEX] in VALID_IMU_XYZ_SUBTYPES: # Valid standard message, copy x, y, and z values
+        elif (len(message_line) == IMU_MESSAGE_LENGTH
+              and message_line[SUB_TYPE_INDEX] in VALID_IMU_XYZ_SUBTYPES):
+            # Valid standard message, copy x, y, and z values
             imu_data.set_generic_sensor(cur_time, message_line[SUB_TYPE_INDEX],
                                         message_line[X_INDEX], message_line[Y_INDEX],
                                         message_line[Z_INDEX])
@@ -138,23 +142,14 @@ def read_serial_data(ser: serial.Serial, pressure_data: PressureSensor,
         imu_data (IMUSensor): IMUSensor object to store serial data
     """
     line = ser.readline().decode('utf-8', errors = "ignore").strip()
-    
 
-    #print(line)
     message_line = line.split(',')
-    #print( "(" + str(message_line) + ")")
-    # Message is of pressure data
-    if len(message_line) == PRESSURE_MESSAGE_LENGTH and message_line[MESSAGE_TYPE_INDEX] == 'p':
+    if (len(message_line) == PRESSURE_MESSAGE_LENGTH
+        and message_line[MESSAGE_TYPE_INDEX] == 'p'):
         parse_pressure_message(pressure_data, message_line)
-    elif (len(message_line) in VALID_IMU_MESSAGE_LENGTHS) and (message_line[MESSAGE_TYPE_INDEX] == 'i'):
+    elif ((len(message_line) in VALID_IMU_MESSAGE_LENGTHS)
+          and (message_line[MESSAGE_TYPE_INDEX] == 'i')):
         parse_imu_message(imu_data, message_line)
-    elif len(message_line) == DISTANCE_MESSAGE_LENGTH and message_line[MESSAGE_TYPE_INDEX] == "d" :
+    elif (len(message_line) == DISTANCE_MESSAGE_LENGTH
+          and message_line[MESSAGE_TYPE_INDEX] == "d"):
         parse_distance_message(distance_data, message_line)
-
-# pressure_data = PressureSensor()
-# imu_data = IMUSensor()
-
-# while True:
-#     read_serial_data(serial_port, pressure_data, imu_data)
-#     print(str(pressure_data) + "\n")
-#     print(str(imu_data) + "\n")

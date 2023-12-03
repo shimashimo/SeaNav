@@ -180,13 +180,18 @@ class IMUSensor():
         self.qua.roll.append(roll)
 
     def write_to_matlab_file(self, path: str) -> None:
+        """
+        Write data collected from IMU currently in Python to a data file
+        for further analysis in Matlab, including IMU position history.
+
+        Args:
+            path (str): Path to write the data file to.
+        """
         # Open file
-        with open(path, "w") as file:
+        with open(path, "w", encoding="utf-8") as file:
             # go through each point in data storage
-            for element_index, element in enumerate(self.acc.x):
+            for element_index, _ in enumerate(self.acc.x):
                 # Store as string, while converting rad to degrees
-                # Index may be out of range if is a different number of data points parsed due to errors, maybe
-                # add a try except or better printing algorithm
                 line = (self.acc.x[element_index] + "\t"
                        + self.acc.y[element_index] + "\t"
                        + self.acc.z[element_index] + "\t"
