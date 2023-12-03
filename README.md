@@ -5,6 +5,9 @@ SeaNav is a modular navigation system that is applied to existing drone systems 
 # Software
 SeaNav consists of two main software components, an Arduino UNO Microcontroller and a Flask server. The main folder in final_dashboard_code contains the files for the Arduino Microcontroller and app.py contains the flask server to run.
 
+# Documentation
+See sphinx_documentation/html for generated documentation for the Python software.
+
 # Arduino Libraries
 Pressure Sensor: Adafruit LPS35HW by Adafruit \
 IMU Sensor: Adafruit BNO055 by Adafruit 
