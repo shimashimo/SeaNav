@@ -12,12 +12,18 @@ $(document).ready(function() {
               url: "/generate-matlab", // Replace with your server-side script URL
               type: "POST", // HTTP method (can be GET or POST)
               success: function(response) {
-                  if(response.data == true)
+                  if(response.data == true) {
                   // On successful execution, handle the response here
                       console.log("Program executed successfully.");
-                  // You can do further actions with the response if needed
-                  else 
+                      iziToast.success({
+                        title: 'Success!',
+                        message: 'Position History Generated!',
+                        timeout: 5000, // Auto-closes after 3 seconds
+                        position: 'topLeft',
+                    });
+                  } else {
                       console.log("Failed");
+                    }
               },
                   error: function(xhr, status, error) {
                   // Handle errors if the request fails
@@ -165,6 +171,7 @@ evtSource.onmessage = function(event) {
 
     //Depth
     depth_data = parseFloat(data["p_depth"]);
+    // console.log(depth_data);
     depth_data < 0 ? depth_data = 0 : depth_data = depth_data;
     if(depth_data > DEPTH_THRESH+30 && error_timeout_flag == 0) {
         error_timeout_flag = 1;
@@ -193,14 +200,13 @@ evtSource.onmessage = function(event) {
         },5000);
     }
 
-    // Time
-    document.getElementById("time").textContent = realTimeFormat(parseFloat(data["p_time"]));
     // Ultrasonic Sensor
     var distance = parseFloat(data["d_distance"])
-    iDistance = distance;
+    var distance_data = distance;
+    iDistance = distance_data;
     // console.log(iDistance);
-    // document.getElementById("distance").textContent = distance > 20 && distance < 650 ? distance : "Out of Range";
-    document.getElementById("distance").textContent = distance;
+    document.getElementById("distance").textContent = distance > 10 && distance < 650 ? distance : "Out of Range";
+
     if(distance < DISTANCE_THRESH && warning_timeout_flag == 0 && distance != 0) {
         warning_timeout_flag = 1;
         // Display an error toast notification
@@ -219,17 +225,19 @@ evtSource.onmessage = function(event) {
     Euler.heading = parseFloat(data["i_qua_head"]);
     Euler.pitch =   parseFloat(data["i_qua_pitch"]);
     Euler.roll =   parseFloat(data["i_qua_roll"]);
-    // ang_x = parseFloat(data["i_ang_x"]);
-    // ang_y = parseFloat(data["i_ang_y"]);
-    // ang_z = parseFloat(data["i_ang_z"]);
+    ang_x = parseFloat(data["i_ang_x"]);
+    ang_y = parseFloat(data["i_ang_y"]);
+    ang_z = parseFloat(data["i_ang_z"]);
 
     document.getElementById("heading").textContent = realTimeFormat(Euler.heading);
     document.getElementById("pitch").textContent = realTimeFormat(Euler.pitch);
     document.getElementById("roll").textContent = realTimeFormat(Euler.roll);
-    // document.getElementById("xAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_x"]));
-    // document.getElementById("yAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_y"]));
-    // document.getElementById("zAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_z"]));
+    document.getElementById("xAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_x"]));
+    document.getElementById("yAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_y"]));
+    document.getElementById("zAcceleration").textContent = realTimeFormat(parseFloat(data["i_acc_z"]));
 
+
+    // IMU Calibration
     document.getElementById("p-cal-sys").textContent = realTimeFormat(parseFloat(data["i_cal_sys"]));
     document.getElementById("p-cal-gyro").textContent = realTimeFormat(parseFloat(data["i_cal_gyro"]));
     document.getElementById("p-cal-accel").textContent = realTimeFormat(parseFloat(data["i_cal_accel"]));
@@ -242,12 +250,6 @@ evtSource.onmessage = function(event) {
     document.getElementById("p-temperature").textContent = realTimeFormat(parseFloat(data["p_temperature"]));
 
     
-    // console.log(Euler);
-    // Euler.heading = parseFloat(data["i_ori_x"]);
-    // Euler.pitch =   parseFloat(data["i_ori_y"]);
-    // Euler.roll =   parseFloat(data["i_ori_z"]);
-    // console.log(Euler.heading);
-
 };
 //     var timestamp = new Date().toLocaleTimeString();
 var s2 = function( sketch ) {

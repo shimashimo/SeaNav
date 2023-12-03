@@ -64,11 +64,11 @@ def stream_sensor_data():
 @app.route('/generate-matlab' , methods=['POST'])
 def generate_matlab():
     data = {"data": True}
-    imu_data.write_to_matlab_file("C:\\Users\\nicpi\ECE356\SeaNav\matlab\data.txt")
-    matlab_script = "C:\\Users\\nicpi\ECE356\SeaNav\matlab\WitMotion.m"
+    # imu_data.write_to_matlab_file("/Users/echatham/Documents/MATLAB/imu_data.txt")
+    matlab_script = '/Users/echatham/Documents/MATLAB/WitMotion.m'
 
     # Run MATLAB script using subprocess
-    subprocess.run(['matlab', '-nodesktop', '-noFigureWindows', '-batch', f"run('{matlab_script}')"])
+    subprocess.run(['/Applications/MATLAB_R2023b.app/bin/matlab', '-batch', f"run('{matlab_script}')"])
 
     # Path to the generated MATLAB JPEG file
     # matlab_output_image = 'C:\\Users\echat\Documents\MATLAB\\try_now.jpg'

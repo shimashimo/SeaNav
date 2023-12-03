@@ -22,8 +22,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
 </head>
 <body>
-    <h2 style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">SeaNav</h2>
-    <button id = "generateMatlab">Test</button>
+    <div id="button-container">
+        <h2 style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">SeaNav</h2>
+        <button id="generateMatlab" class="button-4">Position History</button>
+    </div>
     <div class="grid-container">
         <div class="chart-container">
             <div id="map"></div>
@@ -46,11 +48,11 @@
                 </thead>
                 <!-- Add Units to all real time measurements-->
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>Time</td>
                         <td id="time"></td>
                         <td>[s]</td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>Object Distance</td>
                         <td id="distance"></td>
@@ -71,7 +73,7 @@
                         <td id="roll"></td>
                         <td>[rad/s]</td>
                     </tr>
-                    <!-- <tr>
+                    <tr>
                         <td>X Acceleration</td>
                         <td id="xAcceleration"></td>
                         <td>[m/s<sup>2</sup>]</td>
@@ -85,7 +87,7 @@
                         <td>Z Acceleration</td>
                         <td id="zAcceleration"></td>
                         <td>[m/s<sup>2</sup>]</td>
-                    </tr> -->
+                    </tr>
                     <tr>
                         <td>Depth</td>
                         <td id="depth"></td>
@@ -107,12 +109,7 @@
         <div class="chart-container" style="vertical-align: top;">
             <h3>Calibration Status</h3>
             <p>(0 = Not Calibrated, 3 = Calibrated)</p>
-<<<<<<< HEAD
             <table id="calibration">
-=======
-            <br>
-            <table id="realtime_table">
->>>>>>> nick_branch
                 <thead>
                     <tr>
                         <th>System</th>

@@ -1,13 +1,18 @@
 from flask import Flask, render_template, Response
 import time
+import subprocess
 
 app = Flask(__name__)
 
-@app.route('/imu', methods=['POST'])
-def start_IMU():
+@app.route('/generate-matlab' , methods=['POST'])
+def generate_matlab():
     data = {
         "data" : True,
     }
+    matlab_script = '/Users/echatham/Documents/MATLAB/WitMotion.m'
+
+    # Run MATLAB script using subprocess
+    subprocess.run(['/Applications/MATLAB_R2023b.app/bin/matlab', '-batch', f"run('{matlab_script}')"])
     return data
 
 # Simulated sensor data (replace this with your actual sensor data logic)

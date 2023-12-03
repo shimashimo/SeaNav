@@ -89,9 +89,9 @@ def parse_imu_message(imu_data: IMUSensor, message_line: str) -> None:
         imu_data (IMUSensor): IMUSensor object to store message data to
         message_line (str): Arduino serial port message to be parsed
     """
+    cur_time = datetime.utcnow().strftime('%T.%f')[:-3]
 
     # Store message information in IMUSensor object.
-
     # Only store if a valid subtype is inputted
     if message_line[SUB_TYPE_INDEX] in VALID_IMU_SUBTYPES:
         if message_line[SUB_TYPE_INDEX] == "unk": # Invalid message
@@ -103,10 +103,10 @@ def parse_imu_message(imu_data: IMUSensor, message_line: str) -> None:
             imu_data.calibration.mag.append(message_line[MAG_INDEX])
             imu_data.temperature.append(message_line[IMU_TEMP_INDEX])
         elif len(message_line) == QUAT_MESSAGE_LENGTH and message_line[SUB_TYPE_INDEX] == "qua":
-            imu_data.set_quat_data(message_line[TIME_INDEX], message_line[HEADING_INDEX],
+            imu_data.set_quat_data(cur_time, message_line[HEADING_INDEX],
                                 message_line[PITCH_INDEX], message_line[ROLL_INDEX])
         elif len(message_line) == IMU_MESSAGE_LENGTH and message_line[SUB_TYPE_INDEX] in VALID_IMU_XYZ_SUBTYPES: # Valid standard message, copy x, y, and z values
-            imu_data.set_generic_sensor(message_line[TIME_INDEX], message_line[SUB_TYPE_INDEX],
+            imu_data.set_generic_sensor(cur_time, message_line[SUB_TYPE_INDEX],
                                         message_line[X_INDEX], message_line[Y_INDEX],
                                         message_line[Z_INDEX])
 

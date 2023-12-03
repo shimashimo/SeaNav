@@ -19,6 +19,7 @@ Adafruit_LPS35HW lps35hw = Adafruit_LPS35HW();
 void setup_pressure(){
   // Ensure I2C connection is established
   if (!lps35hw.begin_I2C()) {
+    Serial.println("No Pressure Sensor");
     while (1);
   }
   lps35hw.zeroPressure();  //equates the pressure reading with 0 every time program starts

@@ -12,7 +12,7 @@ void setup(){
   // Setup all hardware devices
   // I2C
   setup_imu();
-  // setup_pressure();
+  setup_pressure();
   
   // SPI
   setup_distance();
@@ -21,7 +21,7 @@ void setup(){
 void loop(){
   // Collect all sensor data
   loop_imu();
-  // loop_pressure();
+  loop_pressure();
   loop_distance();
 
   // Add a 100 ms delay
