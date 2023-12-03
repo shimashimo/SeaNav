@@ -3,7 +3,7 @@
 SeaNav is a modular navigation system that is applied to existing drone systems with sensor fusion to provide navigation characteristics including GPS location, depth, inertial measurement unit (IMU) properties, and surrounding object detection. This information is wrapped up in an interactable user-friendly dashboard with various options for data analysis methods and a 3-D model.
 
 # Software
-SeaNav consists of two main software components, an Arduino UNO Microcontroller and a Flask server. The main folder in final_dashboard_code contains the files for the Arduino Microcontroller and app.py contains the flask server to run.
+SeaNav consists of three main software components, an Arduino UNO Microcontroller in Arduion's version of C++, a Flask server in Python, and IMU tracking in Matlab. The files under final_dashboard_code/arduino are for the Arduino Microcontroller, the script under final_dashboard_code/python/app.py runs the flask server, and the files under final_dashboard_code/matlab contains the Matlab code for IMU position tracking.
 
 # Documentation
 See sphinx_documentation/html for generated documentation for the Python software.
