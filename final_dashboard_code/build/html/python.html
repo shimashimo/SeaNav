@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>python package &mdash; SeaNav 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="python.data_parsing package" href="python.data_parsing.html" />
+    <link rel="prev" title="Welcome to SeaNav’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SeaNav
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">python package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html">python.data_parsing package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-python.app">python.app module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python.app.generate_matlab"><code class="docutils literal notranslate"><span class="pre">generate_matlab()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python.app.generate_sensor_data"><code class="docutils literal notranslate"><span class="pre">generate_sensor_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python.app.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python.app.stream_sensor_data"><code class="docutils literal notranslate"><span class="pre">stream_sensor_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-python">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SeaNav</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">python package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/python.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-package">
+<h1>python package<a class="headerlink" href="#python-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python.data_parsing.html">python.data_parsing package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python.data_parsing.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.data_parsing.html#module-python.data_parsing.read_serial">python.data_parsing.read_serial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.read_serial.parse_distance_message"><code class="docutils literal notranslate"><span class="pre">parse_distance_message()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.read_serial.parse_imu_message"><code class="docutils literal notranslate"><span class="pre">parse_imu_message()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.read_serial.parse_pressure_message"><code class="docutils literal notranslate"><span class="pre">parse_pressure_message()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.read_serial.read_serial_data"><code class="docutils literal notranslate"><span class="pre">read_serial_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python.data_parsing.html#module-python.data_parsing.sensors_classes">python.data_parsing.sensors_classes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Accelerometer"><code class="docutils literal notranslate"><span class="pre">Accelerometer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.AngularVelocity"><code class="docutils literal notranslate"><span class="pre">AngularVelocity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.DistanceSensor"><code class="docutils literal notranslate"><span class="pre">DistanceSensor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.DistanceSensor.time"><code class="docutils literal notranslate"><span class="pre">DistanceSensor.time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.DistanceSensor.distance"><code class="docutils literal notranslate"><span class="pre">DistanceSensor.distance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id0"><code class="docutils literal notranslate"><span class="pre">DistanceSensor.distance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.DistanceSensor.most_recent_data"><code class="docutils literal notranslate"><span class="pre">DistanceSensor.most_recent_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id1"><code class="docutils literal notranslate"><span class="pre">DistanceSensor.time</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Gravity"><code class="docutils literal notranslate"><span class="pre">Gravity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUCalibration"><code class="docutils literal notranslate"><span class="pre">IMUCalibration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUCalibration.system"><code class="docutils literal notranslate"><span class="pre">IMUCalibration.system</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUCalibration.gyro"><code class="docutils literal notranslate"><span class="pre">IMUCalibration.gyro</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUCalibration.accel"><code class="docutils literal notranslate"><span class="pre">IMUCalibration.accel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUCalibration.mag"><code class="docutils literal notranslate"><span class="pre">IMUCalibration.mag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id2"><code class="docutils literal notranslate"><span class="pre">IMUCalibration.accel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id3"><code class="docutils literal notranslate"><span class="pre">IMUCalibration.gyro</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id4"><code class="docutils literal notranslate"><span class="pre">IMUCalibration.mag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id5"><code class="docutils literal notranslate"><span class="pre">IMUCalibration.system</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor"><code class="docutils literal notranslate"><span class="pre">IMUSensor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.acc"><code class="docutils literal notranslate"><span class="pre">IMUSensor.acc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.ori"><code class="docutils literal notranslate"><span class="pre">IMUSensor.ori</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.mag"><code class="docutils literal notranslate"><span class="pre">IMUSensor.mag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.ang"><code class="docutils literal notranslate"><span class="pre">IMUSensor.ang</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.rot"><code class="docutils literal notranslate"><span class="pre">IMUSensor.rot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.lin"><code class="docutils literal notranslate"><span class="pre">IMUSensor.lin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.gra"><code class="docutils literal notranslate"><span class="pre">IMUSensor.gra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.calibration"><code class="docutils literal notranslate"><span class="pre">IMUSensor.calibration</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.temperature"><code class="docutils literal notranslate"><span class="pre">IMUSensor.temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id6"><code class="docutils literal notranslate"><span class="pre">IMUSensor.acc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id7"><code class="docutils literal notranslate"><span class="pre">IMUSensor.ang</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id8"><code class="docutils literal notranslate"><span class="pre">IMUSensor.calibration</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id9"><code class="docutils literal notranslate"><span class="pre">IMUSensor.gra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id10"><code class="docutils literal notranslate"><span class="pre">IMUSensor.lin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id11"><code class="docutils literal notranslate"><span class="pre">IMUSensor.mag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.most_recent_data"><code class="docutils literal notranslate"><span class="pre">IMUSensor.most_recent_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id12"><code class="docutils literal notranslate"><span class="pre">IMUSensor.ori</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.qua"><code class="docutils literal notranslate"><span class="pre">IMUSensor.qua</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id13"><code class="docutils literal notranslate"><span class="pre">IMUSensor.rot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.set_generic_sensor"><code class="docutils literal notranslate"><span class="pre">IMUSensor.set_generic_sensor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.set_quat_data"><code class="docutils literal notranslate"><span class="pre">IMUSensor.set_quat_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id14"><code class="docutils literal notranslate"><span class="pre">IMUSensor.temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.IMUSensor.write_to_matlab_file"><code class="docutils literal notranslate"><span class="pre">IMUSensor.write_to_matlab_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.LinearAcceleration"><code class="docutils literal notranslate"><span class="pre">LinearAcceleration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Magnetometer"><code class="docutils literal notranslate"><span class="pre">Magnetometer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Orientation"><code class="docutils literal notranslate"><span class="pre">Orientation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.PressureSensor"><code class="docutils literal notranslate"><span class="pre">PressureSensor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.PressureSensor.time"><code class="docutils literal notranslate"><span class="pre">PressureSensor.time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.PressureSensor.pressure"><code class="docutils literal notranslate"><span class="pre">PressureSensor.pressure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.PressureSensor.temperature"><code class="docutils literal notranslate"><span class="pre">PressureSensor.temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.PressureSensor.depth"><code class="docutils literal notranslate"><span class="pre">PressureSensor.depth</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id15"><code class="docutils literal notranslate"><span class="pre">PressureSensor.depth</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.PressureSensor.most_recent_data"><code class="docutils literal notranslate"><span class="pre">PressureSensor.most_recent_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id16"><code class="docutils literal notranslate"><span class="pre">PressureSensor.pressure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id17"><code class="docutils literal notranslate"><span class="pre">PressureSensor.temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id18"><code class="docutils literal notranslate"><span class="pre">PressureSensor.time</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Quaternion"><code class="docutils literal notranslate"><span class="pre">Quaternion</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Quaternion.time"><code class="docutils literal notranslate"><span class="pre">Quaternion.time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Quaternion.heading"><code class="docutils literal notranslate"><span class="pre">Quaternion.heading</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Quaternion.pitch"><code class="docutils literal notranslate"><span class="pre">Quaternion.pitch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.Quaternion.roll"><code class="docutils literal notranslate"><span class="pre">Quaternion.roll</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id19"><code class="docutils literal notranslate"><span class="pre">Quaternion.heading</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id20"><code class="docutils literal notranslate"><span class="pre">Quaternion.pitch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id21"><code class="docutils literal notranslate"><span class="pre">Quaternion.roll</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id22"><code class="docutils literal notranslate"><span class="pre">Quaternion.time</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.RotationVector"><code class="docutils literal notranslate"><span class="pre">RotationVector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.ThreeDegreeSensorData"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.ThreeDegreeSensorData.time"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData.time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.ThreeDegreeSensorData.x"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData.x</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.ThreeDegreeSensorData.y"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData.y</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#python.data_parsing.sensors_classes.ThreeDegreeSensorData.z"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData.z</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id23"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData.time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id24"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData.x</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id25"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData.y</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="python.data_parsing.html#id26"><code class="docutils literal notranslate"><span class="pre">ThreeDegreeSensorData.z</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python.data_parsing.html#module-python.data_parsing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-python.app">
+<span id="python-app-module"></span><h2>python.app module<a class="headerlink" href="#module-python.app" title="Link to this heading"></a></h2>
+<p>Flask server that houses SeaNav dashboard. Communicates with serial port for data
+collection from Arduino, and displays location, depth, 3-D model, distance, various graphs,
+and radar.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="python.app.generate_matlab">
+<span class="sig-prename descclassname"><span class="pre">python.app.</span></span><span class="sig-name descname"><span class="pre">generate_matlab</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#python.app.generate_matlab" title="Link to this definition"></a></dt>
+<dd><p>Generate matlab IMU tracking image with data from Python.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary containing the response to running the matlab script.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, bool]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python.app.generate_sensor_data">
+<span class="sig-prename descclassname"><span class="pre">python.app.</span></span><span class="sig-name descname"><span class="pre">generate_sensor_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#python.app.generate_sensor_data" title="Link to this definition"></a></dt>
+<dd><p>Pull most recent sensor data from Arduino, store it in Python, and
+return the most recent data as a str in json format for front-end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String with most recent data in json format.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python.app.index">
+<span class="sig-prename descclassname"><span class="pre">python.app.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#python.app.index" title="Link to this definition"></a></dt>
+<dd><p>Renders the template found in templates/index.html for SeaNav dashboard</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String containing the html template for flask to render on the front-end.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python.app.stream_sensor_data">
+<span class="sig-prename descclassname"><span class="pre">python.app.</span></span><span class="sig-name descname"><span class="pre">stream_sensor_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#python.app.stream_sensor_data" title="Link to this definition"></a></dt>
+<dd><p>Stream sensor data from Arduino to front-end</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response that contains the most recent data in a json format.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-python">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-python" title="Link to this heading"></a></h2>
+<p>SeaNav dashboard package with Python script to run flask webserver.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to SeaNav’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="python.data_parsing.html" class="btn btn-neutral float-right" title="python.data_parsing package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Nicholas McLennan and Ewan Chatham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

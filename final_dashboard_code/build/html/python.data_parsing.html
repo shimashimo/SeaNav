@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>python.data_parsing package &mdash; SeaNav 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="python package" href="python.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SeaNav
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="python.html">python package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="python.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">python.data_parsing package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-python.data_parsing.read_serial">python.data_parsing.read_serial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-python.data_parsing.sensors_classes">python.data_parsing.sensors_classes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-python.data_parsing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#module-python.app">python.app module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#module-python">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SeaNav</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="python.html">python package</a></li>
+      <li class="breadcrumb-item active">python.data_parsing package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/python.data_parsing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-data-parsing-package">
+<h1>python.data_parsing package<a class="headerlink" href="#python-data-parsing-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-python.data_parsing.read_serial">
+<span id="python-data-parsing-read-serial-module"></span><h2>python.data_parsing.read_serial module<a class="headerlink" href="#module-python.data_parsing.read_serial" title="Link to this heading"></a></h2>
+<p>Module to read Arduino serial data and put into Python classes</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="python.data_parsing.read_serial.parse_distance_message">
+<span class="sig-prename descclassname"><span class="pre">python.data_parsing.read_serial.</span></span><span class="sig-name descname"><span class="pre">parse_distance_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#python.data_parsing.sensors_classes.DistanceSensor" title="python.data_parsing.sensors_classes.DistanceSensor"><span class="pre">DistanceSensor</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.data_parsing.read_serial.parse_distance_message" title="Link to this definition"></a></dt>
+<dd><p>Parse distance message from Arduino
+Sample Message “1.23,d,250” for “time,message_type,distance”
+Distance is in mm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance_data</strong> (<a class="reference internal" href="#python.data_parsing.sensors_classes.DistanceSensor" title="python.data_parsing.sensors_classes.DistanceSensor"><em>DistanceSensor</em></a>) – DistanceSensor object to store
+message data to</p></li>
+<li><p><strong>message_line</strong> (<em>str</em>) – Arduino serial port message to be parsed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python.data_parsing.read_serial.parse_imu_message">
+<span class="sig-prename descclassname"><span class="pre">python.data_parsing.read_serial.</span></span><span class="sig-name descname"><span class="pre">parse_imu_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imu_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#python.data_parsing.sensors_classes.IMUSensor" title="python.data_parsing.sensors_classes.IMUSensor"><span class="pre">IMUSensor</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.data_parsing.read_serial.parse_imu_message" title="Link to this definition"></a></dt>
+<dd><p>Parse imu message from Arduino
+Sample message “1.00,i,ori,1,2,3” for “time,message_type,subtype,x,y,z”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imu_data</strong> (<a class="reference internal" href="#python.data_parsing.sensors_classes.IMUSensor" title="python.data_parsing.sensors_classes.IMUSensor"><em>IMUSensor</em></a>) – IMUSensor object to store message data to</p></li>
+<li><p><strong>message_line</strong> (<em>str</em>) – Arduino serial port message to be parsed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python.data_parsing.read_serial.parse_pressure_message">
+<span class="sig-prename descclassname"><span class="pre">python.data_parsing.read_serial.</span></span><span class="sig-name descname"><span class="pre">parse_pressure_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#python.data_parsing.sensors_classes.PressureSensor" title="python.data_parsing.sensors_classes.PressureSensor"><span class="pre">PressureSensor</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.data_parsing.read_serial.parse_pressure_message" title="Link to this definition"></a></dt>
+<dd><p>Parse pressure message from Arduino
+Sample Message “1.24,p,20,100” for “time,message_type,temperature,pressure”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pressure_data</strong> (<a class="reference internal" href="#python.data_parsing.sensors_classes.PressureSensor" title="python.data_parsing.sensors_classes.PressureSensor"><em>PressureSensor</em></a>) – PressureSensor object to store
+message data to</p></li>
+<li><p><strong>message_line</strong> (<em>str</em>) – Arduino serial port message to be parsed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python.data_parsing.read_serial.read_serial_data">
+<span class="sig-prename descclassname"><span class="pre">python.data_parsing.read_serial.</span></span><span class="sig-name descname"><span class="pre">read_serial_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Serial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#python.data_parsing.sensors_classes.PressureSensor" title="python.data_parsing.sensors_classes.PressureSensor"><span class="pre">PressureSensor</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">imu_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#python.data_parsing.sensors_classes.IMUSensor" title="python.data_parsing.sensors_classes.IMUSensor"><span class="pre">IMUSensor</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#python.data_parsing.sensors_classes.DistanceSensor" title="python.data_parsing.sensors_classes.DistanceSensor"><span class="pre">DistanceSensor</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.data_parsing.read_serial.read_serial_data" title="Link to this definition"></a></dt>
+<dd><p>Determine what type of message is in serial port and store data in
+correct object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pressure_data</strong> (<a class="reference internal" href="#python.data_parsing.sensors_classes.PressureSensor" title="python.data_parsing.sensors_classes.PressureSensor"><em>PressureSensor</em></a>) – PressureSensor object to store
+serial data</p></li>
+<li><p><strong>imu_data</strong> (<a class="reference internal" href="#python.data_parsing.sensors_classes.IMUSensor" title="python.data_parsing.sensors_classes.IMUSensor"><em>IMUSensor</em></a>) – IMUSensor object to store serial data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-python.data_parsing.sensors_classes">
+<span id="python-data-parsing-sensors-classes-module"></span><h2>python.data_parsing.sensors_classes module<a class="headerlink" href="#module-python.data_parsing.sensors_classes" title="Link to this heading"></a></h2>
+<p>This module includes the classes required to hold all
+sensor data in Python</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Accelerometer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">Accelerometer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.Accelerometer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData" title="python.data_parsing.sensors_classes.ThreeDegreeSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeDegreeSensorData</span></code></a></p>
+<p>Class for accelerometer</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.AngularVelocity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">AngularVelocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.AngularVelocity" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData" title="python.data_parsing.sensors_classes.ThreeDegreeSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeDegreeSensorData</span></code></a></p>
+<p>Class for angular vleocity</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.DistanceSensor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">DistanceSensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.DistanceSensor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Distance sensor class to store all distance sensor data</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.DistanceSensor.time">
+<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.DistanceSensor.time" title="Link to this definition"></a></dt>
+<dd><p>list of timestamps for data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.DistanceSensor.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.DistanceSensor.distance" title="Link to this definition"></a></dt>
+<dd><p>list of distance values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.DistanceSensor.most_recent_data">
+<span class="sig-name descname"><span class="pre">most_recent_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.DistanceSensor.most_recent_data" title="Link to this definition"></a></dt>
+<dd><p>Pull most recently polled data from Arduino on serial port</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary containing the most recent data
+for flask server to read.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, int | str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Gravity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">Gravity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.Gravity" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData" title="python.data_parsing.sensors_classes.ThreeDegreeSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeDegreeSensorData</span></code></a></p>
+<p>Class for gravity</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUCalibration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">IMUCalibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gyro:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accel:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mag:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUCalibration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>IMU Calibration dataclass to hold system, gyro, acceleration,
+and magnitude calibration data as lists.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUCalibration.system">
+<span class="sig-name descname"><span class="pre">system</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUCalibration.system" title="Link to this definition"></a></dt>
+<dd><p>List containing all calibration data for system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUCalibration.gyro">
+<span class="sig-name descname"><span class="pre">gyro</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUCalibration.gyro" title="Link to this definition"></a></dt>
+<dd><p>List containing all calibration data for gyro</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUCalibration.accel">
+<span class="sig-name descname"><span class="pre">accel</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUCalibration.accel" title="Link to this definition"></a></dt>
+<dd><p>List containing all calibration data for
+accelerometer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUCalibration.mag">
+<span class="sig-name descname"><span class="pre">mag</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUCalibration.mag" title="Link to this definition"></a></dt>
+<dd><p>List containing all calibration data for
+magnetometer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">accel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">gyro</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">mag</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">system</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">IMUSensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">acc:</span> <span class="pre">~python.data_parsing.sensors_classes.Accelerometer</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ori:</span> <span class="pre">~python.data_parsing.sensors_classes.Orientation</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mag:</span> <span class="pre">~python.data_parsing.sensors_classes.Magnetometer</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ang:</span> <span class="pre">~python.data_parsing.sensors_classes.AngularVelocity</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot:</span> <span class="pre">~python.data_parsing.sensors_classes.RotationVector</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lin:</span> <span class="pre">~python.data_parsing.sensors_classes.LinearAcceleration</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gra:</span> <span class="pre">~python.data_parsing.sensors_classes.Gravity</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qua:</span> <span class="pre">~python.data_parsing.sensors_classes.Quaternion</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calibration:</span> <span class="pre">~python.data_parsing.sensors_classes.IMUCalibration</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>IMU sensor class to store all forms of data from the sensor</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.acc">
+<span class="sig-name descname"><span class="pre">acc</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.acc" title="Link to this definition"></a></dt>
+<dd><p>Object containing lists for standard three
+degree sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#python.data_parsing.sensors_classes.Accelerometer" title="python.data_parsing.sensors_classes.Accelerometer">Accelerometer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.ori">
+<span class="sig-name descname"><span class="pre">ori</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.ori" title="Link to this definition"></a></dt>
+<dd><p>Object containing lists for standard three
+degree sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#python.data_parsing.sensors_classes.Orientation" title="python.data_parsing.sensors_classes.Orientation">Orientation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.mag">
+<span class="sig-name descname"><span class="pre">mag</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.mag" title="Link to this definition"></a></dt>
+<dd><p>Object containing lists for standard three
+degree sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#python.data_parsing.sensors_classes.Magnetometer" title="python.data_parsing.sensors_classes.Magnetometer">Magnetometer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.ang">
+<span class="sig-name descname"><span class="pre">ang</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.ang" title="Link to this definition"></a></dt>
+<dd><p>Object containing lists for standard three
+degree sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#python.data_parsing.sensors_classes.AngularVelocity" title="python.data_parsing.sensors_classes.AngularVelocity">AngularVelocity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.rot">
+<span class="sig-name descname"><span class="pre">rot</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.rot" title="Link to this definition"></a></dt>
+<dd><p>Object containing lists for standard three
+degree sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#python.data_parsing.sensors_classes.RotationVector" title="python.data_parsing.sensors_classes.RotationVector">RotationVector</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.lin">
+<span class="sig-name descname"><span class="pre">lin</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.lin" title="Link to this definition"></a></dt>
+<dd><p>Object containing lists for standard three
+degree sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#python.data_parsing.sensors_classes.LinearAcceleration" title="python.data_parsing.sensors_classes.LinearAcceleration">LinearAcceleration</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.gra">
+<span class="sig-name descname"><span class="pre">gra</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.gra" title="Link to this definition"></a></dt>
+<dd><p>Object containing lists for standard three
+degree sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#python.data_parsing.sensors_classes.Gravity" title="python.data_parsing.sensors_classes.Gravity">Gravity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.calibration">
+<span class="sig-name descname"><span class="pre">calibration</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.calibration" title="Link to this definition"></a></dt>
+<dd><p>Object containing lists for historical
+calibration data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#python.data_parsing.sensors_classes.IMUCalibration" title="python.data_parsing.sensors_classes.IMUCalibration">IMUCalibration</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.temperature" title="Link to this definition"></a></dt>
+<dd><p>List containing temperature data from IMU</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">acc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.Accelerometer" title="python.data_parsing.sensors_classes.Accelerometer"><span class="pre">Accelerometer</span></a></em><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">ang</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.AngularVelocity" title="python.data_parsing.sensors_classes.AngularVelocity"><span class="pre">AngularVelocity</span></a></em><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">calibration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.IMUCalibration" title="python.data_parsing.sensors_classes.IMUCalibration"><span class="pre">IMUCalibration</span></a></em><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">gra</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.Gravity" title="python.data_parsing.sensors_classes.Gravity"><span class="pre">Gravity</span></a></em><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">lin</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.LinearAcceleration" title="python.data_parsing.sensors_classes.LinearAcceleration"><span class="pre">LinearAcceleration</span></a></em><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">mag</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.Magnetometer" title="python.data_parsing.sensors_classes.Magnetometer"><span class="pre">Magnetometer</span></a></em><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.most_recent_data">
+<span class="sig-name descname"><span class="pre">most_recent_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.most_recent_data" title="Link to this definition"></a></dt>
+<dd><p>Returns the most recently collected data from imu sensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Dictionary containing most recently</dt><dd><p>collected data</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, int | str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">ori</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.Orientation" title="python.data_parsing.sensors_classes.Orientation"><span class="pre">Orientation</span></a></em><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.qua">
+<span class="sig-name descname"><span class="pre">qua</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.Quaternion" title="python.data_parsing.sensors_classes.Quaternion"><span class="pre">Quaternion</span></a></em><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.qua" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">rot</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#python.data_parsing.sensors_classes.RotationVector" title="python.data_parsing.sensors_classes.RotationVector"><span class="pre">RotationVector</span></a></em><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.set_generic_sensor">
+<span class="sig-name descname"><span class="pre">set_generic_sensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indicator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.set_generic_sensor" title="Link to this definition"></a></dt>
+<dd><p>Appends values to desired class of ThreeDegreeSensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>str</em>) – Timestamp for incoming data</p></li>
+<li><p><strong>indicator</strong> (<em>str</em>) – Indicator to tell which class of ThreeDegreeSensor
+the data is being added to</p></li>
+<li><p><strong>x</strong> (<em>str</em>) – Data for x axis</p></li>
+<li><p><strong>y</strong> (<em>str</em>) – Data for y axis</p></li>
+<li><p><strong>z</strong> (<em>str</em>) – Data for z axis</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.set_quat_data">
+<span class="sig-name descname"><span class="pre">set_quat_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heading</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roll</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.set_quat_data" title="Link to this definition"></a></dt>
+<dd><p>Appends values to quat data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>str</em>) – Timestamp for incoming data</p></li>
+<li><p><strong>heading</strong> (<em>str</em>) – Data for heading axis</p></li>
+<li><p><strong>pitch</strong> (<em>str</em>) – Data for pitch axis</p></li>
+<li><p><strong>roll</strong> (<em>str</em>) – Data for roll axis</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">temperature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.IMUSensor.write_to_matlab_file">
+<span class="sig-name descname"><span class="pre">write_to_matlab_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.IMUSensor.write_to_matlab_file" title="Link to this definition"></a></dt>
+<dd><p>Write data collected from IMU currently in Python to a data file
+for further analysis in Matlab, including IMU position history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to write the data file to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.LinearAcceleration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">LinearAcceleration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.LinearAcceleration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData" title="python.data_parsing.sensors_classes.ThreeDegreeSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeDegreeSensorData</span></code></a></p>
+<p>Class for linear acceleration</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Magnetometer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">Magnetometer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.Magnetometer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData" title="python.data_parsing.sensors_classes.ThreeDegreeSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeDegreeSensorData</span></code></a></p>
+<p>Class for magnetometer</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Orientation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">Orientation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.Orientation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData" title="python.data_parsing.sensors_classes.ThreeDegreeSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeDegreeSensorData</span></code></a></p>
+<p>Class for orientation</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.PressureSensor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">PressureSensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.PressureSensor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="simple">
+<dt>Pressure sensor data points with helper functions to output real-time</dt><dd><p>data to flask server.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.PressureSensor.time">
+<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.PressureSensor.time" title="Link to this definition"></a></dt>
+<dd><p>List containing the time each of the correspondingly
+index data points from pressure, temperature, and
+depth</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.PressureSensor.pressure">
+<span class="sig-name descname"><span class="pre">pressure</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.PressureSensor.pressure" title="Link to this definition"></a></dt>
+<dd><p>List containing all pressure data points from pressure
+sensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.PressureSensor.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.PressureSensor.temperature" title="Link to this definition"></a></dt>
+<dd><p>List containing all temperature data points
+from pressure sensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.PressureSensor.depth">
+<span class="sig-name descname"><span class="pre">depth</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.PressureSensor.depth" title="Link to this definition"></a></dt>
+<dd><p>List containing all depth data points from pressure
+sensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.PressureSensor.most_recent_data">
+<span class="sig-name descname"><span class="pre">most_recent_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.PressureSensor.most_recent_data" title="Link to this definition"></a></dt>
+<dd><p>Pull most recently polled data from Arduino on serial port</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary containing the most recent data
+for flask server to read.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, int | str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-name descname"><span class="pre">pressure</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id16" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id17">
+<span class="sig-name descname"><span class="pre">temperature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id17" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id18">
+<span class="sig-name descname"><span class="pre">time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id18" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Quaternion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">Quaternion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heading:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roll:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.Quaternion" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Quaternion data class for data off of IMU</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Quaternion.time">
+<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.Quaternion.time" title="Link to this definition"></a></dt>
+<dd><p>List of timestamps for data in three degrees</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Quaternion.heading">
+<span class="sig-name descname"><span class="pre">heading</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.Quaternion.heading" title="Link to this definition"></a></dt>
+<dd><p>List of heading value sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Quaternion.pitch">
+<span class="sig-name descname"><span class="pre">pitch</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.Quaternion.pitch" title="Link to this definition"></a></dt>
+<dd><p>List of pitch value sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.Quaternion.roll">
+<span class="sig-name descname"><span class="pre">roll</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.Quaternion.roll" title="Link to this definition"></a></dt>
+<dd><p>List of roll value sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id19">
+<span class="sig-name descname"><span class="pre">heading</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id19" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id20">
+<span class="sig-name descname"><span class="pre">pitch</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id20" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id21">
+<span class="sig-name descname"><span class="pre">roll</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id21" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id22">
+<span class="sig-name descname"><span class="pre">time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id22" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.RotationVector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">RotationVector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.RotationVector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData" title="python.data_parsing.sensors_classes.ThreeDegreeSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeDegreeSensorData</span></code></a></p>
+<p>Class for rotation vector</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.ThreeDegreeSensorData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python.data_parsing.sensors_classes.</span></span><span class="sig-name descname"><span class="pre">ThreeDegreeSensorData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Standard three degree sensor data class for all sensor data off of IMU</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.ThreeDegreeSensorData.time">
+<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData.time" title="Link to this definition"></a></dt>
+<dd><p>List of timestamps for data in three degrees</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.ThreeDegreeSensorData.x">
+<span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData.x" title="Link to this definition"></a></dt>
+<dd><p>List of x value sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.ThreeDegreeSensorData.y">
+<span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData.y" title="Link to this definition"></a></dt>
+<dd><p>List of y value sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.data_parsing.sensors_classes.ThreeDegreeSensorData.z">
+<span class="sig-name descname"><span class="pre">z</span></span><a class="headerlink" href="#python.data_parsing.sensors_classes.ThreeDegreeSensorData.z" title="Link to this definition"></a></dt>
+<dd><p>List of z value sensor data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id23">
+<span class="sig-name descname"><span class="pre">time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id23" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id24">
+<span class="sig-name descname"><span class="pre">x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id24" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id25">
+<span class="sig-name descname"><span class="pre">y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id25" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id26">
+<span class="sig-name descname"><span class="pre">z</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id26" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-python.data_parsing">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-python.data_parsing" title="Link to this heading"></a></h2>
+<p>Python package containing data structure for IMU, Pressure, and distance sensors.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="python.html" class="btn btn-neutral float-left" title="python package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Nicholas McLennan and Ewan Chatham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
